@@ -1,0 +1,16 @@
+#profileMenu {
+    display: flex;
+    flex-direction: column; /* Définir la direction de la disposition en colonne */
+    align-items: flex-start; /* Aligner les éléments sur le côté gauche */
+    padding: 16px; /* Ajouter un peu d'espacement autour des éléments */
+}
+
+.dropdown-item {
+    margin-bottom: 8px; /* Ajouter de l'espace entre chaque élément */
+    text-decoration: none; /* Supprimer les soulignements des liens */
+    color: black; /* Changer la couleur du texte si nécessaire */
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0; /* Changer la couleur de fond au survol si nécessaire */
+}

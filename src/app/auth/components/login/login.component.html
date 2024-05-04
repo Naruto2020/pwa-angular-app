@@ -1,0 +1,29 @@
+<mat-card class="main-form" [formGroup] = "mainForm">
+    <mat-card-title>Connexion à TEIK</mat-card-title>
+    <mat-card class="form-card" [formGroup]="loginInfoForm">
+        <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
+        <div class="form-row">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Mot de passe</mat-label>
+                <input type="text" matInput formControlName="password">
+            </mat-form-field>
+        </div>
+    </mat-card>
+    <!-- <mat-card class="form-card">
+        <mat-card-subtitle>Mot de passe</mat-card-subtitle>
+    </mat-card> -->
+    <mat-card-actions >
+        <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()">Connexion</button> &nbsp; &nbsp;
+        <button mat-flat-button color="primary" (click)="onSubmitForm()">Mot de passe oublié ?</button>
+        
+        <div>
+            <br>
+            <span>Vous n'avez pas de compte ?</span> &nbsp;
+            <button mat-flat-button color="primary" routerLink="/teik/auth/register"> Inscrivez-vous</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

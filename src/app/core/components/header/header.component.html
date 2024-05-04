@@ -1,0 +1,52 @@
+<ng-container *ngIf="!isLoginPage() && !isRegisterPage()">
+    <div id="headerContainer">
+        <mat-toolbar style="margin:0; display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto; align-items: center; grid-column-gap: 10px;">
+            <button mat-icon-button routerLink="/teik/news" >
+                <span>TK</span>
+    
+            </button>
+            <div class="search" style="position: relative; display: flex; align-items: center;">
+                <mat-icon style="position: absolute; left: 10px;">search</mat-icon>
+                <input class="search" type="text" placeholder="Rechercher..." style="padding-left: 30px; padding-right: 8px;">
+            </div>
+            <div id="iconMediaQuerieMarge" style="display: grid; grid-template-rows: auto auto; place-items: center;">
+                <button mat-icon-button routerLink="/teik/news" [ngClass]="{ 'mat-button-toggle-checked': isActive('/teik/news') }" [style.margin-bottom.px]="isActive('/teik/news') ? -4 : -8" >
+                    <mat-icon>home</mat-icon>
+                </button>
+                <a routerLink="/teik/news" class="icon-text" style="padding-left: 4px; margin-top: -6px;">Accueil</a>
+            </div>
+            <div id="iconMediaQuerieMarge1" style="display: grid; grid-template-rows: auto auto; place-items: center;">
+                <button mat-icon-button routerLink="/teik/mysquad" [ngClass]="{ 'mat-button-toggle-checked': isActive('/teik/mysquad') }" [style.margin-bottom.px]="isActive('/teik/mysquad') ? -4 : -8">
+                    <mat-icon>supervisor_account</mat-icon>
+                </button>
+                <a routerLink="/teik/mysquad"  class="icon-text" style="padding-left: 4px; margin-top: -6px;">Squad</a>
+            </div>
+            <div id="iconMediaQuerieMarge2" style="display: grid; grid-template-rows: auto auto; place-items: center;">
+                <button mat-icon-button routerLink="/teik/notifications" [ngClass]="{ 'mat-button-toggle-checked': isActive('/teik/notifications') }" [style.margin-bottom.px]="isActive('/teik/notifications') ? -4 : -8">
+                    <mat-icon>notifications</mat-icon>
+                </button>
+                <a routerLink="/teik/notifications" class="icon-text" style="padding-left: 4px; margin-top: -6px;">Notifications</a>
+            </div>
+            <div style="display: grid; grid-template-rows: auto auto; place-items: center;">
+                <button mat-icon-button routerLink="/teik/overviews" [ngClass]="{ 'mat-button-toggle-checked': isActive('/teik/overviews') }" [style.margin-bottom.px]="isActive('/teik/overviews') ? -4 : -8">
+                    <mat-icon>dashboard</mat-icon>
+                </button>
+                <a routerLink="/teik/teik/overviews" class="icon-text" style="padding-left: 4px; margin-top: -6px;">Cockpit</a>
+            </div>
+            <div id="iconMediaQuerieMarge4" style="display: flex; flex-direction: column; align-items: center;">
+                <button mat-icon-button style="margin-bottom: -8px;">
+                    <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="user photo profil">
+                </button>
+                <a (click)="toggleDropdown()" 
+                   style="display: flex; align-items: center; text-decoration: none; margin-left: 12px; cursor: pointer;"
+                   class="dropdown-link">
+                    <span class="icon-text">Vous</span>
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </a>
+                <app-profile-drop-down *ngIf="dropdownVisible"></app-profile-drop-down>
+            </div>
+        </mat-toolbar>
+    </div>
+</ng-container>
+
+

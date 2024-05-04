@@ -1,0 +1,113 @@
+
+.search {
+    background-color:beige;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    height: 70%;
+    &:hover {
+        text-decoration: none;
+    }
+}
+mat-toolbar {
+    background-color: white;
+    width: 100%;
+}
+mat-toolbar:first-child > button:first-child {
+    color: #6441a4;
+    font-size:xx-large;
+    font-weight: bolder;
+}
+
+.icon-text {
+    //margin-left: 4px;
+    text-decoration: none; 
+    transition: text-decoration 0.3s; /* Ajoute une transition pour une animation douce du soulignement */
+    font-size:x-small;
+    font-weight: lighter;
+    // &:hover {
+    //     text-decoration: underline;
+    //     margin-top: 4px;
+    // }
+}
+img {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.icon-text:hover {
+    text-decoration: underline; /* Souligne le texte au survol */
+    margin-bottom: 4px;
+}
+
+#iconMediaQuerieMarge {
+    margin-left: 220%;
+}
+#iconMediaQuerieMarge1 {
+    margin-left: 160%;
+}
+#iconMediaQuerieMarge2 {
+    margin-left: 80%;
+}
+#iconMediaQuerieMarge4 {
+    margin-left: 200%;
+}
+
+.dropdown-link:hover {
+    background-color: #f0f0f0; /* Couleur de fond au survol */
+    border-radius: 4px; /* Bords arrondis au survol */
+}
+
+#iconMediaQuerieMarge4 {
+    position: relative; /* le conteneur parent est positionné de manière relative */
+}
+
+app-profile-drop-down {
+    position: absolute;
+    top: 110%; /* Positionne le composant sous le conteneur parent */
+    left: 30;
+    z-index: 999; /* le composant s'affiche au-dessus des autres éléments */
+    font-size:x-small;
+    font-weight: lighter;
+}
+
+#headerContainer {
+    transition: transform 0.3s ease; /* Ajoute une transition fluide lors du changement de position */
+}
+
+#headerContainer.open {
+    transform: translateY(3px); /* Ajuste la position vers le bas lorsque le menu déroulant est visible */
+}
+
+
+@media screen and (max-width: 600px) {
+    .search::placeholder {
+        color: transparent;
+    }
+    #iconMediaQuerieMarge1 {
+        margin-left: 50% ;
+    }
+    #iconMediaQuerieMarge2 {
+        margin-left: 5%;
+    }
+
+    app-profile-drop-down {
+        position: absolute;
+        top: 110%; 
+        z-index: 999; 
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    /* Styles spécifiques pour les écrans de taille tablette */
+    #iconMediaQuerieMarge,
+    #iconMediaQuerieMarge1,
+    #iconMediaQuerieMarge2,
+    #iconMediaQuerieMarge3,
+    #iconMediaQuerieMarge4 {
+        margin-left: 8px; /* Réduire la marge entre les icônes */
+        margin-right: 8px; /* Réduire la marge entre les icônes */
+    }
+}
