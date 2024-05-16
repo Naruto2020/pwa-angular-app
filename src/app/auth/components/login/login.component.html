@@ -6,10 +6,15 @@
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input type="text" matInput formControlName="email">
+                <mat-error>{{getFormControlErrorTex(emailCtrl)}}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="pwd-container" appearance="fill">
                 <mat-label>Mot de passe</mat-label>
-                <input type="text" matInput formControlName="password">
+                <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error>{{getFormControlErrorTex(passwordCtrl)}}</mat-error>
             </mat-form-field>
         </div>
     </mat-card>
@@ -19,6 +24,7 @@
     <mat-card-actions >
         <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()">Connexion</button> &nbsp; &nbsp;
         <button mat-flat-button color="primary" (click)="onSubmitForm()">Mot de passe oublié ?</button>
+        <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
         
         <div>
             <br>

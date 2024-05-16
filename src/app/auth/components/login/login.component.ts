@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +11,17 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
+
+  hidePassword: boolean = true;
+
+  loading: boolean = false;
   mainForm!: FormGroup;
   emailCtrl!: FormControl;
   passwordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.initFormControls();
@@ -22,8 +29,8 @@ export class LoginComponent implements OnInit {
   }
 
   private initFormControls(): void {
-    this.emailCtrl = this.formBuilder.control('', Validators.required);
-    this.passwordCtrl = this.formBuilder.control('', Validators.required);
+    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
+    this.passwordCtrl = this.formBuilder.control('', [Validators.required, Validators.minLength(8)]);
     this.loginInfoForm = this.formBuilder.group({
       email: this.emailCtrl,
       password: this.passwordCtrl,
@@ -38,15 +45,43 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitForm(){
+    this.loading = true;
+    const formValue = this.mainForm.value;
+    const loginForm = {
+      email: formValue['loginInfo'].email, 
+      password: formValue['loginInfo'].password
+    }
+
+    this.loginService.logUser(loginForm).pipe(
+      tap(data => {
+        this.loading = false;
+        if(data) {
+          this.mainForm.reset();
+          this.router.navigate(['/teik/news']);
+        }else {
+          console.error("Echec");
+        }
+      }) 
+    ).subscribe();
 
   }
 
 
+  getFormControlErrorTex(ctrl: AbstractControl) {
+    if(ctrl.hasError('required')) {
+      return 'Ce champs est requis';
+    }else if(ctrl.hasError('email')) {
+      return 'Merci d\'entrer une adresse mail valide';
+    }else if(ctrl.hasError('minlength')) {
+      return 'mot de passe incorrecte Ou contient moins de 8 carractères'
+    }
+    else{
+      return " Ce Champs contien une érreur";
+    }
+  }
 
-
-  // getErrorMessage(control: FormControl) {
-  //   return control.hasError('required') ? 'You must enter a value' :
-  //          control.hasError('email') ? 'Not a valid email' :
-  //          '';
-  // }
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+}
+  
 }

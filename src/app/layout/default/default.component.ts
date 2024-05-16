@@ -24,7 +24,6 @@ export class DefaultComponent implements OnInit {
     if(route.firstChild) {
       return this.shouldShowHeader(route.firstChild);
     }
-    console.log('TIK --> : ', route.data)
     return route.data['showHeader'] !== false;
   }
 

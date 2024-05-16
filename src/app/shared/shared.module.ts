@@ -9,6 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -25,6 +26,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   exports: [
     MatToolbarModule,
@@ -36,6 +38,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ]
 })
 export class SharedModule { }

@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { RegisterService } from '../services/register.service';
 import { User } from '../models/user-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -28,12 +29,12 @@ export class RegisterComponent implements OnInit {
 
 
   phoneNumberValidator(control: FormControl): { [key: string]: any } | null {
-    const phoneNumberPattern = /^\d{13}$/; // Changer cela selon votre besoin
+    const phoneNumberPattern = /^\d+$/; // Changer cela selon le besoin
     const isValid = phoneNumberPattern.test(control.value);
     return isValid ? null : { 'invalidPhoneNumber': { value: control.value } };
   }
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) { }
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
     this.initFormControls();
@@ -72,10 +73,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // initFormObservable() {
-  //   throw new Error('Method not implemented.');
-  // }
-
   onSubmitForm(){
     this.loading = true;
     const formValue = this.mainForm.value
@@ -88,14 +85,16 @@ export class RegisterComponent implements OnInit {
     newUser.phoneNumber = formValue["phone"];
     newUser.email = formValue["loginInfo"].email;
     newUser.password = formValue["loginInfo"].password;
+
     this.registerService.saveUserInfo(newUser).pipe(
       tap(data => {
         this.loading = false
         if(data) {
           this.mainForm.reset();
-          this.userCompanieStatusCtrl.patchValue('non')
+          this.userCompanieStatusCtrl.patchValue('non');
+          this.router.navigate(['/login']);
         } else {
-          console.error("Echec")
+          console.error("Echec");
         }
       })
     ).subscribe();
@@ -108,6 +107,8 @@ export class RegisterComponent implements OnInit {
       return 'Merci d\'entrer une adresse mail valide';
     }else if(ctrl.hasError('minlength')) {
       return 'mot de passe incorrecte Ou contient moins de 8 carractères'
+    }else if(ctrl.hasError('invalidPhoneNumber')){
+      return 'Merci d\'entrer un numéro valide'
     }
     else{
       return " Ce Champs contien une érreur";
