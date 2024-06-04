@@ -55,7 +55,10 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Mot de passe </mat-label>
-                <input type="text" matInput formControlName="password">
+                <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
+                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
                 <mat-error>{{getFormControlErrorTex(passwordCtrl)}}</mat-error>
                 <!-- <mat-error>"mot de passe incorrecte Ou contient moins de 8 carractères "</mat-error> -->
             </mat-form-field>

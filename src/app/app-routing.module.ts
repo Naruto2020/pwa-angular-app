@@ -12,7 +12,8 @@ const routes: Routes = [
       {path: 'mysquad', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule)},
       {path: 'notifications', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule)},
       {path: 'overviews', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule)},
-      {path: '**', redirectTo: 'auth' }
+      {path: 'user', loadChildren: () => import('./user/user.module').then(m =>m.UserModule)},
+      {path: '**', redirectTo: 'auth' },
 
     ]
   },

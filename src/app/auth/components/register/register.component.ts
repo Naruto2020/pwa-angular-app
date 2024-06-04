@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  hidePassword: boolean = true;
+  
   loading = false;
   mainForm!: FormGroup;
   personalInfoForm!: FormGroup;
@@ -113,6 +115,10 @@ export class RegisterComponent implements OnInit {
     else{
       return " Ce Champs contien une érreur";
     }
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 
 }
