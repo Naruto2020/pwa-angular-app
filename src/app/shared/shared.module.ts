@@ -10,6 +10,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import {  HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../guards/auth.interceptor';
 
 
 
@@ -27,6 +29,10 @@ import {MatIconModule} from '@angular/material/icon';
     MatRadioModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    HttpClientModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   exports: [
     MatToolbarModule,

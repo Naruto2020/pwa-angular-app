@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/auth/components/services/login.service';
 
 @Component({
   selector: 'app-profile-drop-down',
@@ -7,12 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDropDownComponent implements OnInit {
 
-  constructor() { }
+  userF = ''
+
+  constructor(private loginService: LoginService,) { }
 
   ngOnInit(): void {
+    const token = this.loginService.getToken();
+    const userInfo = this.loginService.getUserInfo()
+    if (userInfo && userInfo.firstName) {
+      this.userF = userInfo.firstName;
+    }
   }
   logout() {
-    // Implémentez ici la logique de déconnexion de l'utilisateur
+    // logique de déconnexion de l'utilisateur
+    this.loginService.logout()
   }
 
 }

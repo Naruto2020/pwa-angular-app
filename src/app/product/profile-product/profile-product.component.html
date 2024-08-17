@@ -1,0 +1,20 @@
+<mat-card class="main-form">
+    <mat-card-title>Les produits de {{currentUserFirstName}} </mat-card-title>
+    <div class="product-container">
+        <div class="product-card" *ngFor="let product of uniqueDataByName">
+          <img [src]="product.imageUrl" [alt]="product.name">
+          <h2>{{ product.name }}</h2>
+          <p>{{ product.description }}</p>
+          <div *ngFor="let currentProduct of countOfProducts">
+            <p *ngIf="currentProduct.name === product.name ">
+              <span *ngIf="currentProduct.name === product.name">
+                Quantité {{ currentProduct.count }} 
+              </span>
+            </p>
+            <!-- <button (click)="buyProduct(product)">Buy Now</button> -->
+
+          </div>
+        </div>
+    </div>
+</mat-card>
+

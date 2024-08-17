@@ -25,7 +25,25 @@
     font-size: 18px;
     font-style: italic;
     margin-bottom: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    align-items: center;
 }
+
+.profile-title:hover {
+    color: #0d47a1; /* Couleur plus foncée au survol */
+    text-decoration: underline;
+}
+  
+.profile-title .material-icons {
+    margin-right: 4px; /* Espace entre l'icône et le texte */
+}
+  
+.profile-title-link-icon {
+    font-size: 18px; /* Taille de l'icône */
+}
+
   
 .profile-location {
     font-size: 16px;

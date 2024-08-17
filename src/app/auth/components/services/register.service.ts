@@ -10,11 +10,10 @@ export class RegisterService {
     saveUserInfo(formValue: User): Observable<boolean> {
         return this.http.post('http://127.0.0.1:8002/teko/gateway/authservice', formValue).pipe(
             map(() => true),
-            delay(2000),
+            delay(1000),
             catchError(() => of(false).pipe(
-                delay(2000)
+                delay(1000)
             ))
-            
         );
     }
 }

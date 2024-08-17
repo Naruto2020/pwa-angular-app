@@ -1,0 +1,77 @@
+<mat-card class="main-form"  [formGroup]="productForm">
+  <mat-card-title>Créer un nouveau produit</mat-card-title>
+  <mat-card class="form-card" formGroupName="primaryProductInfo">
+    <mat-card-subtitle>Informations principales </mat-card-subtitle>
+    <br>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>nom du produit </mat-label>
+        <input type="text" matInput formControlName="name">
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>nom de l'entreprise</mat-label>
+        <input type="text" matInput formControlName="companieName">
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf appearance="fill">
+        <mat-label> Id del'entreprise</mat-label>
+        <input type="text" matInput formControlName="companieId">
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Est-ce que le produit est un vêtement ?</mat-card-subtitle>
+    <mat-radio-group [formControl]="productTypeCtrl">
+      <mat-radio-button value="non">Non</mat-radio-button>
+      <mat-radio-button value="oui">Oui</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>Est-ce que le produit est déjas utilisé ?</mat-card-subtitle>
+    <mat-radio-group [formControl]="productStatusCtrl">
+      <mat-radio-button value="non">Non</mat-radio-button>
+      <mat-radio-button value="oui">Oui</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card" formGroupName="secondaryProductInfo">
+    <mat-card-subtitle>Informations secondaires</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+          <mat-label>propriétaire</mat-label>
+          <input type="text" matInput formControlName="owner">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+          <mat-label>Date d'expiration</mat-label>
+          <input type="date" matInput formControlName="expiryDate">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>nombres de produits à créer </mat-card-subtitle>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Quantité</mat-label>
+      <input type="text" matInput [formControl]="quantityCtrl">
+    </mat-form-field> -->
+
+    <mat-label>Quantité</mat-label>
+    <input matInput id="quantity" formControlName="quantity" type="number">
+    <mat-error *ngIf="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.dirty || productForm.get('quantity')?.touched)">
+      <small *ngIf="productForm.get('quantity')?.errors?.['required']">Quantity is required.</small>
+      <small *ngIf="productForm.get('quantity')?.errors?.['min']">Quantity must be at least 1.</small>
+    </mat-error>
+  </mat-card>
+
+  <mat-card-actions>
+    <button *ngIf="productForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">Enregistrer</button> &nbsp; &nbsp;
+    <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+  </mat-card-actions>
+</mat-card>

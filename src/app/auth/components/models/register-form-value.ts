@@ -1,5 +1,6 @@
 export class RegisterFormValue {
     personalInfo!: {
+        profilePhoto?: File;
         firstName: string
         lastName: string,
     };

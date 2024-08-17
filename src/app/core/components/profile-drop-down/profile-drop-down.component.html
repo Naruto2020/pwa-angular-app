@@ -6,7 +6,7 @@
 </div> -->
 
 <mat-card id="profileMenu" class="dropdown-menu">
-    <a routerLink="/teik/user/profile-name" class="dropdown-item">Profil</a>
+    <a [routerLink]="['/teik/user/current-user', userF]" class="dropdown-item">Profil</a>
     <a routerLink="/teik/news" class="dropdown-item">Premium</a>
     <a routerLink="/teik/news" class="dropdown-item">Gérer</a>
     <a routerLink="/teik/logout" (click)="logout()" class="dropdown-item">Déconnexion</a>

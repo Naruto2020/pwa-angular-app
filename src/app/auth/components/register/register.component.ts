@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit {
 
   private initFormControls() {
     this.personalInfoForm = this.formBuilder.group({
+      profilePhoto: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
     });
@@ -75,12 +76,21 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  // onFileSelected(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files.length) {
+  //     const file = input.files[0];
+  //     this.mainForm.get('personalInfo')?.patchValue({ profilePhoto: file });
+  //   }
+  // }
+
   onSubmitForm(){
     this.loading = true;
-    const formValue = this.mainForm.value
-    const newUser = new User()
+    const formValue = this.mainForm.value;
+    const newUser = new User();
     newUser.firstName = formValue["personalInfo"].firstName;
     newUser.lastName = formValue["personalInfo"].lastName;
+    newUser.profilPhoto = formValue["personalInfo"].profilePhoto;
     newUser.companie = formValue["companie"];
     newUser.city = formValue["userRegion"].city;
     newUser.country = formValue["userRegion"].country;
