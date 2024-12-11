@@ -50,7 +50,7 @@ export class CreateProductComponent implements OnInit {
       //quantity: [null, [Validators.required, Validators.min(1)]],
       // isFashion: ['', Validators.required],
       // isAlreadyUse: ['', Validators.required],
-      owner: [[], Validators.required],
+      owner: currentCompanieId,
       expiryDate: ['', Validators.required],
       productPhoto: [''],
       usedBy: [''],

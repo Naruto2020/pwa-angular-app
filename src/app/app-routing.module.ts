@@ -14,7 +14,8 @@ const routes: Routes = [
       {path: 'notifications', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule), canActivate: [AuthGuard] },
       {path: 'overviews', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule), canActivate: [AuthGuard] },
       {path: 'user', loadChildren: () => import('./user/user.module').then(m =>m.UserModule), canActivate: [AuthGuard] },
-      {path: 'product', loadChildren: () => import('./product/product.module').then(m =>m.ProductModule), canActivate: [AuthGuard] },
+      {path: 'products', loadChildren: () => import('./product/product.module').then(m =>m.ProductModule), canActivate: [AuthGuard] },
+      { path: 'qrcodes', loadChildren: ()=> import('./qrcode/qrcode.module').then(m =>m.QrcodeModule), canActivate: [AuthGuard]},
       {path: '**', redirectTo: 'auth/login' },
 
     ]

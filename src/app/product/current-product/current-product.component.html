@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="main-card">
+        <div >
+            
+            <mat-card class="profile-card">
+                <div class="profile-content">
+                    <!-- <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture"> -->
+                    <img [src]= "currentProductPhoto" alt="Profile product Picture" class="profile-picture">
+                
+                    <div class="profile-info"> 
+                        <h2 class="profile-name"> {{currentProductName}} </h2>
+                        <p class="profile-title">
+                            fabriqué à : Paris 
+                        </p> 
+                        <p class="profile-title">
+                            date de création: 10/8/2024
+                        </p> 
+                        <p class="profile-title"> 
+                            date d'expiration : {{expiryDate}}
+                        </p> 
+                        <p class="profile-location">fabriqué par : {{companieName}} </p>
+                       
+                    </div>
+                </div>
+            
+                <button mat-icon-button class="edit-button" aria-label="Modifier">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </mat-card>
+        </div>
+        <div >
+           
+            <mat-card class="profile-card">
+                <div class="profile-content">
+                    <img [src]= "ownerPhoto" alt="owner Picture" class="profile-picture">
+                    <div class="profile-info">
+                        <h2 class="profile-name"> Propriétaire </h2>
+                        <p class="profile-title">
+                            nom : {{ownerfirstName}}
+                        </p>
+                        <p class="profile-title">
+                            ville : {{ownerCity}}
+                        </p>
+                        <p class="profile-title">
+                                pays : {{ownerCountry}}
+                        </p>
+                        <br>
+                        <button *ngIf="currentuserId === currentOwnerId; else notOwner" mat-flat-button color="primary" routerLink="/teik/products/create">
+                            Céder le produit
+                        </button>
+                        
+                        <ng-template #notOwner>
+                            <button mat-flat-button color="primary" >
+                                Acquerir le produit
+                            </button>
+                        </ng-template>
+                    </div>
+                </div>
+            </mat-card>
+           
+
+        </div>
+        <div >
+           
+            <mat-card class="profile-card">
+                <div class="profile-content">
+                    <div class="profile-info">
+                        <h2 class="profile-name"> Etat du produit</h2>
+                        <p class="profile-title" >
+                            <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+                            qrcodes : <span *ngIf="currentProductState === 'NON'" class="qr_code">OK</span>
+                        </p>
+                        <p class="profile-title">
+                            <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
+                            produit déjas consommé : <span class="consumed"> {{currentProductState}} </span> 
+                            <span *ngIf="currentProductState === 'OUI'"> , Consommé à {{ownerCity}} le 23/2/2024 à 16h29</span>
+                        </p>
+                        <br>
+                            <div *ngIf="currentProductState === 'NON' && currentuserId === currentOwnerId" >
+                                <button mat-flat-button color="primary" routerLink="/teik/products/create"> Consommé le produit </button>
+                            </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="secondary-card">
+
+    </div>
+</div>

@@ -5,24 +5,32 @@ import { Product } from "../models/product-model";
 
 @Injectable()
 export class ProductService {
-    constructor (private http: HttpClient) {}
+  constructor (private http: HttpClient) {}
 
-    createProduct(formValue: Product): Observable<Product | null> {
-        return this.http.post<Product>('http://127.0.0.1:8002/teko/gateway-products/products', formValue).pipe(
-            
-            delay(1000), 
-            map(response => response), 
-            catchError(() => of(null).pipe(
-              delay(1000) 
-            ))
-          );
-    }
-
-    getAllCompanieProducts(companieId: string ): Observable<Product[]> {
-        return this.http.get<Product[]>(`http://127.0.0.1:8002/teko/gateway-products/companie/${companieId}`).pipe(
-            catchError(() => of([]).pipe(
-              delay(1000)
-            ))
+  createProduct(formValue: Product): Observable<Product | null> {
+      return this.http.post<Product>('http://127.0.0.1:8002/teko/gateway-products/products', formValue).pipe(
+          
+          delay(1000), 
+          map(response => response), 
+          catchError(() => of(null).pipe(
+            delay(1000) 
+          ))
         );
-    }
+  }
+
+  getAllCompanieProducts(companieId: string ): Observable<Product[]> {
+      return this.http.get<Product[]>(`http://127.0.0.1:8002/teko/gateway-products/companie/${companieId}`).pipe(
+        catchError(() => of([]).pipe(
+          delay(1000)
+        ))
+      );
+  }
+
+  getCurrentProduct(productId: string): Observable<Product> {
+    return this.http.get<Product>(`http://127.0.0.1:8002/teko/gateway-products/${productId}`).pipe(
+      catchError(() => of().pipe(
+        delay(1000)
+      ))
+    );
+  }
 }

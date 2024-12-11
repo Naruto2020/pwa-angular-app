@@ -1,10 +1,11 @@
-.product-container {
+.product-container a {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     padding: 20px;
     background-color: #f4f4f4;
+    text-decoration: none;
   }
   .main-form {
     margin: 5%;
@@ -26,7 +27,8 @@
     }
   
     img {
-      width: 100%;
+      width: 30%;
+      //max-width: 300px;
       height: auto;
     }
   

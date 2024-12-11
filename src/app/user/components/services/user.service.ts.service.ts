@@ -21,4 +21,12 @@ export class UserService {
       // ))
     );
   }
+
+  getOwnerProduct(ownerId: string) {
+    
+    return this.http.get<User>(`http://127.0.0.1:8002/teko/gateway-users/owner/${ownerId}`).pipe(
+      map((user: User) => user),
+      catchError(() => of(null))
+    );
+  }
 }

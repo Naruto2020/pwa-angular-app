@@ -21,7 +21,7 @@
     margin-bottom: 5px;
 }
   
-.profile-title a {
+.profile-title {
     font-size: 18px;
     font-style: italic;
     margin-bottom: 5px;
@@ -31,10 +31,10 @@
     align-items: center;
 }
 
-.profile-title a:hover {
-    color: #0d47a1; /* Couleur plus foncée au survol */
-    text-decoration: underline;
-}
+// .profile-title a:hover {
+//     color: #0d47a1; /* Couleur plus foncée au survol */
+//     text-decoration: underline;
+// }
   
 .profile-title .material-icons {
     margin-right: 4px; /* Espace entre l'icône et le texte */
@@ -144,4 +144,13 @@
     flex-direction: row; /* Assure que les éléments main-card et secondary-card sont sur la même ligne */
     gap: 150px; /* Espace entre les cartes */
     padding: 20px; /* Espace intérieur pour le container */
+}
+.qr_code{
+    color: forestgreen;
+}
+.consumed{
+    color: forestgreen;
+}
+h3 {
+    color: darkorange;
 }

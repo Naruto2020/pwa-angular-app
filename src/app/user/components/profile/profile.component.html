@@ -7,13 +7,17 @@
                     <!-- <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture"> -->
                     <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture">
                 
-                    <div class="profile-info">
+                    <div class="profile-info"> 
                         <h2 class="profile-name">{{currentUserFirstName}} {{currentUserLastName}}</h2>
-                        <p class="profile-title">10 partenaires</p> 
-                        <p class="profile-title"> {{totalProduct}} produits</p> 
-                        <p class="profile-title">2 transactions</p> 
-                        <!-- <p class="profile-product">80 produits</p>
-                        <p class="profile">80 transactions</p> -->
+                        <p class="profile-title">
+                            <a routerLink="/teik/products/user-squad"> 10 partenaires </a>
+                        </p> 
+                        <p class="profile-title"> 
+                            <a routerLink="/teik/products/profile-product"> {{totalProduct}} produits </a>
+                        </p> 
+                        <p class="profile-title">
+                            <a routerLink="/teik/products/user-transaction"> 2 transactions </a>
+                        </p> 
                         <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
                         <!-- Autres informations de profil -->
                     </div>
@@ -33,29 +37,27 @@
                 
                     <div class="profile-info">
                         <h2 class="profile-name"> produits & Qrcodes</h2>
-                        <p>
-                            <a class="profile-title" routerLink="/teik/product/profile-product">
+                        <p class="profile-title">
+                            <a routerLink="/teik/products/profile-product">
                                 <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
                                 {{numberOfProducts}} Catégories de produits
                             </a>
                         </p>
-                        <p>
-                            <a class="profile-title" routerLink="/teik/qrcodes">
+                        <p class="profile-title">
+                            <a routerLink="/teik/qrcodes/profile-qrcode">
                                 <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                                180 qrcodes
+                                {{totalProduct}} qrcodes
                             </a>
                         </p>
-                        <!-- <p class="profile-title">80 produits </p>
-                        <p class="profile-title">180 qrcodes</p> -->
                         <br>
-                        <button mat-flat-button color="primary" routerLink="/teik/product/create"> Nouveau Produit </button>
+                        <button mat-flat-button color="primary" routerLink="/teik/products/create"> Nouveau Produit </button>
                         <!-- Autres informations de produit -->
                     </div>
                 </div>
             
-                <button mat-icon-button class="edit-button" aria-label="Modifier">
+                <!-- <button mat-icon-button class="edit-button" aria-label="Modifier">
                     <mat-icon>edit</mat-icon>
-                </button>
+                </button> -->
             </mat-card>
         </div>
         <div >
