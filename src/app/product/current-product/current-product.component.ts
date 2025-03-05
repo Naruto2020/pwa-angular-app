@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, switchMap, takeUntil, tap } from 'rxjs';
-import { of, Subject } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { UserService } from '@app/user/components/services/user.service.ts.service';
-import { ProductService } from '../services/product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
+import { UserService } from '@app/user/components/services/user.service.ts.service';
+import { catchError, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-current-product',
@@ -29,7 +28,10 @@ export class CurrentProductComponent implements OnInit {
   ownerImgUrl!: string;
   ownerPhoto!: SafeUrl;
 
-  currentuserId!: string;
+  currentUserId!: string;
+  currentProductId!: string;
+  
+
   
   constructor(private userService: UserService, private route: ActivatedRoute, 
     private router: Router, private sanitizer: DomSanitizer, 
@@ -38,13 +40,15 @@ export class CurrentProductComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.loginService.getUserInfo().userId;
     if (!userId) return;
-    this.currentuserId = userId;
+    this.currentUserId = userId;
 
     this.route.paramMap.pipe(
       takeUntil(this.unsubscribe$),
       switchMap(paramMap => {
         const productId = paramMap.get('id');
         if (!productId) return of(null);
+
+        this.currentProductId = productId;
 
         return this.productService.getCurrentProduct(productId).pipe(
           tap(data => {
@@ -85,5 +89,25 @@ export class CurrentProductComponent implements OnInit {
     ).subscribe();
   }
 
+  purchaseProduct() {
+    const requestParams = {
+      userId: this.currentUserId,
+      productId: this.currentProductId,
+    };
+
+    this.productService.sendRequestProduct(requestParams).pipe(
+      takeUntil(this.unsubscribe$),
+      tap((notification) => {
+        console.log('Request sent successfully:', notification);
+        alert('Request sent successfully');
+      }),
+      catchError(error => {
+        console.error('Error sending request:', error);
+        return of(null); 
+      })
+    ).subscribe();
+
+    //this.router.navigate(['/product/purchase-product', this.currentProductId]);
+  }
 
 }

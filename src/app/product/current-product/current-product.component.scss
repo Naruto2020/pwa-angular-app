@@ -145,8 +145,11 @@
     gap: 150px; /* Espace entre les cartes */
     padding: 20px; /* Espace intérieur pour le container */
 }
-.qr_code{
+.qr_code_ok{
     color: forestgreen;
+}
+.qr_code_nok{
+    color:darkred;
 }
 .consumed{
     color: forestgreen;

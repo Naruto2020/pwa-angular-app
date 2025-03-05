@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, map, of, tap } from "rxjs";
+import { Observable, catchError, delay, map, of } from "rxjs";
 import { Product } from "../models/product-model";
 
 @Injectable()
@@ -29,6 +29,16 @@ export class ProductService {
   getCurrentProduct(productId: string): Observable<Product> {
     return this.http.get<Product>(`http://127.0.0.1:8002/teko/gateway-products/${productId}`).pipe(
       catchError(() => of().pipe(
+        delay(1000)
+      ))
+    );
+  }
+
+  sendRequestProduct(requestParams: any) {
+    console.log('requestParams ==>: ',requestParams);
+    return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/request_product`, requestParams).pipe(
+      catchError(() => of().pipe(
+        map(response => response), 
         delay(1000)
       ))
     );

@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ProductRoutingModule } from './product-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileProductComponent } from './profile-product/profile-product.component';
+import { SharedModule } from '../shared/shared.module';
 import { CreateProductComponent } from './create-product/create-product.component';
-import { ProductService } from './services/product.service';
 import { CurrentProductComponent } from './current-product/current-product.component';
+import { ProductRoutingModule } from './product-routing.module';
+import { ProfileProductComponent } from './profile-product/profile-product.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
     ProfileProductComponent,
     CreateProductComponent,
-    CurrentProductComponent
+    CurrentProductComponent,
   ],
   imports: [
     CommonModule,

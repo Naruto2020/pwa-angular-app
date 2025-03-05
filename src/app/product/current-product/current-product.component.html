@@ -29,10 +29,13 @@
             </mat-card>
         </div>
         <div >
-           
             <mat-card class="profile-card">
                 <div class="profile-content">
-                    <img [src]= "ownerPhoto" alt="owner Picture" class="profile-picture">
+                    <img 
+                        [src]= "ownerPhoto" 
+                        alt="owner " 
+                        class="profile-picture"
+                    >
                     <div class="profile-info">
                         <h2 class="profile-name"> Propriétaire </h2>
                         <p class="profile-title">
@@ -45,38 +48,50 @@
                                 pays : {{ownerCountry}}
                         </p>
                         <br>
-                        <button *ngIf="currentuserId === currentOwnerId; else notOwner" mat-flat-button color="primary" routerLink="/teik/products/create">
+                        <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'" 
+                                mat-flat-button color="primary" 
+                                routerLink="/teik/products/create">
+                            Céder le produit
+                        </button>
+
+                        <button *ngIf="currentUserId !== currentOwnerId && currentProductState === 'NON'" 
+                                mat-flat-button color="primary" 
+                                (click)="purchaseProduct()">
+                            Acquérir le produit
+                        </button>
+                        <!-- <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'non'; else notOwner" mat-flat-button color="primary" routerLink="/teik/products/create">
                             Céder le produit
                         </button>
                         
                         <ng-template #notOwner>
-                            <button mat-flat-button color="primary" >
+                            <button  mat-flat-button color="primary" (click)="purchaseProduct()">
                                 Acquerir le produit
                             </button>
-                        </ng-template>
+                        </ng-template> -->
                     </div>
                 </div>
             </mat-card>
-           
 
         </div>
         <div >
-           
             <mat-card class="profile-card">
                 <div class="profile-content">
                     <div class="profile-info">
                         <h2 class="profile-name"> Etat du produit</h2>
                         <p class="profile-title" >
                             <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                            qrcodes : <span *ngIf="currentProductState === 'NON'" class="qr_code">OK</span>
+                            qrcodes : <span *ngIf="currentProductState === 'NON' else notOk" class="qr_code_ok">OK</span>
                         </p>
+                        <ng-template #notOk>
+                            <span class="qr_code_nok">Not OK</span>
+                        </ng-template>
                         <p class="profile-title">
                             <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
                             produit déjas consommé : <span class="consumed"> {{currentProductState}} </span> 
                             <span *ngIf="currentProductState === 'OUI'"> , Consommé à {{ownerCity}} le 23/2/2024 à 16h29</span>
                         </p>
                         <br>
-                            <div *ngIf="currentProductState === 'NON' && currentuserId === currentOwnerId" >
+                            <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId">
                                 <button mat-flat-button color="primary" routerLink="/teik/products/create"> Consommé le produit </button>
                             </div>
                     </div>
