@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
-import { SharedModule } from '../shared/shared.module';
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { SharedModule } from '../shared/shared.module';
+import { HeaderComponent } from './components/header/header.component';
 import { ProfileDropDownComponent } from './components/profile-drop-down/profile-drop-down.component';
-import {MatCardModule} from '@angular/material/card';
 
 
 

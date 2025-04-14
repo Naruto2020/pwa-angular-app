@@ -34,9 +34,34 @@ export class ProductService {
     );
   }
 
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`http://127.0.0.1:8002/teko/gateway-products/products`).pipe(
+      catchError(() => of().pipe(
+        delay(1000)
+      ))
+    );
+  }
+
   sendRequestProduct(requestParams: any) {
-    console.log('requestParams ==>: ',requestParams);
     return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/request_product`, requestParams).pipe(
+      catchError(() => of().pipe(
+        map(response => response), 
+        delay(1000)
+      ))
+    );
+  }
+
+  transfertProduct(requestParams: any) {
+    console.log(" ==> : ", requestParams);
+    return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/transfer_product`, requestParams).pipe(
+      catchError(() => of().pipe(
+        map(response => response), 
+        delay(1000)
+      ))
+    );
+  }
+  consumeProduct(requestParams: any) {
+    return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/consume_product`, requestParams).pipe(
       catchError(() => of().pipe(
         map(response => response), 
         delay(1000)

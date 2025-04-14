@@ -1,16 +1,31 @@
+// #profileMenu {
+//     display: flex;
+//     flex-direction: column; 
+//     align-items: flex-start; 
+//     padding: 16px; 
+// }
+
 #profileMenu {
+    position: absolute; 
+    top: 100%; 
+    left: 0;
+    background: white; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1000; 
     display: flex;
-    flex-direction: column; /* Définir la direction de la disposition en colonne */
-    align-items: flex-start; /* Aligner les éléments sur le côté gauche */
-    padding: 16px; /* Ajouter un peu d'espacement autour des éléments */
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
 }
 
+
 .dropdown-item {
-    margin-bottom: 8px; /* Ajouter de l'espace entre chaque élément */
-    text-decoration: none; /* Supprimer les soulignements des liens */
-    color: black; /* Changer la couleur du texte si nécessaire */
+    margin-bottom: 8px; 
+    text-decoration: none; 
+    color: black; 
 }
 
 .dropdown-item:hover {
-    background-color: #f0f0f0; /* Changer la couleur de fond au survol si nécessaire */
+    background-color: #f0f0f0;
 }

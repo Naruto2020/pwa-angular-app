@@ -1,10 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-//import { ProfileDropDownComponent } from '../profile-drop-down/profile-drop-down.component';
-import { UserService } from '../../../user/components/services/user.service.ts.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { LoginService } from '../../../auth/components/services/login.service';
+import { Router } from '@angular/router';
 import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
+import { LoginService } from '../../../auth/components/services/login.service';
+import { UserService } from '../../../user/components/services/user.service.ts.service';
 
 
 @Component({

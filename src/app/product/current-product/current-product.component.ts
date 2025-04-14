@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
 import { UserService } from '@app/user/components/services/user.service.ts.service';
 import { catchError, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { NotificationsService } from '../../services/notifications.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -30,12 +31,16 @@ export class CurrentProductComponent implements OnInit {
 
   currentUserId!: string;
   currentProductId!: string;
+  selectedNotificationId!: string;
+  purchaserUserId!: string;
+
+  consumeDate!: string;
   
 
   
   constructor(private userService: UserService, private route: ActivatedRoute, 
     private router: Router, private sanitizer: DomSanitizer, 
-  private productService: ProductService, private loginService: LoginService) { }
+  private productService: ProductService, private loginService: LoginService, private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
     const userId = this.loginService.getUserInfo().userId;
@@ -49,6 +54,8 @@ export class CurrentProductComponent implements OnInit {
         if (!productId) return of(null);
 
         this.currentProductId = productId;
+
+
 
         return this.productService.getCurrentProduct(productId).pipe(
           tap(data => {
@@ -87,8 +94,34 @@ export class CurrentProductComponent implements OnInit {
         );
       })
     ).subscribe();
+
+    // Retrieve the purchaser user id from query params
+    this.route.queryParams.subscribe(params => {
+      if(params['notificationId']){
+        this.selectedNotificationId = params['notificationId'];
+        console.log("Notification ID:", this.selectedNotificationId);
+        this.getPurchaserUserId();
+      }
+    });
   }
 
+  // Method to get the purchaser user id
+  getPurchaserUserId() {
+    this.notificationService.displayAllNotifications().pipe(
+      tap((notifications) => {
+        if (!notifications || notifications.length === 0) return;
+        
+        // Trouver la notification correspondante
+        const selectedNotif = notifications.find(notif => notif._id === this.selectedNotificationId);
+        if (selectedNotif) {
+          this.purchaserUserId = selectedNotif.userId;
+          console.log("Acheteur trouvé :", this.purchaserUserId);
+        }
+      })
+    ).subscribe();
+  }
+
+  // Method to purchase a product
   purchaseProduct() {
     const requestParams = {
       userId: this.currentUserId,
@@ -108,6 +141,55 @@ export class CurrentProductComponent implements OnInit {
     ).subscribe();
 
     //this.router.navigate(['/product/purchase-product', this.currentProductId]);
+  }
+
+  // Method to transfer a product to the new owner
+  transfertProduct() {
+
+    if (!this.purchaserUserId || !this.currentProductId) {
+      alert("Erreur : Acheteur ou produit non défini !");
+      return;
+    }
+
+    const requestParams = {
+      purchaserUserId: this.purchaserUserId,
+      productId: this.currentProductId,
+    };
+
+    this.productService.transfertProduct(requestParams).pipe(
+      takeUntil(this.unsubscribe$),
+      tap((notification) => {
+        console.log('Request sent successfully:', notification);
+        alert('Request sent successfully');
+      }),
+      catchError(error => {
+        console.error('Error sending request:', error);
+        return of(null); 
+      })
+    ).subscribe();
+
+    //this.router.navigate(['/product/purchase-product', this.currentProductId]);
+  }
+
+  consumeProduct(){
+    const requestParams = {
+      userId: this.currentUserId,
+      productId: this.currentProductId,
+    };
+
+    this.productService.consumeProduct(requestParams).pipe(
+      takeUntil(this.unsubscribe$),
+      tap((notification) => {
+        const dateOfConsumption = new Date();
+        this.consumeDate = dateOfConsumption.toISOString();
+        console.log('Request sent successfully:', notification);
+        alert('Request sent successfully');
+      }),
+      catchError(error => {
+        console.error('Error sending request:', error);
+        return of(null); 
+      })
+    ).subscribe();
   }
 
 }

@@ -22,13 +22,9 @@ mat-toolbar:first-child > button:first-child {
 .icon-text {
     //margin-left: 4px;
     text-decoration: none; 
-    transition: text-decoration 0.3s; /* Ajoute une transition pour une animation douce du soulignement */
+    transition: text-decoration 0.3s; 
     font-size:x-small;
     font-weight: lighter;
-    // &:hover {
-    //     text-decoration: underline;
-    //     margin-top: 4px;
-    // }
 }
 img {
     height: 30px;
@@ -38,7 +34,7 @@ img {
 }
 
 .icon-text:hover {
-    text-decoration: underline; /* Souligne le texte au survol */
+    text-decoration: underline; 
     margin-bottom: 4px;
 }
 
@@ -56,29 +52,32 @@ img {
 }
 
 .dropdown-link:hover {
-    background-color: #f0f0f0; /* Couleur de fond au survol */
-    border-radius: 4px; /* Bords arrondis au survol */
+    background-color: #f0f0f0;
+    border-radius: 4px;
 }
 
 #iconMediaQuerieMarge4 {
-    position: relative; /* le conteneur parent est positionné de manière relative */
+    position: relative;
 }
 
 app-profile-drop-down {
     position: absolute;
-    top: 110%; /* Positionne le composant sous le conteneur parent */
-    left: 30;
-    z-index: 999; /* le composant s'affiche au-dessus des autres éléments */
+    top: 110%;
+    right: 15%;
+    z-index: 999;
     font-size:x-small;
     font-weight: lighter;
 }
 
 #headerContainer {
-    transition: transform 0.3s ease; /* Ajoute une transition fluide lors du changement de position */
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: transform 0.3s ease;
 }
 
 #headerContainer.open {
-    transform: translateY(3px); /* Ajuste la position vers le bas lorsque le menu déroulant est visible */
+    transform: translateY(3px);
 }
 
 
@@ -107,7 +106,7 @@ app-profile-drop-down {
     #iconMediaQuerieMarge2,
     #iconMediaQuerieMarge3,
     #iconMediaQuerieMarge4 {
-        margin-left: 8px; /* Réduire la marge entre les icônes */
-        margin-right: 8px; /* Réduire la marge entre les icônes */
+        margin-left: 8px;
+        margin-right: 8px; 
     }
 }

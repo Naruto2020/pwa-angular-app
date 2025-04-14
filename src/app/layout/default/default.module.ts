@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DefaultComponent } from './default.component';
-import { CoreModule } from '../../core/core.module';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HomepageComponent } from '../../home/components/homepage/homepage.component';
-import { HomeModule } from 'src/app/home/home.module';
 import { AuthModule } from 'src/app/auth/auth.module';
-import { LoginComponent } from 'src/app/auth/components/login/login.component';
+import { HomeModule } from 'src/app/home/home.module';
+import { CoreModule } from '../../core/core.module';
+import { HomepageComponent } from '../../home/components/homepage/homepage.component';
+import { ScansModule } from '../../scans/scans.module';
+import { DefaultComponent } from './default.component';
 
 
 
@@ -21,7 +21,8 @@ import { LoginComponent } from 'src/app/auth/components/login/login.component';
     RouterModule,
     CoreModule,
     HomeModule,
-    AuthModule
+    AuthModule,
+    ScansModule,
   ],
 })
 export class DefaultModule { }

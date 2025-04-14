@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="main-card">
+    <div *ngFor="let notif of notifications">
+        <mat-card *ngIf="notif.data.productOwnerId === currentuserId" class="profile-card">
+          <a 
+          [routerLink]="['/teik/products/current-product/', notif.data.productId]" 
+          [queryParams]="{notificationId: notif._id}" 
+          style="cursor: pointer; text-decoration: none; color: inherit;"
+          >
+            <div class="profile-content" *ngIf="userInfos.has(notif.userId)">
+              <img *ngIf="userInfos.get(notif.userId)?.photo" [src]="userInfos.get(notif.userId)?.photo" alt="Profile Picture" class="profile-picture">
+              <div class="profile-info">
+                <h3 class="profile-name">
+                  {{ userInfos.get(notif.userId)?.firstName || 'Utilisateur inconnu' }} 
+                  {{ userInfos.get(notif.userId)?.lastName || '' }}
+                </h3>
+                <p *ngIf="filteredProducts.get(notif._id)">
+                  Souhaite faire une {{notif.type}} du produit <strong>{{filteredProducts.get(notif._id).name}} </strong>
+                </p>
+              </div>
+            </div>
+          </a>
+        </mat-card>
+    </div>
+  </div>
+
+  <div class="secondary-card">
+
+  </div>
+
+</div>
+  

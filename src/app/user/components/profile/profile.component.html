@@ -4,7 +4,6 @@
             <!-- Contenu de la carte principale -->
             <mat-card class="profile-card">
                 <div class="profile-content">
-                    <!-- <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture"> -->
                     <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture">
                 
                     <div class="profile-info"> 
@@ -19,7 +18,6 @@
                             <a routerLink="/teik/products/user-transaction"> 2 transactions </a>
                         </p> 
                         <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
-                        <!-- Autres informations de profil -->
                     </div>
                 </div>
             
@@ -28,12 +26,34 @@
                 </button>
             </mat-card>
         </div>
+        <div *ngIf="currentUserCompanie === 'non'">
+            <!-- Contenu de la carte principale -->
+            <mat-card class="profile-card">
+                <div class="profile-content">          
+                    <div class="profile-info">
+                        <h2 class="profile-name"> produits </h2>
+                        <p class="profile-title">
+                            <a routerLink="/teik/products/profile-product">
+                                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
+                                {{totalUserUniqueProducts}} Catégories de produits
+                            </a>
+                        </p>
+                        <p class="profile-title">
+                            <a routerLink="/teik/qrcodes/profile-qrcode">
+                                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+                                {{totalUserProducts}} qrcodes
+                            </a>
+                        </p>
+                        <br>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
         <div *ngIf="currentUserCompanie === 'oui'">
             <!-- Contenu de la carte principale -->
             <mat-card class="profile-card">
                 <div class="profile-content">
-                    <!-- <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture"> -->
-                    <!-- <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture"> -->
                 
                     <div class="profile-info">
                         <h2 class="profile-name"> produits & Qrcodes</h2>
@@ -55,9 +75,6 @@
                     </div>
                 </div>
             
-                <!-- <button mat-icon-button class="edit-button" aria-label="Modifier">
-                    <mat-icon>edit</mat-icon>
-                </button> -->
             </mat-card>
         </div>
         <div >
@@ -82,10 +99,7 @@
 
                     </div>
                 </div>
-            
-                <!-- <button mat-icon-button class="edit-button" aria-label="Modifier">
-                    <mat-icon>edit</mat-icon>
-                </button> -->
+
             </mat-card>
         </div>
         <div >
@@ -128,7 +142,7 @@
             <mat-card-header>
                 <mat-card-title>nouveauté sur les produits</mat-card-title>
             </mat-card-header>
-      
+
             <!-- Contenu pour Jack Daniel -->
             <mat-card-content>
                 <div class="product-section">
@@ -136,10 +150,10 @@
                     <h2 class="product-name">Jack Daniel SAS </h2>
                 </div>
             </mat-card-content>
-      
+
             <!-- Barre de séparation -->
             <div class="separator"></div>
-      
+
             <!-- Contenu pour Chivas -->
             <mat-card-content>
                 <div class="product-section">
@@ -148,7 +162,7 @@
                 </div>
             </mat-card-content>
             <div class="separator"></div>
-      
+
             <!-- Contenu pour heineken -->
             <mat-card-content>
                 <div class="product-section">
@@ -157,7 +171,7 @@
                 </div>
             </mat-card-content>
             <div class="separator"></div>
-      
+
             <!-- Contenu pour basmati -->
             <mat-card-content>
                 <div class="product-section">

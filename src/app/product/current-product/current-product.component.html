@@ -4,7 +4,6 @@
             
             <mat-card class="profile-card">
                 <div class="profile-content">
-                    <!-- <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture"> -->
                     <img [src]= "currentProductPhoto" alt="Profile product Picture" class="profile-picture">
                 
                     <div class="profile-info"> 
@@ -19,7 +18,6 @@
                             date d'expiration : {{expiryDate}}
                         </p> 
                         <p class="profile-location">fabriqué par : {{companieName}} </p>
-                       
                     </div>
                 </div>
             
@@ -50,7 +48,7 @@
                         <br>
                         <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'" 
                                 mat-flat-button color="primary" 
-                                routerLink="/teik/products/create">
+                                (click)="transfertProduct()">
                             Céder le produit
                         </button>
 
@@ -59,15 +57,6 @@
                                 (click)="purchaseProduct()">
                             Acquérir le produit
                         </button>
-                        <!-- <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'non'; else notOwner" mat-flat-button color="primary" routerLink="/teik/products/create">
-                            Céder le produit
-                        </button>
-                        
-                        <ng-template #notOwner>
-                            <button  mat-flat-button color="primary" (click)="purchaseProduct()">
-                                Acquerir le produit
-                            </button>
-                        </ng-template> -->
                     </div>
                 </div>
             </mat-card>
@@ -92,7 +81,7 @@
                         </p>
                         <br>
                             <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId">
-                                <button mat-flat-button color="primary" routerLink="/teik/products/create"> Consommé le produit </button>
+                                <button mat-flat-button color="primary" (click)="consumeProduct()"> Consommé le produit </button>
                             </div>
                     </div>
                 </div>

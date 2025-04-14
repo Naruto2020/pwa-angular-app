@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    justify-content: center; /* Centre les cartes horizontalement */
+    align-items: flex-start; /* Alignement en haut */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Partie principale (scanner + infos) en colonne */
+.main-card {
+    display: flex;
+    flex-direction: column; /* Mets les éléments en colonne */
+    align-items: center; /* Centre horizontalement */
+    flex: 2;
+    gap: 20px;
+}
+
+/* Carte secondaire (infos produits) */
+.secondary-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Cartes */
+.scanner-card {
+    width: 100%;
+    max-width: 90%; /* Ajustable selon la mise en page */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 90%; /* Ajustable selon la mise en page */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Vidéo centrée */
+.video-preview {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+}
+
+/* Sections des produits & QR codes */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Produits */
+.product-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Bouton */
+button {
+    margin-top: 10px;
+}
+
+/* Image produit */
+.product-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Séparateur */
+.separator {
+    height: 2px;
+    background-color: #ccc;
+    margin: 15px 0;
+    width: 100%;
+}

@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: row; /* Assure que les éléments main-card et secondary-card sont sur la même ligne */
+    gap: 20px; /* Espace entre les cartes */
+    padding: 20px; /* Espace intérieur pour le container */
+}
+
+/* Style pour les cartes principales */
+.main-card {
+    flex: 2; /* main-card prend deux fois plus d'espace que secondary-card */
+    margin-left: 120px;
+}
+
+.secondary-card {
+    flex: 1; /* secondary-card prend une part d'espace */
+    margin-right: 120px;
+}
+
+/* Style pour la carte secondaire */
+.secondary-card {
+    display: flex;
+    flex-direction: column; /* Assure que les éléments à l'intérieur de la secondary-card sont en colonne */
+}
+
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+}
+
+.profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Assure une forme circulaire */
+    margin-right: 20px;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center; /* Aligne l'image et les informations de profil verticalement au centre */
+    gap: 20px; /* Espace entre l'image et les informations de profil */
+}
+
+.profile-info {
+    flex: 1;
+}
