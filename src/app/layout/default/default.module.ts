@@ -14,7 +14,6 @@ import { DefaultComponent } from './default.component';
   declarations: [
     DefaultComponent,
     HomepageComponent,
-    //LoginComponent,
   ],
   imports: [
     CommonModule,

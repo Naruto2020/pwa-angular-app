@@ -1,5 +1,5 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../app/auth/components/services/login.service';
 
@@ -13,16 +13,20 @@ export class AuthInterceptor implements HttpInterceptor {
     const loginUrl = 'http://127.0.0.1:8002/teko/gateway/login';
     const registerUrl = 'http://127.0.0.1:8002/teko/gateway/authservice'
     
-    // Ne pas intercepter les requêtes de login et register
+    // Do not intercept login and register requests
     if (req.url === loginUrl || req.url === registerUrl ) {
       return next.handle(req);
     }
 
+    // Excludes request containing files  (multipart/form-data)
+    if (req.headers.has('Content-Type') && req.headers.get('Content-Type')!.includes('multipart/form-data')) {
+      return next.handle(req);  
+    }
+
     if (token) {
       const cloned = req.clone({
-        withCredentials: true, // pour envoyer les cookies avec la requête
+        withCredentials: true,
         setHeaders: {
-          'Content-Type': 'application/json',
           'Authorization': `Authentication=${token}`
         },
       });

@@ -28,7 +28,7 @@ export class NotifComponent implements OnInit {
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private productService: ProductService,
-    private cdr: ChangeDetectorRef // Ajout du ChangeDetectorRef
+    private cdr: ChangeDetectorRef // Add ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class NotifComponent implements OnInit {
                     photo: this.sanitizer.bypassSecurityTrustUrl(data.profilPhoto)
                   });
                   
-                  // Forcer Angular à rafraîchir l'affichage
+                  // Force Angular to refresh display
                   setTimeout(() => this.cdr.detectChanges(), 0);
                 }
               }),

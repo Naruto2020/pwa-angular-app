@@ -30,7 +30,7 @@ export class QrcodeScanComponent implements AfterViewInit {
 
 
           if (this.isValidUrl(url) && url.startsWith(allowedPrefix)) {
-            window.location.href = url; // Redirige l'utilisateur vers l'URL détectée
+            window.location.href = url; // Redirect user trhough detected url
           } else {
             alert('⚠️ QR Code détecté mais l\'URL n\'est pas autorisée ou peut être une contrefaçon ! 💀...');
 

@@ -84,7 +84,7 @@ export class ProfileProductComponent implements OnInit {
             .map(product => ({
               name: product.name,
               id: product._id || '',
-              count: 1, // On met 1 par défaut car on ne compte pas les occurrences ici
+              count: 1, // Default count to 1 for each unique product
               imageUrl: this.sanitizer.bypassSecurityTrustUrl(product.productPhoto || '')
             }));
         }

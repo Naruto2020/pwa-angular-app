@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Product } from '../models/product-model';
-import { LoginService } from '../../auth/components/services/login.service';
-import { ProductService } from '../services/product.service';
 import { tap } from 'rxjs';
+import { LoginService } from '../../auth/components/services/login.service';
+import { Product } from '../models/product-model';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -47,9 +47,6 @@ export class CreateProductComponent implements OnInit {
     this.productStatusCtrl = this.formBuilder.control('non');
     this.YesCtrl = this.formBuilder.control('');
     this.secondaryProductInfoForm = this.formBuilder.group({
-      //quantity: [null, [Validators.required, Validators.min(1)]],
-      // isFashion: ['', Validators.required],
-      // isAlreadyUse: ['', Validators.required],
       owner: currentCompanieId,
       expiryDate: ['', Validators.required],
       productPhoto: [''],
@@ -73,7 +70,6 @@ export class CreateProductComponent implements OnInit {
     this.loading = true;
     const formValue = this.productForm.value;
     const newProduct = new Product();
-    //const newOwner = 
 
     newProduct.name = formValue["primaryProductInfo"].name;
     newProduct.companieName = formValue["primaryProductInfo"].companieName;
@@ -93,7 +89,6 @@ export class CreateProductComponent implements OnInit {
           this.productForm.reset();
           this.productTypeCtrl.patchValue('non');
           this.productStatusCtrl.patchValue('non');
-          //console.log('new product :  ---> ', data);
         }
       })
     ).subscribe();

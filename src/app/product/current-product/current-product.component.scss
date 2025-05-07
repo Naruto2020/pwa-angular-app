@@ -1,7 +1,7 @@
   .profile-picture {
     width: 100px;
     height: 100px;
-    border-radius: 50%; /* Assure une forme circulaire */
+    border-radius: 50%; 
     margin-right: 20px;
 }
   
@@ -25,11 +25,11 @@
 }
 
 .profile-title .material-icons {
-    margin-right: 4px; /* Espace entre l'icône et le texte */
+    margin-right: 4px; 
 }
 
 .profile-title-link-icon {
-    font-size: 18px; /* Taille de l'icône */
+    font-size: 18px; 
 }
 
 .profile-location {
@@ -43,32 +43,31 @@
     right: 10px;
 }
 
-/* Style pour la mise en page principale */
 .container {
     display: flex;
-    flex-direction: row; /* Assure que les éléments main-card et secondary-card sont sur la même ligne */
-    gap: 20px; /* Espace entre les cartes */
-    padding: 20px; /* Espace intérieur pour le container */
+    flex-direction: row; 
+    gap: 20px;
+    padding: 20px; 
 }
 
-/* Style pour les cartes principales */
+
 .main-card {
-    flex: 2; /* main-card prend deux fois plus d'espace que secondary-card */
+    flex: 2;
     margin-left: 120px;
 }
 
 .secondary-card {
-    flex: 1; /* secondary-card prend une part d'espace */
-    margin-right: 120px;
+    flex: 1;
+    margin-left: 120px;
 }
 
-/* Style pour la carte secondaire */
+
 .secondary-card {
     display: flex;
-    flex-direction: column; /* Assure que les éléments à l'intérieur de la secondary-card sont en colonne */
+    flex-direction: column; 
 }
 
-/* Style pour la carte de profil */
+
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -80,45 +79,43 @@
     margin: 10px;
 }
 
-/* Style pour le contenu de profil dans main-card */
 .profile-content {
     display: flex;
-    align-items: center; /* Aligne l'image et les informations de profil verticalement au centre */
-    gap: 20px; /* Espace entre l'image et les informations de profil */
+    align-items: center; 
+    gap: 20px; 
 }
 
-/* Style pour les sections de produit */
+
 .product-section {
     display: flex;
-    align-items: center; /* Aligne les images et le texte verticalement au centre */
-    gap: 10px; /* Espace entre l'image et le texte */
+    align-items: center; 
+    gap: 10px; 
 }
 
-/* Style pour la barre de séparation */
+
 .separator {
-    height: 2px; /* Hauteur de la barre de séparation */
-    background-color: #ccc; /* Couleur de la barre de séparation */
-    margin: 20px 0; /* Espacement vertical autour de la barre */
-    width: 100%; /* Prend toute la largeur disponible */
+    height: 2px; 
+    background-color: #ccc; 
+    margin: 20px 0; 
+    width: 100%; 
 }
 
-/* Autres styles */
 .profile-picture, .product-picture {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    object-fit: cover; /* Assure que l'image remplit bien les dimensions sans être déformée */
+    object-fit: cover; 
 }
 
 .product-name {
-    min-height: 60px; /* Hauteur minimale pour accommoder au moins deux lignes de texte */
+    min-height: 60px; 
     display: flex;
-    align-items: center; /* Centre le texte verticalement dans son conteneur */
+    align-items: center; 
     margin: 0;
     font-size: 18px;
-    max-width: 100px; /* Définit une largeur maximale pour le texte */
-    white-space: normal; /* Permet le retour à la ligne automatique */
-    overflow-wrap: break-word; /* Permet de casser les mots pour éviter le débordement */
+    max-width: 100px; 
+    white-space: normal; 
+    overflow-wrap: break-word; 
 }
 
 .profile-title, .profile-title a, .profile-location {
@@ -128,9 +125,9 @@
 
 .profile-statistique {
     display: flex;
-    flex-direction: row; /* Assure que les éléments main-card et secondary-card sont sur la même ligne */
-    gap: 150px; /* Espace entre les cartes */
-    padding: 20px; /* Espace intérieur pour le container */
+    flex-direction: row; 
+    gap: 150px; 
+    padding: 20px; 
 }
 .qr_code_ok{
     color: forestgreen;

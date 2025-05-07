@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, tap, throwError } from 'rxjs';
-import { RegisterService } from '../services/register.service';
-import { User } from '../models/user-model';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { User } from '../models/user-model';
+import { RegisterService } from '../services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
 
   phoneNumberValidator(control: FormControl): { [key: string]: any } | null {
-    const phoneNumberPattern = /^\d+$/; // Changer cela selon le besoin
+    const phoneNumberPattern = /^\d+$/; // Change this if needed
     const isValid = phoneNumberPattern.test(control.value);
     return isValid ? null : { 'invalidPhoneNumber': { value: control.value } };
   }
@@ -41,7 +41,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.initFormControls();
     this.initMainForm();
-    //this.initFormObservable();
   }
 
   private initFormControls() {
@@ -75,14 +74,6 @@ export class RegisterComponent implements OnInit {
       loginInfo: this.loginInfoForm
     });
   }
-
-  // onFileSelected(event: Event): void {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files.length) {
-  //     const file = input.files[0];
-  //     this.mainForm.get('personalInfo')?.patchValue({ profilePhoto: file });
-  //   }
-  // }
 
   onSubmitForm(){
     this.loading = true;

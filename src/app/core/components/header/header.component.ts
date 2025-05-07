@@ -24,22 +24,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.loginService.getUserInfo().userId;
     if (!userId) {
-      //console.log('testons ')
-      //window.location.reload();
       return
     } else {
-      //console.log("arg ---> : ", userId);
       this.userService.getCurrentUser(userId).pipe(
         tap(data => {
           if(data) {
-            //this.userImageUrl = data.profilPhoto;
             this.currentUserPhoto = this.sanitizer.bypassSecurityTrustUrl(data.profilPhoto);
-            console.log('testons ', this.currentUserPhoto)
-            // if (!isReloaded) {
-            //   sessionStorage.setItem('isReloaded', 'true'); // Marque la page comme rechargée
-            //   window.location.reload();
-            //   console.log('testons ', isReloaded)
-            // }
           }
         }),
         catchError(error => {
@@ -49,30 +39,7 @@ export class HeaderComponent implements OnInit {
         takeUntil(this.unsubscribe$)
       ).subscribe();
     }
-    // const isReloaded = sessionStorage.getItem('isReloaded');
-    // if (!isReloaded) {
-    //   console.log('testons ', isReloaded)
-    //   sessionStorage.setItem('isReloaded', 'true');
-    //   window.location.reload();
-    //   this.userService.getCurrentUser(userId).pipe(
-    //     tap(data => {
-    //       if(data) {
-    //         this.userImageUrl = data.profilPhoto;
-    //         this.currentUserPhoto = this.sanitizer.bypassSecurityTrustUrl(this.userImageUrl);
-    //         // if (!isReloaded) {
-    //         //   sessionStorage.setItem('isReloaded', 'true'); // Marque la page comme rechargée
-    //         //   window.location.reload();
-    //         //   console.log('testons ', isReloaded)
-    //         // }
-    //       }
-    //     }),
-    //     catchError(error => {
-    //       console.error('Error fetching user data:', error);
-    //       return of(null); 
-    //     }),
-    //     takeUntil(this.unsubscribe$)
-    //   ).subscribe();
-    // }
+
   }
 
   isActive(route: string): boolean {

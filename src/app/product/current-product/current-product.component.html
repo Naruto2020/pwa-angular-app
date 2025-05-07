@@ -90,6 +90,14 @@
     </div>
 
     <div class="secondary-card">
+        <mat-card class="profile-card">
+            <h3> <strong>Telecharger l'image du produit</strong></h3>
+            <app-image-upload
+                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-products'"
+                [resourceId]= "currentProductId"
+                [fileType]= "'productPhoto'"
+            ></app-image-upload>    
+        </mat-card>
 
     </div>
 </div>

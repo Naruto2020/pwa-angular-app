@@ -12,11 +12,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from '../guards/auth.interceptor';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ImageUploadComponent
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -46,6 +49,7 @@ import { AuthInterceptor } from '../guards/auth.interceptor';
     MatRadioModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    ImageUploadComponent,
   ]
 })
 export class SharedModule { }

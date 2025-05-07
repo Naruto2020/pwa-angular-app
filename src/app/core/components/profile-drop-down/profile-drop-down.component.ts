@@ -20,7 +20,6 @@ export class ProfileDropDownComponent implements OnInit {
     }
   }
   logout() {
-    // logique de déconnexion de l'utilisateur
     this.loginService.logout()
   }
 
