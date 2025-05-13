@@ -16,7 +16,7 @@ import { UserService } from '../services/user.service.ts.service';
 export class ProfileComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
-  currentuserId!: string;
+  currentUserId!: string;
   currentUserLastName!: string;
   currentUserFirstName!: string;
   currentUserCompanie!: string;
@@ -36,9 +36,42 @@ export class ProfileComponent implements OnInit {
     private productService: ProductService, private loginService: LoginService, ) { }
 
   ngOnInit(): void {
+    /** execice for technical tests  */
+
+    // function sumTo(n: number): number {
+    //   //return (n * (n + 1)) / 2;
+    //   let sum = 0;
+    //   for (let i=1; i <= n; i++) {
+    //     sum += i;
+    //   }
+    //   console.log('sum : ', sum);
+    //   return sum;
+    // }
+
+    // sumTo(10); // 55
+    // sumTo(100); // 5050
+    // sumTo(5); // 15
+
+    // function reverseString(str: string): string {
+    //   console.log(str.split('').reverse().join(''))
+    //   return str.split('').reverse().join('');
+    // }
+
+    // reverseString('hello'); // 'olleh'
+    // reverseString('world'); // 'dlrow'
+    // reverseString('12345'); // '54321'
+
+    // function findOdd(arr: number[]): number {
+    //   return arr.reduce((acc, curr) => acc ^curr, 0);
+
+    // }
+    // console.log("Impair => : ",findOdd([1, 2, 3, 2, 3, 1, 5])) //5
+
+    // //function isPalindrome(str: string): boolean {}
+
     const userId = this.loginService.getUserInfo().userId;
     if (!userId) return;
-    this.currentuserId = userId;
+    this.currentUserId = userId;
     this.userService.getCurrentUser(userId).pipe(
       tap(data => {
         if (data) {
@@ -58,7 +91,7 @@ export class ProfileComponent implements OnInit {
       takeUntil(this.unsubscribe$)
     ).subscribe();
 
-    this.productService.getAllCompanieProducts(this.currentuserId).pipe(
+    this.productService.getAllCompanieProducts(this.currentUserId).pipe(
       tap(data => {
         if(data) {
           this.totalProduct = data.length;
@@ -74,7 +107,7 @@ export class ProfileComponent implements OnInit {
     this.productService.getAllProducts().pipe(
       tap(data =>{
         if(data) {
-          this.userProducts = data.filter(product => product.owner[product.owner.length -1] === this.currentuserId);
+          this.userProducts = data.filter(product => product.owner[product.owner.length -1] === this.currentUserId);
           const uniqueProducts = Array.from(new Map(this.userProducts.map(item => [item.name, item])).values());
 
           this.totalUserProducts = this.userProducts.length;

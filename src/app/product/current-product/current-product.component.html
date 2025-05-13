@@ -77,7 +77,7 @@
                         <p class="profile-title">
                             <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
                             produit déjas consommé : <span class="consumed"> {{currentProductState}} </span> 
-                            <span *ngIf="currentProductState === 'OUI'"> , Consommé à {{ownerCity}} le 23/2/2024 à 16h29</span>
+                            <span *ngIf="currentProductState === 'OUI'"> , Consommé par {{ownerfirstName}} à {{ownerCity}} le 23/2/2024 à 16h29</span>
                         </p>
                         <br>
                             <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId">

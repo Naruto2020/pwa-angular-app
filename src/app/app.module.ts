@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 //import { SharedModule } from './shared/shared.module';
 //import { DefaultComponent } from './layout/default/default.component';
 import { DefaultModule } from './layout/default/default.module';
+import { SquadComponent } from './network/components/squad/squad.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SquadComponent,
     //DefaultComponent
   ],
   imports: [

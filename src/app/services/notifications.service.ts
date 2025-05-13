@@ -11,7 +11,6 @@ export class NotificationsService {
   constructor(private http: HttpClient) {}
 
   displayAllNotifications(){
-    console.log('getNotifications =======>AAAAA: ');
     return this.http.get<Notification[]>('http://127.0.0.1:8002/teko/gateway-notifications/notifications').pipe(
       map((notifications: Notification[]) => notifications),
       catchError(() => of(null))
