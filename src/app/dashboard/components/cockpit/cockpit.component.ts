@@ -25,4 +25,21 @@ export class CockpitComponent implements OnInit {
     this.currentUserCompanie = this.loginService.getUserInfo().companie ?? '';
   }
 
+// Company data
+createdProductsCount = 124;
+expiredProducts = 9;
+totalScans = 845;
+authenticityRate = 92;
+flaggedProductsCount = 7;
+activeUsersCount = 48;
+consumerOfTheMonthName = "Jean K.";
+
+// Consumer data
+userScanCount = 37;
+userValidScanCount = 29;
+userReportedProducts = 3;
+authenticityScore = 82; // Calculated
+cashbackScore = 500; // Calculated
+userBadges = ['Détective', 'Anti-fake', 'Premium'];
+
 }
