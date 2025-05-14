@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CockpitComponent } from './components/cockpit/cockpit.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { CockpitComponent } from './components/cockpit/cockpit.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SharedModule,
+    HttpClientModule,
   ]
 })
 export class DashboardModule { }
