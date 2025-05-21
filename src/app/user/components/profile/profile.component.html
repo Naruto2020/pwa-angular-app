@@ -1,7 +1,7 @@
 <div class="container">
     <div class="main-card">
         <div >
-          
+
             <mat-card class="profile-card">
                 <div class="profile-content">
                     <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture">
@@ -11,7 +11,10 @@
                         <p class="profile-title">
                             <a routerLink="/teik/products/user-squad"> 10 partenaires </a>
                         </p> 
-                        <p class="profile-title"> 
+                        <p class="profile-title" *ngIf="currentUserCompanie === 'non'"> 
+                            <a routerLink="/teik/products/profile-product"> {{totalUserProducts}} produits </a>
+                        </p> 
+                        <p class="profile-title" *ngIf="currentUserCompanie === 'oui'"> 
                             <a routerLink="/teik/products/profile-product"> {{totalProduct}} produits </a>
                         </p> 
                         <p class="profile-title">
@@ -27,7 +30,7 @@
             </mat-card>
         </div>
         <div *ngIf="currentUserCompanie === 'non'">
-           
+
             <mat-card class="profile-card">
                 <div class="profile-content">          
                     <div class="profile-info">
@@ -51,7 +54,7 @@
             </mat-card>
         </div>
         <div *ngIf="currentUserCompanie === 'oui'">
-           
+
             <mat-card class="profile-card">
                 <div class="profile-content">
                 
@@ -78,7 +81,7 @@
             </mat-card>
         </div>
         <div >
-           
+
             <mat-card class="profile-card">
                 
                 <div class="profile-info">
@@ -103,7 +106,7 @@
             </mat-card>
         </div>
         <div >
-           
+
             <mat-card class="profile-card">
                 
                 <div class="profile-info">
@@ -146,12 +149,12 @@
             ></app-image-upload>    
         </mat-card>
         <mat-card class="profile-card">
-           
+
             <mat-card-header>
                 <mat-card-title>nouveauté sur les produits</mat-card-title>
             </mat-card-header>
 
-           
+
             <mat-card-content>
                 <div class="product-section">
                     <img src="../../../../assets/images/j_daniel.png" alt="Jack Daniel" class="product-picture">
