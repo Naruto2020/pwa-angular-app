@@ -36,38 +36,6 @@ export class ProfileComponent implements OnInit {
     private productService: ProductService, private loginService: LoginService, ) { }
 
   ngOnInit(): void {
-    /** execice for technical tests  */
-
-    // function sumTo(n: number): number {
-    //   //return (n * (n + 1)) / 2;
-    //   let sum = 0;
-    //   for (let i=1; i <= n; i++) {
-    //     sum += i;
-    //   }
-    //   console.log('sum : ', sum);
-    //   return sum;
-    // }
-
-    // sumTo(10); // 55
-    // sumTo(100); // 5050
-    // sumTo(5); // 15
-
-    // function reverseString(str: string): string {
-    //   console.log(str.split('').reverse().join(''))
-    //   return str.split('').reverse().join('');
-    // }
-
-    // reverseString('hello'); // 'olleh'
-    // reverseString('world'); // 'dlrow'
-    // reverseString('12345'); // '54321'
-
-    // function findOdd(arr: number[]): number {
-    //   return arr.reduce((acc, curr) => acc ^curr, 0);
-
-    // }
-    // console.log("Impair => : ",findOdd([1, 2, 3, 2, 3, 1, 5])) //5
-
-    // //function isPalindrome(str: string): boolean {}
 
     const userId = this.loginService.getUserInfo().userId;
     if (!userId) return;
@@ -95,7 +63,6 @@ export class ProfileComponent implements OnInit {
       tap(data => {
         if(data) {
           this.totalProduct = data.length;
-          console.log(' les pro : ', this.totalProduct);
           // extract product by unique name 
           const uniqueDataByName = Array.from(new Map(data.map(item => [item.name, item])).values());
           this.numberOfProducts = uniqueDataByName.length;
