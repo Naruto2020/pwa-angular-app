@@ -11,7 +11,7 @@ const routes: Routes = [
       {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m =>m.AuthModule), data: {showHeader: false} },
       {path: 'news', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule),  canActivate: [AuthGuard] },
       {path: 'notifications', loadChildren: () => import('./notifications/notifications.module').then(m =>m.NotificationsModule), canActivate: [AuthGuard] },
-      {path: 'overviews', loadChildren: () => import('./home/home.module').then(m =>m.HomeModule), canActivate: [AuthGuard] },
+      {path: 'activity', loadChildren: () => import('./posts/posts.module').then(m =>m.PostsModule), canActivate: [AuthGuard] },
       {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m =>m.DashboardModule), canActivate: [AuthGuard] },
       {path: 'mysquad', loadChildren: () => import('./network/network.module').then(m =>m.NetworkModule), canActivate: [AuthGuard] },
       {path: 'user', loadChildren: () => import('./user/user.module').then(m =>m.UserModule), canActivate: [AuthGuard] },

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfileProductComponent } from './profile-product/profile-product.component';
-import { CreateProductComponent } from './create-product/create-product.component';
-import { CurrentProductComponent } from './current-product/current-product.component';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+import { CurrentProductComponent } from './components/current-product/current-product.component';
+import { ProfileProductComponent } from './components/profile-product/profile-product.component';
 
 const routes: Routes = [
   {path: 'create', component: CreateProductComponent},

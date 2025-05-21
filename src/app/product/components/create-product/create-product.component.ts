@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { LoginService } from '../../auth/components/services/login.service';
-import { Product } from '../models/product-model';
-import { ProductService } from '../services/product.service';
+import { LoginService } from '../../../auth/components/services/login.service';
+import { Product } from '../../models/product-model';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-create-product',
