@@ -10,6 +10,7 @@ export class QrcodeScanComponent implements AfterViewInit {
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
   codeReader = new BrowserMultiFormatReader();
   scanning = false;
+  isFakeUrl = false;
 
   ngAfterViewInit() {
     this.startScan();
@@ -24,15 +25,14 @@ export class QrcodeScanComponent implements AfterViewInit {
       this.codeReader.decodeFromVideoElement(this.videoElement.nativeElement, (result, err) => {
         if (result) {
           const url = result.getText();
-          console.log('QR Code détecté:', url);
 
-          const allowedPrefix = 'http://localhost:4200/teik/products/current-product';
-
+          const allowedPrefix = 'http://localhost:4200/teik/products/current-product'; // To protect against phishing
 
           if (this.isValidUrl(url) && url.startsWith(allowedPrefix)) {
+            console.log('QR Code détecté:', url);
             window.location.href = url; // Redirect user trhough detected url
           } else {
-            alert('⚠️ QR Code détecté mais l\'URL n\'est pas autorisée ou peut être une contrefaçon ! 💀...');
+            this.isFakeUrl = true;
 
           }
 
@@ -46,6 +46,7 @@ export class QrcodeScanComponent implements AfterViewInit {
 
   isValidUrl(url: string): boolean {
     const pattern = new RegExp('^(https?:\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*(\.[a-z]{2,5})?(:[0-9]{1,5})?(\/.*)?$', 'i');
+    
     return pattern.test(url);
   }
   

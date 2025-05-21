@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
 import { UserService } from '@app/user/components/services/user.service.ts.service';
 import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../../services/product.service';
 
 interface Product {
   name: string;

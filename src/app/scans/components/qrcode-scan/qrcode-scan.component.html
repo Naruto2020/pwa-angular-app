@@ -1,10 +1,17 @@
 <div class="container">
+    <!-- modal alert section -->
+    <app-scan-alert *ngIf="isFakeUrl"></app-scan-alert>
+
     <!-- Main section : Scanner + Products -->
     <div class="main-card">
+        
         <!-- Scanner QR Code -->
         <mat-card class="scanner-card">
-            <div class="profile-content">
+            <div class="scanner-wrapper">
                 <video #videoElement class="video-preview"></video>
+                <div class="scanner-overlay">
+                    <div class="scanner-frame"></div>
+                </div>
             </div>
         </mat-card>
 
@@ -16,14 +23,14 @@
                 <h6>Cornel West a publié ceci . 2 sem</h6>
                 <p class="profile-title">Eau minérale Supermont de contrefaçon </p>
                 <p class="profile-location">Douala viva shop akwa</p>
-               
+
                 <div class="separator"></div>
 
                 <h6>Cornel West a publié ceci . 2 mois</h6>
                 <p class="profile-title">Gaz de contrebande non plein</p>
                 <p class="profile-location">Douala magasin trouvetout qaurtier new bell</p>
 
-               
+
                 <div class="separator"></div>
 
                 <h6>Cornel West a publié ceci . 5 mois</h6>

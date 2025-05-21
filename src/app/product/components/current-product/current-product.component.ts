@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
 import { UserService } from '@app/user/components/services/user.service.ts.service';
 import { catchError, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { NotificationsService } from '../../services/notifications.service';
-import { ProductService } from '../services/product.service';
+import { NotificationsService } from '../../../services/notifications.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-current-product',
