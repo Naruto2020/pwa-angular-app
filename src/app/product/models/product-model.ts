@@ -1,4 +1,5 @@
-export class Product {
+export class 
+Product {
     
     quantity!: number;
     name!: string;

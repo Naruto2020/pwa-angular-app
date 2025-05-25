@@ -11,6 +11,11 @@ export class QrcodeScanComponent implements AfterViewInit {
   codeReader = new BrowserMultiFormatReader();
   scanning = false;
   isFakeUrl = false;
+  multiScanMode = false;
+  scanUrls : string[] = [];
+
+  constructor() { }
+
 
   ngAfterViewInit() {
     this.startScan();
@@ -29,8 +34,19 @@ export class QrcodeScanComponent implements AfterViewInit {
           const allowedPrefix = 'http://localhost:4200/teik/products/current-product'; // To protect against phishing
 
           if (this.isValidUrl(url) && url.startsWith(allowedPrefix)) {
-            console.log('QR Code détecté:', url);
-            window.location.href = url; // Redirect user trhough detected url
+            if(this.multiScanMode) {
+              console.log('multi scan mode détecté:');
+
+              //if(!this.scanUrls.includes(url)) {
+                this.scanUrls.push(url);
+                console.log('Ajouté à la liste :', this.scanUrls);
+              //}
+            }else {
+
+              console.log('QR Code détecté:', url);
+              this.stopScan(); // Stop scanning after first valid URL
+              window.location.href = url; // Redirect user trhough detected url
+            }
           } else {
             this.isFakeUrl = true;
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { LoginService } from '../../../auth/components/services/login.service';
+import { ProductFormValue } from '../../models/product-form-value';
 import { Product } from '../../models/product-model';
 import { ProductService } from '../../services/product.service';
 
@@ -35,7 +36,7 @@ export class CreateProductComponent implements OnInit {
 
   private initFormControls() {
     const currentCompanieName1 = this.loginService.getUserInfo().firstName;
-    const currentCompanieName2 = this.loginService.getUserInfo().lastName;
+    //const currentCompanieName2 = this.loginService.getUserInfo().lastName;
     const currentCompanieId = this.loginService.getUserInfo().userId;
   
     this.primaryProductInfoForm = this.formBuilder.group({
@@ -68,7 +69,7 @@ export class CreateProductComponent implements OnInit {
 
   onSubmitForm() {
     this.loading = true;
-    const formValue = this.productForm.value;
+    const formValue: ProductFormValue = this.productForm.value;
     const newProduct = new Product();
 
     newProduct.name = formValue["primaryProductInfo"].name;
