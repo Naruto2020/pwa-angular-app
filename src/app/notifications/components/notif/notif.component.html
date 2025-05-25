@@ -1,7 +1,7 @@
 <div class="container">
   <div class="main-card">
     <div *ngFor="let notif of notifications">
-        <mat-card *ngIf="notif.data.productOwnerId === currentuserId" class="profile-card">
+        <mat-card *ngIf="filteredProducts.get(notif._id)?.owner.slice(-1)[0] === currentuserId"  class="profile-card">
           <a 
           [routerLink]="['/teik/products/current-product/', notif.data.productId]" 
           [queryParams]="{notificationId: notif._id}" 

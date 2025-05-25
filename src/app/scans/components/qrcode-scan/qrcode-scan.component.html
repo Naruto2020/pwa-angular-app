@@ -1,10 +1,12 @@
 <div class="container">
-    <!-- modal alert section -->
-    <app-scan-alert *ngIf="isFakeUrl"></app-scan-alert>
+    <!-- modal alert section  -->
+    <app-scan-alert *ngIf="isFakeUrl" ></app-scan-alert>
 
     <!-- Main section : Scanner + Products -->
     <div class="main-card">
-        
+        <button mat-flat-button color="primary" (click)="multiScanMode = !multiScanMode">
+            {{ multiScanMode ? 'Scanner un produit' : 'Scanner plusieurs produits' }}
+        </button>
         <!-- Scanner QR Code -->
         <mat-card class="scanner-card">
             <div class="scanner-wrapper">
@@ -15,33 +17,65 @@
             </div>
         </mat-card>
 
-        <mat-card class="profile-card">
-                
-            <div class="profile-info">
-                <h2 class="profile-name">Activités</h2> <br>
-
-                <h6>Cornel West a publié ceci . 2 sem</h6>
-                <p class="profile-title">Eau minérale Supermont de contrefaçon </p>
-                <p class="profile-location">Douala viva shop akwa</p>
-
-                <div class="separator"></div>
-
-                <h6>Cornel West a publié ceci . 2 mois</h6>
-                <p class="profile-title">Gaz de contrebande non plein</p>
-                <p class="profile-location">Douala magasin trouvetout qaurtier new bell</p>
-
-
-                <div class="separator"></div>
-
-                <h6>Cornel West a publié ceci . 5 mois</h6>
-                <p class="profile-title">ruinar de contrefaçon</p>
-                <p class="profile-location"> Douala sckack B&W quartier Bonamoussadi</p>
+        <div *ngIf="multiScanMode && scanUrls.length " class="separator-activity"><h2 class="profile-name">Produits scannés</h2> </div> 
+        <mat-card *ngIf="multiScanMode && scanUrls.length " class="profile-card">
+            <div *ngIf="multiScanMode && scanUrls.length > 0" class="results-list">
+                <h3>Produits scannés :</h3>
+                <ul>
+                    <li *ngFor="let url of scanUrls"> 
+                        <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+                        {{ url }}
+                    </li>
+                </ul>
             </div>
-            
-        
-            <button mat-icon-button class="edit-button" aria-label="Modifier">
-                <mat-icon>edit</mat-icon>
-            </button>
+            <button mat-flat-button color="primary">Céder Les articles</button>
+        </mat-card>
+
+        <div class="separator-activity"><h2 class="profile-name">Actualités</h2> </div> 
+
+        <mat-card class="profile-card">
+            <div class="profile-content">
+                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
+                <div class="profile-info">
+                    <h6>Cornel West a publié ceci . 5 mois</h6>
+                    <p class="profile-title">Jack Daniel  de contrefaçon</p>
+                    <img src="../../../../assets/images/j_daniel.png" alt="" class="alert-picture">
+                    <p class="profile-location"> Douala sckack B&W quartier Bonamoussadi</p>
+    
+                    <div class="separator"></div>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card class="profile-card">
+            <div class="profile-content">
+                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
+                <div class="profile-info">
+                    <h6>Cornel West a publié ceci . 2 sem</h6>
+                    <p class="profile-title">Riz basmati de contrefaçon </p>
+                    <img src="../../../../assets/images/r_basmati.png" alt="" class="alert-picture">
+                    <p class="profile-location">Douala viva shop akwa</p>
+    
+                    <div class="separator"></div>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card class="profile-card">
+            <div class="profile-content">
+                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
+                <div class="profile-info">
+                    <h6>Cornel West a publié ceci . 2 mois</h6>
+                    <p class="profile-title">Heineken de contrefaçon</p>
+                    <img src="../../../../assets/images/heineken.png" alt="" class="alert-picture">
+                    <p class="profile-location">Douala magasin trouvetout qaurtier new bell</p>
+    
+    
+                    <div class="separator"></div>
+                </div>
+
+            </div>
+
         </mat-card>
     </div>
 
@@ -55,7 +89,10 @@
             <mat-card-content>
                 <div class="product-section">
                     <img src="../../../../assets/images/andy-mabillai.png" alt="Jack Daniel" class="product-picture">
-                    <h2 class="product-name">Le Mabillais bar de nuit</h2>
+                    <div class="product-name-wrapper">
+                        <h2 class="product-name">Le Mabillais bar rennes</h2>
+
+                    </div>
                 </div>
             </mat-card-content>
 
@@ -64,7 +101,10 @@
             <mat-card-content>
                 <div class="product-section">
                     <img src="../../../../assets/images/vendome-nc.png" alt="Chivas" class="product-picture">
-                    <h2 class="product-name">Le vendome nigth club</h2>
+                    <div class="product-name-wrapper">
+                        <h2 class="product-name">Le vendome nigth club</h2>
+
+                    </div>
                 </div>
             </mat-card-content>
 
@@ -73,7 +113,10 @@
             <mat-card-content>
                 <div class="product-section">
                     <img src="../../../../assets/images/saveur.png" alt="Heineken" class="product-picture">
-                    <h2 class="product-name">Restaurant la saveur</h2>
+                    <div class="product-name-wrapper">
+                        <h2 class="product-name">Restaurant la saveur</h2>
+
+                    </div>
                 </div>
             </mat-card-content>
 
@@ -82,7 +125,10 @@
             <mat-card-content>
                 <div class="product-section">
                     <img src="../../../../assets/images/droguerie.png" alt="riz Basmati" class="product-picture">
-                    <h2 class="product-name">Waty droguerie</h2>
+                    <div class="product-name-wrapper">
+                        <h2 class="product-name">La seine droguerie  </h2>
+
+                    </div>
                 </div>
             </mat-card-content>
         </mat-card>

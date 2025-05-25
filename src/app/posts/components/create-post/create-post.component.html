@@ -1,1 +1,74 @@
-<p>create-post works!</p>
+<mat-card class="main-form" [formGroup]="postForm">
+  <mat-card-title> Signaler un produit </mat-card-title>
+
+      <div class="secondary-card">
+        <mat-card class="profile-card">
+            <h3> <strong>Telecharger l'image du produit</strong></h3>
+            <app-image-upload
+                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-products'"
+                [resourceId]= "currentProductId"
+                [fileType]= "'productPhoto'"
+            ></app-image-upload>    
+        </mat-card>
+
+    </div>
+
+  <mat-card class="form-card" formGroupName="primaryPostInfo">
+    <mat-card-subtitle>Informations principales </mat-card-subtitle>
+    <br>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label> Auteur </mat-label>
+        <input type="text" matInput formControlName="author">
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label> Qrcode</mat-label>
+        <input type="text" matInput formControlName="fakeUrl" >
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label> Description</mat-label>
+        <!-- <input type="text" matInput formControlName="description" > -->
+        <textarea matInput formControlName="description" rows="4"></textarea>
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card" formGroupName="secondaryPostInfo">
+    <mat-card-subtitle>Informations secondaires</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+          <mat-label>Point de vente</mat-label>
+          <input type="text" matInput formControlName="storeName">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+          <mat-label>Produit</mat-label>
+          <input type="text" matInput formControlName="productName">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+          <mat-label>Ville</mat-label>
+          <input type="text" matInput formControlName="city">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
+          <mat-label>Photo du produit</mat-label>
+          <input type="text" matInput formControlName="postImage">
+          <mat-error>Ce champs est requis</mat-error>
+      </mat-form-field> -->
+
+        <mat-card-actions>
+    <button *ngIf="postForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">Enregistrer</button> &nbsp; &nbsp;
+    <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+  </mat-card-actions>
+    </div>
+  </mat-card>
+
+</mat-card>

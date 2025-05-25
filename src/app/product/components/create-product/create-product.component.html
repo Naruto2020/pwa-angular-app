@@ -1,8 +1,10 @@
 <mat-card class="main-form"  [formGroup]="productForm">
   <mat-card-title>Créer un nouveau produit</mat-card-title>
+
   <mat-card class="form-card" formGroupName="primaryProductInfo">
     <mat-card-subtitle>Informations principales </mat-card-subtitle>
     <br>
+    
     <div class="form-row">
       <mat-form-field appearance="fill">
         <mat-label>nom du produit </mat-label>
@@ -57,11 +59,6 @@
 
   <mat-card class="form-card">
     <mat-card-subtitle>nombres de produits à créer </mat-card-subtitle>
-    <!-- <mat-form-field appearance="fill">
-      <mat-label>Quantité</mat-label>
-      <input type="text" matInput [formControl]="quantityCtrl">
-    </mat-form-field> -->
-
     <mat-label>Quantité</mat-label>
     <input matInput id="quantity" formControlName="quantity" type="number">
     <mat-error *ngIf="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.dirty || productForm.get('quantity')?.touched)">

@@ -10,8 +10,9 @@ export class ProductFormValue {
     non?: string;
     secondaryProductInfo!: {
         owner: string,
-        expiryDate: string
-        productPhoto: string
+        expiryDate: string,
+        productPhoto: string,
+        usedBy: string,
     };
 
     quantity!: number;
