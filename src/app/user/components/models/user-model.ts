@@ -9,4 +9,6 @@ export class User {
     phoneNumber!: string;
     email!: string;
     password!: string
+    createdAt?: string;
+    updatedAt?: string;
 }

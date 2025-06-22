@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { catchError, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { LoginService } from '../../../auth/components/services/login.service';
 import { Product } from '../../../product/models/product-model';
@@ -7,6 +8,7 @@ import { ProductService } from '../../../product/services/product.service';
 import { NotificationsService } from '../../../services/notifications.service';
 import { UserService } from '../../../user/components/services/user.service.ts.service';
 import { Notification } from '../../components/model/notification-model';
+import { Notif } from '../../interfaces/notif.interface';
 
 @Component({
   selector: 'app-notif',
@@ -27,15 +29,28 @@ export class NotifComponent implements OnInit {
     private loginService: LoginService,
     private userService: UserService,
     private sanitizer: DomSanitizer,
+    private router: Router,
     private productService: ProductService,
     private cdr: ChangeDetectorRef // Add ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    const userId = this.loginService.getUserInfo().userId;
+    this.initUserInfos();
+    this.getProductsMatchingNotification();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private initUserInfos(): void {
+        const userId = this.loginService.getUserInfo().userId;
     if (!userId) return;
     this.currentuserId = userId;
+  }
 
+  private getProductsMatchingNotification(): void{
     this.productService.getAllProducts().pipe(
       tap(data => {
         if (data) {
@@ -46,7 +61,7 @@ export class NotifComponent implements OnInit {
       tap((notifications) => {
         if (!notifications || notifications.length === 0) return;
         this.notifications = notifications;
-    
+
         notifications.forEach((notif) => {
           const requestUserId = notif.userId;
     
@@ -71,7 +86,7 @@ export class NotifComponent implements OnInit {
           }
     
           const matchingProduct = this.products.find(pdt =>
-            notif.data.productOwnerId === pdt.owner[pdt.owner.length - 1]
+            notif.data.productId === pdt._id
           );
           if (matchingProduct) {
             this.filteredProducts.set(notif._id, matchingProduct);
@@ -83,6 +98,38 @@ export class NotifComponent implements OnInit {
         return of([]);
       })
     ).subscribe();
+  }
+
+
+  markAsRead(notif : Notification) {
+    const notificationRead: Notif = { isRead: 'oui' };
     
+    if (notif.isRead === 'oui') {
+      this.router.navigate(['/teik/products/current-product', notif.data.productId], {
+        queryParams: { notificationId: notif._id },
+      });
+      return;
+    }
+
+    this.notificationsService.markNotificationAsRead(notif._id, notificationRead).pipe(
+      tap((updatedNotification) => {
+        if (updatedNotification) {
+          notif.isRead = updatedNotification.isRead;
+          this.cdr.detectChanges(); // Trigger change detection
+          this.router.navigate(['/teik/products/current-product', notif.data.productId], {
+            queryParams: { notificationId: notif._id },
+          });
+        }
+      }),
+      catchError(err => {
+        console.error('Error marking notification as read', err);
+        return of(null);
+      }),
+      takeUntil(this.unsubscribe$)
+    ).subscribe();
+  }
+
+  goToScanUser(userId: string): void {
+    this.router.navigate(['/teik/user/scan-user', userId]);
   }
 }

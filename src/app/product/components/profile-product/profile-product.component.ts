@@ -3,7 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
 import { UserService } from '@app/user/components/services/user.service.ts.service';
-import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
+import { Subject, tap } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 
 interface Product {
@@ -26,14 +26,14 @@ interface ProductCount {
 })
 export class ProfileProductComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
-  currentuserId!: string;
+  currentUserId!: string;
   uniqueDataByName!: Product[];
   currentUserFirstName!: string;
   currentUserCompanie!: string;
   countOfProducts: ProductCount[] = [];
   userProducts!: Product[] | null;
   uniqueProducts: ProductCount[] = [];
-  //productIdForTest!: string; // to cancel later
+  userProfilePhoto!: SafeUrl 
 
   constructor(
     private productService: ProductService,
@@ -45,41 +45,51 @@ export class ProfileProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initUserInfo();
+    this.getProductsCategory(this.currentUserCompanie);
+    this.getProductsInfo();
+    
+  }
+
+  private initUserInfo(): void {
     const userInfo = this.loginService.getUserInfo();
-    if (!userInfo?.userId || !userInfo?.firstName) return;
+    if (!userInfo?.userId || !userInfo?.firstName || !userInfo?.companie) return;
   
-    this.currentuserId = userInfo.userId;
+    this.currentUserId = userInfo.userId;
     this.currentUserFirstName = userInfo.firstName;
-  
-    this.userService.getCurrentUser(this.currentuserId).pipe(
+    this.currentUserCompanie = userInfo.companie ;
+
+    this.userService.getCurrentUser(this.currentUserId).pipe(
       tap(user => {
-        if (user) this.currentUserCompanie = user.companie;
-      }),
-      catchError(error => {
-        console.error('Erreur récupération utilisateur:', error);
-        return of(null);
-      }),
-      takeUntil(this.unsubscribe$)
+        if (user && user.profilPhoto) {
+          this.userProfilePhoto = this.sanitizer.bypassSecurityTrustUrl(user.profilPhoto);
+        }
+      })
     ).subscribe();
-  
-    this.productService.getAllCompanieProducts(this.currentuserId).pipe(
+  }
+
+  private getProductsCategory(companyId: string): void {
+    this.productService.getAllCompanieProducts(this.currentUserId).pipe(
       tap(products => {
         if (products) {
-          this.uniqueDataByName = Array.from(new Map(products.map(p => [p.name, p])).values());
+          const productOwnByUser = products.filter(p => p.owner?.slice(-1)[0] === this.currentUserId);
+          this.uniqueDataByName = Array.from(new Map(productOwnByUser.map(p => [p.name, p])).values());
           this.countOfProducts = this.uniqueDataByName.map(product => ({
             name: product.name,
             id: product._id || '',
-            count: products.filter(p => p.name === product.name).length,
+            count: productOwnByUser.filter(p => p.name === product.name).length,
             imageUrl: this.sanitizer.bypassSecurityTrustUrl(product.productPhoto || '')
           }));
         }
       })
     ).subscribe();
-  
+  }
+
+  private getProductsInfo(): void {
     this.productService.getAllProducts().pipe(
       tap(allProducts => {
         if (allProducts) {
-          this.userProducts = allProducts.filter(p => p.owner?.slice(-1)[0] === this.currentuserId);
+          this.userProducts = allProducts.filter(p => p.owner?.slice(-1)[0] === this.currentUserId);
           this.uniqueProducts = Array.from(new Map(this.userProducts.map(p => [p.name, p])).values())
             .map(product => ({
               name: product.name,
@@ -90,7 +100,7 @@ export class ProfileProductComponent implements OnInit {
         }
       })
     ).subscribe();
-    
   }
+    
   
 }

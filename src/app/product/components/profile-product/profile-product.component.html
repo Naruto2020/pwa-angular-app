@@ -1,21 +1,23 @@
 <mat-card class="main-form">
-  <mat-card-title>Les produits de {{ currentUserFirstName }}</mat-card-title>
+  <div>
+    <img [src]="userProfilePhoto" alt="user profile picture" class="profile-picture">
+    <h2>Les produits de {{ currentUserFirstName }}</h2>
 
-  <div *ngIf="currentUserCompanie === 'oui' || currentUserCompanie === 'non'">
-    <div class="product-container">
+  </div>
 
-      <a 
-        *ngFor="let product of (currentUserCompanie === 'oui' ? countOfProducts : uniqueProducts)" 
-        routerLink="/teik/products/current-product/{{ product.id}}"
-        class="product-card-link"
-      >
-        <div class="product-card">
-          <img [src]="product.imageUrl" alt="photo produit" class="profile-picture">
-          <h2>{{ product.name }}</h2>
-          <p>Quantité {{ product.count }}</p>
-        </div>
+  <div class="product-container">
 
-      </a>
-    </div>
+    <a 
+      *ngFor="let product of (currentUserCompanie === 'oui' ? countOfProducts : uniqueProducts)" 
+      routerLink="/teik/products/current-product/{{ product.id}}"
+      class="product-card-link"
+    >
+      <div class="product-card">
+        <img [src]="product.imageUrl" alt="photo produit"  class="product-image">
+        <h2>{{ product.name }}</h2>
+        <p>Quantité {{ product.count }}</p>
+      </div>
+
+    </a>
   </div>
 </mat-card>

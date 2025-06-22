@@ -1,1 +1,17 @@
-<p>profile-qrcode works!</p>
+<mat-card class="main-form">
+    <mat-card-title>QRCodes de {{ currentUserFirstName }}</mat-card-title>
+    
+    <div class="qrcode-container">
+        <a
+        *ngFor="let qrcode of (currentUserCompanie === 'oui' ? countOfQrcodes : uniqueQrcodes)"
+        routerLink="/teik/qrcodes/current-qrcode/{{ qrcode.id }}"
+        class="qrcode-card-link"
+        >
+        <div class="qrcode-card">
+            <img [src]="qrcode.imageUrl" alt="photo qrcode" class="profile-picture">
+            <h2>{{ qrcode.name }}</h2>
+            <p>Quantité {{ qrcode.count }}</p>
+        </div>
+        </a>
+    </div>
+</mat-card>

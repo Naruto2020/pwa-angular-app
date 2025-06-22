@@ -1,24 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { LoginService } from '../auth/components/services/login.service';
+import { PostsService } from '../posts/services/posts.service';
+import { ProductService } from '../product/services/product.service';
 import { SharedModule } from '../shared/shared.module';
+import { UserService } from '../user/components/services/user.service.ts.service';
 import { QrcodeScanComponent } from './components/qrcode-scan/qrcode-scan.component';
-import { ScansRoutingModule } from './scans-routing.module';
 import { ScanAlertComponent } from './components/scan-alert/scan-alert.component';
+import { ScanShareComponent } from './components/scan-share/scan-share.component';
+import { ScansRoutingModule } from './scans-routing.module';
 
 
 @NgModule({
   declarations: [
     QrcodeScanComponent,
-    ScanAlertComponent
+    ScanAlertComponent,
+    ScanShareComponent
   ],
   imports: [
     CommonModule,
     ScansRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
-    QrcodeScanComponent 
+    QrcodeScanComponent,
+    ScanShareComponent,
+  ],
+  providers: [
+    PostsService,
+    LoginService,
+    UserService,
+    ProductService,
   ]
 })
 export class ScansModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-scan-alert',
@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scan-alert.component.scss']
 })
 export class ScanAlertComponent implements OnInit {
+  showScanAlert = true;
+
+  @Input() scannedUrl: string | null = null;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log('Scanned URL:', this.scannedUrl);
+  }
+
+  hideModal() {
+    this.showScanAlert = false;
   }
 
 }

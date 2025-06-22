@@ -15,6 +15,7 @@ import { ProductService } from '../../services/product.service';
 export class CreateProductComponent implements OnInit {
 
   loading = false;
+  showOwnerField = false; 
   productForm!: FormGroup;
   primaryProductInfoForm!: FormGroup;
   secondaryProductInfoForm!: FormGroup;
@@ -36,12 +37,13 @@ export class CreateProductComponent implements OnInit {
 
   private initFormControls() {
     const currentCompanieName1 = this.loginService.getUserInfo().firstName;
-    //const currentCompanieName2 = this.loginService.getUserInfo().lastName;
     const currentCompanieId = this.loginService.getUserInfo().userId;
   
     this.primaryProductInfoForm = this.formBuilder.group({
       name: ['', Validators.required],
+     // serialNumber: ['', [Validators.required, Validators.pattern('^[0-9]{2,}$')]],
       companieName: currentCompanieName1,
+      city: ['', Validators.required],
       companieId: currentCompanieId,
     });
     this.productTypeCtrl = this.formBuilder.control('non');
@@ -73,7 +75,9 @@ export class CreateProductComponent implements OnInit {
     const newProduct = new Product();
 
     newProduct.name = formValue["primaryProductInfo"].name;
+    //newProduct.serialNumber = formValue["primaryProductInfo"].serialNumber;
     newProduct.companieName = formValue["primaryProductInfo"].companieName;
+    newProduct.city = formValue["primaryProductInfo"].city;
     newProduct.companieId = formValue["primaryProductInfo"].companieId;
     newProduct.isFashion = formValue["isFashion"];
     newProduct.isAlreadyUse = formValue["isAlreadyUse"];

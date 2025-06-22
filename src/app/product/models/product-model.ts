@@ -1,14 +1,19 @@
 export class 
 Product {
-    
+    _id?: string;
     quantity!: number;
     name!: string;
+    serialNumber?: string;
     productPhoto!: string;
+    certificatePhoto!: string;
     companieName!: string;
+    city!: string;
+    isLost?: boolean;
     companieId!: string;
     isFashion!: string;
     isAlreadyUse!: string;
     usedBy!: string;
     owner!: string[];
     expiryDate!: string;
+    createdAt!: string;
 }
