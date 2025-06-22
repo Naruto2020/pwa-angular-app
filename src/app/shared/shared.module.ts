@@ -10,11 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from '../guards/auth.interceptor';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-
-
 
 @NgModule({
   declarations: [
@@ -33,6 +32,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     MatProgressSpinnerModule,
     MatIconModule,
     HttpClientModule,
+    MatSelectModule,
     
   ],
   providers: [
@@ -50,6 +50,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     MatProgressSpinnerModule,
     MatIconModule,
     ImageUploadComponent,
+    MatSelectModule,
   ]
 })
 export class SharedModule { }

@@ -26,7 +26,7 @@ mat-card-actions {
 }
 
 .main-form {
-  margin: 10%;
+  margin: 20px 10%;
   padding-bottom: 30px;
   position: relative;
 }
@@ -52,7 +52,6 @@ mat-card-actions {
 button{
   padding-left: 15PX;
   padding-right: 15PX;
-  // color: white;
 }
 
 a{
@@ -61,4 +60,9 @@ a{
 
 h3 {
     color: darkorange;
+}
+.secondary-card {
+  margin: 5px 10%;
+  padding-bottom: 30px;
+  position: relative;
 }

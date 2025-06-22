@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="main-card">
+        <div>
+            <mat-card class="profile-card">
+                <div class="profile-content">
+                    <img [src]="currentUserPhoto" alt="Profile Picture" class="profile-picture">
+                    <div class="profile-info">
+                        <h2 class="profile-name">{{currentUserFirstName}} {{currentUserLastName}}</h2>
+                        <p class="profile-location">
+                            10 partenaires
+                        </p>
+                        <p class="profile-location" *ngIf="currentUserCompanie === 'non'">
+                            {{totalUserProducts}} produits
+                        </p>
+                        <p class="profile-location" *ngIf="currentUserCompanie === 'oui'">
+                            {{totalUserProducts}} produits
+                        </p>
+                        <p class="profile-location">
+                            2 transactions
+                        </p>
+                        <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
+                    </div>
+                    <div class="profile-title">
+                        <a routerLink="/teik/user/watch-user/Dior">
+                            <mat-icon class="profile-title-link-icon">visibility</mat-icon>
+                        </a>
+                        <br>
+                        <a routerLink="/teik/news">
+                            <mat-icon class="profile-title-link-icon" (click)="navigateToNews()">cached</mat-icon>
+                        </a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+    </div>        
+
+</div>

@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { ProfilePostComponent } from './components/profile-post/profile-post.component';
 import { PostsRoutingModule } from './posts-routing.module';
+import { PostsService } from './services/posts.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { PostsRoutingModule } from './posts-routing.module';
     HttpClientModule,
   ],
   providers: [
-    //PostService // Uncomment if you have a PostService to provide
+    PostsService, 
   ]
 })
 export class PostsModule { }

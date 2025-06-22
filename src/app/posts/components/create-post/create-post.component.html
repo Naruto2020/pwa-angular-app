@@ -1,24 +1,12 @@
 <mat-card class="main-form" [formGroup]="postForm">
   <mat-card-title> Signaler un produit </mat-card-title>
 
-      <div class="secondary-card">
-        <mat-card class="profile-card">
-            <h3> <strong>Telecharger l'image du produit</strong></h3>
-            <app-image-upload
-                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-products'"
-                [resourceId]= "currentProductId"
-                [fileType]= "'productPhoto'"
-            ></app-image-upload>    
-        </mat-card>
-
-    </div>
-
   <mat-card class="form-card" formGroupName="primaryPostInfo">
     <mat-card-subtitle>Informations principales </mat-card-subtitle>
     <br>
 
     <div class="form-row">
-      <mat-form-field appearance="fill">
+      <mat-form-field *ngIf="showUserField" appearance="fill">
         <mat-label> Auteur </mat-label>
         <input type="text" matInput formControlName="author">
         <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
@@ -30,7 +18,6 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label> Description</mat-label>
-        <!-- <input type="text" matInput formControlName="description" > -->
         <textarea matInput formControlName="description" rows="4"></textarea>
         <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
       </mat-form-field>
@@ -47,9 +34,15 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-          <mat-label>Produit</mat-label>
-          <input type="text" matInput formControlName="productName">
-          <mat-error>Ce champs est requis</mat-error>
+        <mat-label>Nom de la Marque</mat-label>
+        <mat-select formControlName="productName">
+          <mat-option *ngFor="let company of companies" [value]="company.firstName">
+            {{ company.firstName }} {{ company.lastName }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Ce champ est requis OU contient moins de 2 caractères
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -58,17 +51,23 @@
           <mat-error>Ce champs est requis</mat-error>
       </mat-form-field>
 
-      <!-- <mat-form-field appearance="fill">
-          <mat-label>Photo du produit</mat-label>
-          <input type="text" matInput formControlName="postImage">
-          <mat-error>Ce champs est requis</mat-error>
-      </mat-form-field> -->
-
-        <mat-card-actions>
-    <button *ngIf="postForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">Enregistrer</button> &nbsp; &nbsp;
-    <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
-  </mat-card-actions>
+      <mat-card-actions>
+        <button *ngIf="postForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">Enregistrer</button> &nbsp; &nbsp;
+        <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+      </mat-card-actions>
     </div>
   </mat-card>
-
 </mat-card>
+
+<div *ngIf="currentPostId" class="secondary-card">
+  <mat-card class="profile-card">
+    <h3> <strong>Telecharger l'image du produit</strong></h3>
+    <app-image-upload
+      [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-posts'"
+      [resourceId]= "currentPostId"
+      [fileType]= "'fakeProductPhoto'"
+      (imageUploaded)="onImageUploaded()"
+    ></app-image-upload>    
+  </mat-card>
+
+</div>

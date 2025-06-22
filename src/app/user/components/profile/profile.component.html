@@ -9,21 +9,21 @@
                     <div class="profile-info"> 
                         <h2 class="profile-name">{{currentUserFirstName}} {{currentUserLastName}}</h2>
                         <p class="profile-title">
-                            <a routerLink="/teik/products/user-squad"> 10 partenaires </a>
+                            <a routerLink="/teik/mysquad"> 10 partenaires </a>
                         </p> 
-                        <p class="profile-title" *ngIf="currentUserCompanie === 'non'"> 
-                            <a routerLink="/teik/products/profile-product"> {{totalUserProducts}} produits </a>
+                        <p class="profile-location" *ngIf="currentUserCompanie === 'non'"> 
+                            {{totalUserProducts}} produits 
                         </p> 
-                        <p class="profile-title" *ngIf="currentUserCompanie === 'oui'"> 
-                            <a routerLink="/teik/products/profile-product"> {{totalProduct}} produits </a>
+                        <p class="profile-location" *ngIf="currentUserCompanie === 'oui'"> 
+                            {{totalProduct}} produits 
                         </p> 
                         <p class="profile-title">
-                            <a routerLink="/teik/products/user-transaction"> 2 transactions </a>
+                            <a routerLink="/teik/dashboard"> 2 transactions </a>
                         </p> 
                         <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
                     </div>
                     <div class="qrcode-image">
-                        <img src="../../../../assets/images/Capture d’écran 2025-05-24 à 13.03.30.png" alt="">
+                        <img [src]= "currentUserQrcode" alt="qrcode picture">
                     </div>
                 </div>
             
@@ -44,7 +44,7 @@
                                 {{totalUserUniqueProducts}} Catégories de produits
                             </a>
                         </p>
-                        <p class="profile-title">
+                        <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
                             <a routerLink="/teik/qrcodes/profile-qrcode">
                                 <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
                                 {{totalUserProducts}} qrcodes
@@ -69,14 +69,14 @@
                                 {{numberOfProducts}} Catégories de produits
                             </a>
                         </p>
-                        <p class="profile-title">
+                        <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
                             <a routerLink="/teik/qrcodes/profile-qrcode">
                                 <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
                                 {{totalProduct}} qrcodes
                             </a>
                         </p>
                         <br>
-                        <button mat-flat-button color="primary" routerLink="/teik/products/create"> Nouveau Produit </button>
+                        <button *ngIf="currentUserId === qrcodeOwnerId" mat-flat-button color="primary" routerLink="/teik/products/create"> Nouveau Produit </button>
                         
                     </div>
                 </div>
@@ -149,50 +149,28 @@
                 [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-user-image'"
                 [resourceId]= "currentUserId"
                 [fileType]= "'profilePhoto'"
+                (imageUploaded)="onImageUploaded()"
             ></app-image-upload>    
         </mat-card>
         <mat-card class="profile-card">
-
             <mat-card-header>
-                <mat-card-title>nouveauté sur les produits</mat-card-title>
+                <mat-card-title>Nouveautés sur les articles</mat-card-title>
             </mat-card-header>
 
-
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/j_daniel.png" alt="Jack Daniel" class="product-picture">
-                    <h2 class="product-name">Jack Daniel SAS </h2>
+            <div class="carousel-vertical">
+                <div class="carousel-track" [style.animation]="animationSpeed">
+                <div
+                    class="carousel-item"
+                    *ngFor="let product of newProducts"
+                    (click)="onProductClick(product)"
+                >
+                <a href="https://www.24s.com/fr-fr/sac-seau-signature-small-toile-jacquard-dior-oblique-et-cuir-de-veau-lisse-dior_DIO57QMWBLU?color=bleu" target="_blank">
+                    <img [src]="product.image" [alt]="product.name" class="product-picture" />
+                </a>
+                <h2 class="product-name">{{ product.name }}</h2>
                 </div>
-            </mat-card-content>
-
-            
-            <div class="separator"></div>
-
-            
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/chiv.png" alt="Chivas" class="product-picture">
-                    <h2 class="product-name">Chivas SAS</h2>
                 </div>
-            </mat-card-content>
-            <div class="separator"></div>
-
-           
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/heineken.png" alt="Heineken" class="product-picture">
-                    <h2 class="product-name">Heineken SAS</h2>
-                </div>
-            </mat-card-content>
-            <div class="separator"></div>
-
-           
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/r_basmati.png" alt="riz Basmati" class="product-picture">
-                    <h2 class="product-name">Basmati SAS</h2>
-                </div>
-            </mat-card-content>
+            </div>
         </mat-card>
     </div>
 </div>

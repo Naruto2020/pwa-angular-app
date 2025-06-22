@@ -1,5 +1,5 @@
 <mat-card class="main-form"  [formGroup]="productForm">
-  <mat-card-title>Créer un nouveau produit</mat-card-title>
+  <mat-card-title>Créer un nouvel article</mat-card-title>
 
   <mat-card class="form-card" formGroupName="primaryProductInfo">
     <mat-card-subtitle>Informations principales </mat-card-subtitle>
@@ -7,15 +7,29 @@
     
     <div class="form-row">
       <mat-form-field appearance="fill">
-        <mat-label>nom du produit </mat-label>
+        <mat-label> nom de l'article </mat-label>
         <input type="text" matInput formControlName="name">
         <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
       </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Numéro de serie </mat-label>
+        <input type="text" matInput formControlName="serialNumber">
+        <mat-error>Ce champs est requis OU Contien moin de 2 chiffres </mat-error>
+      </mat-form-field> -->
+
       <mat-form-field appearance="fill">
         <mat-label>nom de l'entreprise</mat-label>
         <input type="text" matInput formControlName="companieName">
         <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>ville</mat-label>
+        <input type="text" matInput formControlName="city">
+        <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
+      </mat-form-field>
+
       <mat-form-field *ngIf appearance="fill">
         <mat-label> Id del'entreprise</mat-label>
         <input type="text" matInput formControlName="companieId">
@@ -43,7 +57,7 @@
   <mat-card class="form-card" formGroupName="secondaryProductInfo">
     <mat-card-subtitle>Informations secondaires</mat-card-subtitle>
     <div class="form-row">
-      <mat-form-field appearance="fill">
+      <mat-form-field *ngIf="showOwnerField" appearance="fill">
           <mat-label>propriétaire</mat-label>
           <input type="text" matInput formControlName="owner">
           <mat-error>Ce champs est requis</mat-error>
@@ -58,7 +72,7 @@
   </mat-card>
 
   <mat-card class="form-card">
-    <mat-card-subtitle>nombres de produits à créer </mat-card-subtitle>
+    <mat-card-subtitle>nombres de d'articles à créer </mat-card-subtitle>
     <mat-label>Quantité</mat-label>
     <input matInput id="quantity" formControlName="quantity" type="number">
     <mat-error *ngIf="productForm.get('quantity')?.invalid && (productForm.get('quantity')?.dirty || productForm.get('quantity')?.touched)">

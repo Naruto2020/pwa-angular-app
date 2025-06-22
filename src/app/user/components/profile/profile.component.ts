@@ -23,13 +23,26 @@ export class ProfileComponent implements OnInit {
   currentUserCity!: string;
   currentUserCountry!: string;
   userImageUrl!: string;
+  userQrcodeUrl!: string;
   currentUserPhoto!: SafeUrl;
+  currentUserQrcode!: SafeUrl;
   loading: boolean = true;
   numberOfProducts!: number;
   totalProduct!: number;
   userProducts!: Product[] | null;
   totalUserProducts!: number;
   totalUserUniqueProducts!: number;
+  qrcodeOwnerId!: string;
+
+  newProducts = [
+    { name: 'Jacquard Dior', image: '../../../../assets/images/dior.png' },
+    { name: 'Sneaker LV Skate', image: '../../../../assets/images/vuiton.png' },
+    { name: 'Gucci Marina Chain', image: '../../../../assets/images/gucci.png' },
+    { name: 'Mui Mui sac beau', image: '../../../../assets/images/mui.png' },
+    { name: 'Hermes Pendentif Amulettes', image: '../../../../assets/images/hermes.png' },
+  ];
+
+  animationSpeed = 'scrollVertical 20s linear infinite';
 
   constructor(private userService: UserService, private route: ActivatedRoute, 
     private router: Router, private sanitizer: DomSanitizer, 
@@ -37,10 +50,27 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.initUserInfos();
+    this.getUserData();
+    this.getUserQrcode();
+    this.getCompanieProducts();
+    this.getAllUserProducts();
+
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private initUserInfos(): void {
     const userId = this.loginService.getUserInfo().userId;
     if (!userId) return;
     this.currentUserId = userId;
-    this.userService.getCurrentUser(userId).pipe(
+  }
+
+  private getUserData(): void {
+    this.userService.getCurrentUser(this.currentUserId).pipe(
       tap(data => {
         if (data) {
           this.currentUserFirstName = data.firstName;
@@ -58,19 +88,41 @@ export class ProfileComponent implements OnInit {
       }),
       takeUntil(this.unsubscribe$)
     ).subscribe();
+  }
 
+  private getUserQrcode(): void {
+    this.userService.getOwnerQrcode(this.currentUserId).pipe(
+      tap(data => {
+        if (data) {
+          if(!data.userId) return;
+          this.qrcodeOwnerId = data.userId;
+          this.userQrcodeUrl = data.imageDataUrl;
+          this.currentUserQrcode = this.sanitizer.bypassSecurityTrustUrl(this.userQrcodeUrl);
+        }
+      }),
+      catchError(error => {
+        console.error('Error fetching QR code:', error);
+        return of(null);
+      }),
+      takeUntil(this.unsubscribe$)    
+    ).subscribe();
+  }
+
+  private getCompanieProducts(): void {
     this.productService.getAllCompanieProducts(this.currentUserId).pipe(
       tap(data => {
         if(data) {
-          this.totalProduct = data.length;
+          const productOwnByUser = data.filter(product => product.owner[product.owner.length -1] === this.currentUserId);
+          this.totalProduct = productOwnByUser.length;
           // extract product by unique name 
-          const uniqueDataByName = Array.from(new Map(data.map(item => [item.name, item])).values());
+          const uniqueDataByName = Array.from(new Map(productOwnByUser.map(item => [item.name, item])).values());
           this.numberOfProducts = uniqueDataByName.length;
-          console.log(' les produits : ', this.numberOfProducts);
         }
       })
     ).subscribe();
+  }
 
+  private getAllUserProducts(): void {
     this.productService.getAllProducts().pipe(
       tap(data =>{
         if(data) {
@@ -85,4 +137,15 @@ export class ProfileComponent implements OnInit {
       )
     ).subscribe();
   }
+
+  onImageUploaded() {
+    this.getUserData();
+  }
+
+  onProductClick(product: any) {
+    console.log('Produit cliqué:', product);
+    //this.router.navigate(['/teik/products/profile-product']);
+
+  }
+
 }

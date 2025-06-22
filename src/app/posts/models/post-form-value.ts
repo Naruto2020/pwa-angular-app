@@ -9,6 +9,5 @@ export class PostFormValue {
         storeName: string;
         productName: string;
         city: string;
-        //postImage: string;
     };
 }

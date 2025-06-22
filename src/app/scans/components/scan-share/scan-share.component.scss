@@ -1,0 +1,88 @@
+.container {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px; 
+    padding: 20px; 
+}
+
+.main-card {
+    flex: 2; 
+    margin-left: 120px;
+}
+
+.profile-location {
+    font-size: 16px;
+    color: #666;
+}
+
+.profile-title a:hover {
+    color: #0d47a1; 
+    text-decoration: underline;
+}
+
+.profile-title a {
+    font-size: 18px;
+    font-style: italic;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    align-items: center;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+}
+
+.product-name {
+    min-height: 60px; 
+    display: flex;
+    align-items: center; 
+    margin: 0;
+    font-size: 18px;
+    max-width: 100px; 
+    white-space: normal; 
+    overflow-wrap: break-word; 
+}
+
+.profile-title, .profile-title a, .profile-location {
+    margin: 0;
+    color: #777;
+}
+
+.profile-title {
+    margin-bottom: 10px;
+    margin-right: 200px;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    gap: 20px; 
+}
+.profile-title-link-icon {
+    font-size: 40px;
+}

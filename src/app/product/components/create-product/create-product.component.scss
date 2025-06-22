@@ -8,7 +8,8 @@ mat-form-field {
 
 .form-row {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
+  flex-direction: column;
   align-items: center;
 }
 

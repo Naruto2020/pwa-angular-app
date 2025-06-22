@@ -1,30 +1,52 @@
+/* --- GLOBAL STYLES --- */
 
-.search {
-    background-color:beige;
-    border: none;
-    border-radius: 15px;
-    width: 100%;
-    height: 70%;
-    &:hover {
-        text-decoration: none;
-    }
-}
 mat-toolbar {
     background-color: white;
     width: 100%;
 }
-mat-toolbar:first-child > button:first-child {
-    color: #6441a4;
-    font-size:xx-large;
-    font-weight: bolder;
+
+.teik-logo {
+    height: 120%;
+    width: auto;
+    object-fit: contain;
 }
 
-.icon-text {
-    text-decoration: none; 
-    transition: text-decoration 0.3s; 
+app-profile-drop-down {
+    position: absolute;
+    top: 110%;
+    right: 15%;
+    z-index: 999;
     font-size:x-small;
     font-weight: lighter;
 }
+
+
+.search {
+    background-color: beige;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    height: 70%;
+    padding-left: 30px;
+    padding-right: 8px;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.icon-text {
+    text-decoration: none;
+    transition: text-decoration 0.3s;
+    font-size: x-small;
+    font-weight: lighter;
+}
+
+.icon-text:hover {
+    text-decoration: underline;
+    margin-bottom: 4px;
+}
+
 img {
     height: 30px;
     width: 30px;
@@ -32,27 +54,22 @@ img {
     object-fit: cover;
 }
 
-.icon-text:hover {
-    text-decoration: underline; 
-    margin-bottom: 4px;
-}
-
-#iconMediaQuerieMarge {
-    margin-left: 220%;
-}
-#iconMediaQuerieMarge1 {
-    margin-left: 160%;
-}
-#iconMediaQuerieMarge2 {
-    margin-left: 80%;
-}
-#iconMediaQuerieMarge4 {
-    margin-left: 200%;
-}
-
 .dropdown-link:hover {
     background-color: #f0f0f0;
     border-radius: 4px;
+}
+
+#iconMediaQuerieMarge {
+    margin-left: 80px;
+}
+#iconMediaQuerieMarge1,
+#iconMediaQuerieMarge2,
+#iconMediaQuerieMarge4 {
+    margin-left: 8px;
+    margin-right: 8px;
+    display: grid;
+    grid-template-rows: auto auto;
+    place-items: center;
 }
 
 #iconMediaQuerieMarge4 {
@@ -62,9 +79,9 @@ img {
 app-profile-drop-down {
     position: absolute;
     top: 110%;
-    right: 15%;
+    right: 28%;
     z-index: 999;
-    font-size:x-small;
+    font-size: x-small;
     font-weight: lighter;
 }
 
@@ -80,32 +97,52 @@ app-profile-drop-down {
 }
 
 
+/* --- RESPONSIVE --- */
+
+/* SMARTPHONES (≤600px) */
 @media screen and (max-width: 600px) {
+    mat-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px;
+        gap: 8px;
+    }
+
     .search::placeholder {
         color: transparent;
     }
-    #iconMediaQuerieMarge1 {
-        margin-left: 50% ;
+
+    .search {
+        width: 90%;
+        margin: 0 auto;
     }
-    #iconMediaQuerieMarge2 {
-        margin-left: 5%;
+
+    #iconContainer {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .icon-text {
+        font-size: xx-small;
     }
 
     app-profile-drop-down {
-        position: absolute;
-        top: 110%; 
-        z-index: 999; 
+        right: 30%;
+        top: 105%;
     }
 }
 
+/* TABLETTES ET PETITS ÉCRANS (≤1024px) */
 @media screen and (max-width: 1024px) {
-    /* Styles spécifiques pour les écrans de taille tablette */
+    
     #iconMediaQuerieMarge,
     #iconMediaQuerieMarge1,
     #iconMediaQuerieMarge2,
     #iconMediaQuerieMarge3,
     #iconMediaQuerieMarge4 {
         margin-left: 8px;
-        margin-right: 8px; 
+        margin-right: 8px;
     }
 }

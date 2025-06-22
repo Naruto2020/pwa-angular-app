@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImageUploadService } from '../../services/image-upload.service';
 
@@ -8,9 +8,11 @@ import { ImageUploadService } from '../../services/image-upload.service';
   styleUrls: ['./image-upload.component.scss']
 })
 export class ImageUploadComponent implements OnInit {
+  @Output() imageUploaded = new EventEmitter<void>();
+
   @Input() apiUrl!: string;
   @Input() resourceId!: string;
-  @Input() fileType: 'profilePhoto' | 'productPhoto' = 'productPhoto';
+  @Input() fileType: 'profilePhoto' | 'productPhoto' | 'certificatePhoto' | 'fakeProductPhoto' = 'productPhoto';
 
   uploadForm!: FormGroup;
   seletedFile: File | null = null;
@@ -20,7 +22,7 @@ export class ImageUploadComponent implements OnInit {
       file: [null, Validators.required],
       fileType: [this.fileType, Validators.required],
     });
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -44,8 +46,16 @@ export class ImageUploadComponent implements OnInit {
     formData.append('file', this.seletedFile);
     formData.append('fileType', this.fileType);
 
-    this.imageUploadService.uploadImage(this.apiUrl, this.resourceId, formData).subscribe(
-    );
+    this.imageUploadService.uploadImage(this.apiUrl, this.resourceId, formData).subscribe({
+      next: () => {
+        this.imageUploaded.emit();
+        this.uploadForm.reset();
+        this.seletedFile = null;
+      },
+      error: (error) => {
+        console.error('Image upload failed', error);
+      }
+    });
   }
 
 }

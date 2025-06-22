@@ -1,31 +1,50 @@
-<div class="modal-overlay">
-    <mat-card id="scan-alert" >
-        <mat-card-header>
-            <mat-card-title>⚠️ Alert ce QR Code n 'est pas de l'application TEIK 💀...</mat-card-title>
+<div class="modal-overlay" *ngIf="showScanAlert">
+    <button mat-flat-button color="primary" class="close-button" (click)="hideModal()">Retour</button>
+
+    <mat-card id="scan-alert">
+        <mat-card-header class="alert-header">
+        <mat-icon class="alert-icon">error_outline</mat-icon>
+        <mat-card-title>⚠️ Alert QR Code non reconnu par TEIK 💀</mat-card-title>
         </mat-card-header>
-        <br>
+
         <mat-card-content>
-            <p> TEIK n'a pas pu authentifié ce QR CODE pour L'une des raisons suivantes : </p>
-            <ul>
-                <li>Le QR CODE scané est faux et renvoit à un site malveillant.</li>
-                <li>Le QR CODE a été généré par une autre application</li>
-                <li>L'entreprise qui possède ce produit n'est pas encore enregistré sur TEIK</li>
-                <li>Il y a un autre QR CODE sur le produit qui est de TEIK Veillez le scanner</li>
-            </ul>
-            <br> <br>
-            <p> <strong>Si vous suspectez une contrefaçon, veuillez clicker sur le bouton ci-dessous pour la signaler </strong>  </p>
             <br>
-            <p style="text-align: center;">
-                <mat-icon style="color: #d32f2f; font-size: 36px;">arrow_downward</mat-icon>
-                <mat-icon style="color: #d32f2f; font-size: 36px;">arrow_downward</mat-icon>
-                <mat-icon style="color: #d32f2f; font-size: 36px;">arrow_downward</mat-icon>
-            </p>
-            <br>
-            <button mat-raised-button color="warn" class="report-button" [routerLink]="['/teik/activity/create']">
-                Signaler un produit
+        <p class="intro-text">
+            TEIK n’a pas pu authentifier ce QR code pour l’une des raisons suivantes :
+        </p>
+
+        <ul class="alert-reasons">
+            <li>Le QR code est faux et redirige vers un site malveillant.</li>
+            <li>Il a été généré par une autre application.</li>
+            <li>L'entreprise n’est pas encore enregistrée sur TEIK.</li>
+            <li>Un autre QR code TEIK est présent sur le produit : veillez le scanner.</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <p class="call-to-action">
+            <strong>Vous suspectez une contrefaçon ?</strong><br />
+            Cliquez sur le bouton ci-dessous pour la signaler.
+        </p>
+
+        <div class="arrow-indicator">
+            <mat-icon>arrow_downward</mat-icon>
+            <mat-icon>arrow_downward</mat-icon>
+            <mat-icon>arrow_downward</mat-icon>
+        </div>
+
+        <div class="button-container">
+            <button 
+            mat-raised-button 
+            color="warn" 
+            class="report-button"
+            [routerLink]="['/teik/activity/create']"
+            [state]="{ fakeUrl: scannedUrl }"
+            >
+            🚨 Signaler un produit
             </button>
-            
+        </div>
         </mat-card-content>
     </mat-card>
-
 </div>
+

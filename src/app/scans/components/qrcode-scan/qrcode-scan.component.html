@@ -1,7 +1,18 @@
-<div class="container">
-    <!-- modal alert section  -->
-    <app-scan-alert *ngIf="isFakeUrl" ></app-scan-alert>
+<!-- Modal alert section  -->
+<app-scan-alert *ngIf="isFakeUrl" [scannedUrl]="fakeUrl" ></app-scan-alert>
 
+<div *ngIf="successMessage || errorMessage" class="alert-box">
+    <div *ngIf="successMessage" class="alert success-alert">
+        {{ successMessage }}
+        <button class="close-btn" (click)="clearMessages()">✖</button>
+    </div>
+    <div *ngIf="errorMessage" class="alert error-alert">
+        {{ errorMessage }}
+        <button class="close-btn" (click)="clearMessages()">✖</button>
+    </div>
+</div>
+
+<div class="container">
     <!-- Main section : Scanner + Products -->
     <div class="main-card">
         <button mat-flat-button color="primary" (click)="multiScanMode = !multiScanMode">
@@ -28,55 +39,36 @@
                     </li>
                 </ul>
             </div>
-            <button mat-flat-button color="primary">Céder Les articles</button>
+            <button mat-flat-button  (click)="transfertProduct()" color="primary">Céder Les articles</button>
         </mat-card>
 
         <div class="separator-activity"><h2 class="profile-name">Actualités</h2> </div> 
 
-        <mat-card class="profile-card">
+        <mat-card *ngFor="let post of signalPost" class="profile-card">
             <div class="profile-content">
-                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
+                <!-- Horizontal row : image + texte -->
+                <div class="profile-header">
+                <img [src]="post.userImageUrl" alt="Profile Picture" class="profile-picture">
                 <div class="profile-info">
-                    <h6>Cornel West a publié ceci . 5 mois</h6>
-                    <p class="profile-title">Jack Daniel  de contrefaçon</p>
-                    <img src="../../../../assets/images/j_daniel.png" alt="" class="alert-picture">
-                    <p class="profile-location"> Douala sckack B&W quartier Bonamoussadi</p>
-    
-                    <div class="separator"></div>
+                    <h6>{{ post.userName }} a publié ceci le {{ post.date }}</h6>
+                    <p class="profile-title">contrefaçon {{ post.productName }} : {{post.fakeUrl}} </p>
                 </div>
+                </div>
+                <div class="profile-description">
+                    <img [src]="post.imageUrl" alt="" class="alert-picture">
+                    <p class="profile-location description-text"> 
+                        <strong>
+                            {{ post.city }} :  {{ post.storeName }}
+                        </strong> <br> {{ post.description }} 
+                    </p>
+
+                </div>
+
+                <div class="separator"></div>
             </div>
         </mat-card>
 
-        <mat-card class="profile-card">
-            <div class="profile-content">
-                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
-                <div class="profile-info">
-                    <h6>Cornel West a publié ceci . 2 sem</h6>
-                    <p class="profile-title">Riz basmati de contrefaçon </p>
-                    <img src="../../../../assets/images/r_basmati.png" alt="" class="alert-picture">
-                    <p class="profile-location">Douala viva shop akwa</p>
-    
-                    <div class="separator"></div>
-                </div>
-            </div>
-        </mat-card>
 
-        <mat-card class="profile-card">
-            <div class="profile-content">
-                <img src="../../../../assets/images/c_west.png" alt="Profile Picture" class="profile-picture">
-                <div class="profile-info">
-                    <h6>Cornel West a publié ceci . 2 mois</h6>
-                    <p class="profile-title">Heineken de contrefaçon</p>
-                    <img src="../../../../assets/images/heineken.png" alt="" class="alert-picture">
-                    <p class="profile-location">Douala magasin trouvetout qaurtier new bell</p>
-    
-    
-                    <div class="separator"></div>
-                </div>
-
-            </div>
-
-        </mat-card>
     </div>
 
     <!-- Secondary card : Products information -->
