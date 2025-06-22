@@ -158,7 +158,6 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
           console.warn('❌ Utilisateur introuvable');
           this.isFakeUrl = true;
           this.fakeUrl = url;
-          //this.stopScan();
           alert('Utilisateur introuvable');
         }
       })
