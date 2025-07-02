@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, delay, map, of, tap } from "rxjs";
-import { LoginFormValue } from "../models/login-form-value";
 
 @Injectable()
 export class LoginService {
@@ -11,16 +10,18 @@ export class LoginService {
     private userKeyId = "authUserId";
     private userKeyLastName = "authUserLastName";
     private userKeyCompanie = "authUserCompanie";
+    private userKeySecondHand = "authUserSecondHand";
     constructor(private http: HttpClient) {}
 
     logUser(formValue: object): Observable<boolean> {
-        return this.http.post<{ token: string,  user: {userId: string, firstName: string, lastName: string, companie: string}}>('http://127.0.0.1:8002/teko/gateway/login', formValue).pipe(
+        return this.http.post<{ token: string,  user: {userId: string, firstName: string, lastName: string, companie: string, secondHand: string, }}>('http://127.0.0.1:8002/teko/gateway/login', formValue).pipe(
             tap(data => {
                 if(data && data.token) {
                     localStorage.setItem(this.tokenKey, data.token);
                     localStorage.setItem(this.userKeyFirstName, data.user.firstName);
                     localStorage.setItem(this.userKeyLastName, data.user.lastName);
                     localStorage.setItem(this.userKeyCompanie, data.user.companie);
+                    localStorage.setItem(this.userKeySecondHand, data.user.secondHand);
                     localStorage.setItem(this.userKeyId, data.user.userId)
                 }
             }),
@@ -35,16 +36,18 @@ export class LoginService {
     getToken(): string | null {
         return localStorage.getItem(this.tokenKey);
     }
-    getUserInfo(): { userId: string | null, firstName: string | null, lastName: string | null, companie: string | null } {
+    getUserInfo(): { userId: string | null, firstName: string | null, lastName: string | null, companie: string | null, secondHand: string | null } {
         const userId = localStorage.getItem(this.userKeyId);
         const firstName = localStorage.getItem(this.userKeyFirstName);
         const lastName = localStorage.getItem(this.userKeyLastName);
         const companie = localStorage.getItem(this.userKeyCompanie);
+        const secondHand = localStorage.getItem(this.userKeySecondHand);
         return {
             userId: userId,
             firstName: firstName, 
             lastName: lastName,
             companie: companie,
+            secondHand: secondHand,
         }
     }
 

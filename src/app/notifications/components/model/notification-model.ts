@@ -9,4 +9,5 @@ export class Notification {
     };
     status!: string;
     isRead!: string;
+    createdAt?: string
 }

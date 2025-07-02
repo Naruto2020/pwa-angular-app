@@ -1,31 +1,10 @@
 <div class="container">
   <div class="main-card">
 
-    <!-- NOTIFICATION EN DUR (statique) -->
-    <mat-card 
-      class="profile-card" 
-      style="cursor: pointer;"
-      (click)="goToScanUser('68492eda2af9a53df9fecbb8')"
-    >
-      <span class="status-dot unread"></span>
-      <div class="profile-content">
-        <img src="../../../../assets/images/kendal.png" alt="Profile Picture" class="profile-picture">
-        <div class="profile-info">
-          <h3 class="profile-name">
-            Kendall Jenner
-          </h3>
-          <p>
-            A scanné votre produit <strong>Mule Bom Dia</strong> à <strong>Boston</strong> le <strong>18/06/2025</strong>.
-          </p>
-        </div>
-      </div>
-    </mat-card>
-
-
     <div *ngFor="let notif of notifications">
         <mat-card 
           *ngIf="notif.data.productOwnerId === currentuserId"
-          class="profile-card" (click)="markAsRead(notif)"
+          class="profile-card" (click)="handleNotificationClick(notif)"
           style="cursor: pointer;"
         >
           <span 
@@ -39,9 +18,15 @@
                 {{ userInfos.get(notif.userId)?.firstName || 'Unknown User' }} 
                 {{ userInfos.get(notif.userId)?.lastName || '' }}
               </h3>
-              <p *ngIf="filteredProducts.get(notif._id)">
-                Souhaite faire une {{notif.type}} du produit <strong>{{filteredProducts.get(notif._id).name}} </strong>
-              </p>
+              <div *ngIf="filteredProducts.get(notif._id)">
+                <p *ngIf="notif.type === 'acquisition'">
+                    Souhaite faire une {{notif.type}} du produit <strong>{{filteredProducts.get(notif._id).name}} </strong>
+                </p>
+                <p *ngIf="notif.type === 'signal'">
+                    A scanné votre produit <strong>{{filteredProducts.get(notif._id).name}} </strong> le <strong>{{filteredProducts.get(notif._id).createdAt | date: 'dd/MM/yyyy'}} </strong>
+                </p>
+
+              </div>
             </div>
           </div>
         </mat-card>

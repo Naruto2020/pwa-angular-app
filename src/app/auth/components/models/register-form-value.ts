@@ -5,6 +5,7 @@ export class RegisterFormValue {
         lastName: string,
     };
     companie!: string;
+    secondHand!: string;
     oui?: string;
     non?: string;
     userRegion!: {

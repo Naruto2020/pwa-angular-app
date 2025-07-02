@@ -41,7 +41,7 @@ export class CreateProductComponent implements OnInit {
   
     this.primaryProductInfoForm = this.formBuilder.group({
       name: ['', Validators.required],
-     // serialNumber: ['', [Validators.required, Validators.pattern('^[0-9]{2,}$')]],
+      serialNumber: ['', [ Validators.pattern('^[0-9]{2,}$')]],
       companieName: currentCompanieName1,
       city: ['', Validators.required],
       companieId: currentCompanieId,
@@ -75,7 +75,7 @@ export class CreateProductComponent implements OnInit {
     const newProduct = new Product();
 
     newProduct.name = formValue["primaryProductInfo"].name;
-    //newProduct.serialNumber = formValue["primaryProductInfo"].serialNumber;
+    newProduct.serialNumber = formValue["primaryProductInfo"].serialNumber || '';
     newProduct.companieName = formValue["primaryProductInfo"].companieName;
     newProduct.city = formValue["primaryProductInfo"].city;
     newProduct.companieId = formValue["primaryProductInfo"].companieId;

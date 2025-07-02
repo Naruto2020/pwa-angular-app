@@ -61,6 +61,15 @@ getCurrentProduct(productId: string): Observable<Product | null> {
     );
   }
 
+  catchAndSendLostScannedProduct(requestParams: any) {
+    return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/signal_product`, requestParams).pipe(
+      catchError(() => of().pipe(
+        map(response => response),
+        delay(1000)
+      ))
+    )
+  }
+
   transfertProduct(requestParams: any) {
     console.log('Transfert product request params:', requestParams);
     return this.http.post(`http://127.0.0.1:8002/teko/gateway-products/transfer_product`, requestParams).pipe(

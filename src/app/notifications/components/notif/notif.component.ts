@@ -129,7 +129,17 @@ export class NotifComponent implements OnInit {
     ).subscribe();
   }
 
-  goToScanUser(userId: string): void {
+
+  handleNotificationClick(notif: any): void {
+  this.markAsRead(notif);
+
+  if (notif.type === 'acquisition') {
+    const productId = notif.data.productId;
+    this.router.navigate(['/teik/product/current', productId]);
+  } else if (notif.type === 'signal') {
+    const userId = notif.userId;
     this.router.navigate(['/teik/user/scan-user', userId]);
   }
+}
+
 }

@@ -28,6 +28,8 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
   currentProductPhoto!: SafeUrl;
   currentOwnerId!: string;
   currentUserCompanieStatus!: string;
+  currentOwnerSecondHandStatus!: string;
+  productSerialNumber!: string;
   currentProductState!: string;
 
   ownerfirstName!: string;
@@ -83,12 +85,13 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
 
   private initUserInfos(): void {
     const userInfo = this.loginService.getUserInfo();
-    if (!userInfo || !userInfo.userId || !userInfo.companie) {
+    if (!userInfo || !userInfo.userId || !userInfo.companie || !userInfo.secondHand) {
       console.error('User information is not available');
       return;
     }
     this.currentUserId = userInfo.userId;
     this.currentUserCompanieStatus = userInfo.companie;
+    //this.currentOwnerSecondHandStatus = userInfo.secondHand;
   }
 
   private extractRouteParamsAndLoadProduct(): void {
@@ -134,6 +137,7 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
           this.productCreatedCity = data.city;
           this.currentOwnerId = data.owner[data.owner.length - 1];
           this.productLose = data.isLost;
+          this.productSerialNumber = data.serialNumber  || ''
         }
       }),
       catchError(error => {
@@ -170,6 +174,7 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
         if (data) {
           this.ownerfirstName = data.firstName;
           this.ownerCity = data.city;
+          this.currentOwnerSecondHandStatus = data.secondHand;
           this.ownerCountry = data.country;
           this.ownerImgUrl = data.profilPhoto;
           this.ownerPhoto = this.sanitizer.bypassSecurityTrustUrl(this.ownerImgUrl);
