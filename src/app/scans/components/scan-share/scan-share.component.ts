@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
 import { LoginService } from '../../../auth/components/services/login.service';
 import { Product } from '../../../product/models/product-model';
@@ -36,10 +36,12 @@ export class ScanShareComponent implements OnInit {
     private productService: ProductService,
     private transferUrlService: TransferUrlService,
     private router: Router,
+    private route: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
+    //this.getUserIdFromUrl();
     this.initUserInfo();
     this.getUserbyUrlId();
     this.countUserProducts();
@@ -48,6 +50,21 @@ export class ScanShareComponent implements OnInit {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+
+  private getUserIdFromUrl() {
+    this.route.paramMap.subscribe(params => {
+      const userId = params.get('userId');
+      if (userId) {
+        this.userUrlScannedId = userId;
+        this.initUserInfo();       // ⚠️ déplace ici
+        this.getUserbyUrlId();
+        this.countUserProducts();
+      } else {
+        console.warn('❌ Aucun userId trouvé dans l’URL');
+      }
+    });
   }
 
   private initUserInfo(){
