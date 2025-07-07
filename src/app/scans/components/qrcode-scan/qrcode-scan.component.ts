@@ -33,6 +33,7 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
 
   purchaserUserId!: string;
   purchaseDate!: string;
+  currentUserId!: string;
 
   successMessage: string | null = null;
   errorMessage: string | null = null;
@@ -48,6 +49,17 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getPostedUserData();
+    this.initUserInfo();
+  }
+
+  private initUserInfo(): void {
+    const userInfo = this.loginService.getUserInfo();
+    if (!userInfo || !userInfo.userId) {
+      console.error('User information is not available');
+      return;
+    }
+
+    this.currentUserId = userInfo.userId;
   }
 
   private getPostedUserData(): void {
@@ -132,10 +144,26 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
   private checkProductId(url: string, checkProductId: string): void {
     this.productService.getCurrentProduct(checkProductId).pipe(
       tap(product => {
-        if (product) {
+        if ((product && product.isLost === false) || (product && product.owner[product.owner.length - 1] === this.currentUserId) ) {
           console.log('✅ Produit trouvé :', product);
           //this.urlProductArray.push(url);
           window.location.href = url;
+        } else if(product && product.isLost === true) {
+
+          const requestParams = {
+            userId: this.currentUserId,
+            product: product
+          }
+
+          this.productService.catchAndSendLostScannedProduct(requestParams).pipe(
+            tap(notification => {
+              if(notification) {
+                this.successMessage = '✅ Transaction refusé produit signalé Perdu ou Volé ';
+                this.errorMessage = null;
+              }
+            })
+          ).subscribe();
+          this.stopScan();
         } else {
           console.warn('❌ Produit introuvable');
           this.isFakeUrl = true;

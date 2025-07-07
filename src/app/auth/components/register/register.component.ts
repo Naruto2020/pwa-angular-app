@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   personalInfoForm!: FormGroup;
   firstNameCtrl!: FormControl;
   userCompanieStatusCtrl!: FormControl;
+  userSecondHandStatusCtrl!: FormControl;
   YesCtrl!: FormControl;
   userRegionForm!: FormGroup;
   phoneCtrl!: FormControl;
@@ -50,6 +51,7 @@ export class RegisterComponent implements OnInit {
       lastName: ['', Validators.required],
     });
     this.userCompanieStatusCtrl = this.formBuilder.control('non');
+    this.userSecondHandStatusCtrl = this.formBuilder.control('non');
     this.YesCtrl = this.formBuilder.control('');
     this.userRegionForm = this.formBuilder.group({
       city: ['', Validators.required],
@@ -68,6 +70,7 @@ export class RegisterComponent implements OnInit {
     this.mainForm = this.formBuilder.group({
       personalInfo: this.personalInfoForm,
       companie: this.userCompanieStatusCtrl,
+      secondHand: this.userSecondHandStatusCtrl,
       Yes: this.YesCtrl,
       userRegion: this.userRegionForm,
       phone: this.phoneCtrl,
@@ -83,6 +86,7 @@ export class RegisterComponent implements OnInit {
     newUser.lastName = formValue["personalInfo"].lastName;
     newUser.profilPhoto = formValue["personalInfo"].profilePhoto;
     newUser.companie = formValue["companie"];
+    newUser.secondHand = formValue["secondHand"];
     newUser.city = formValue["userRegion"].city;
     newUser.country = formValue["userRegion"].country;
     newUser.phoneNumber = formValue["phone"];

@@ -6,6 +6,7 @@ import { LoginService } from '../../../auth/components/services/login.service';
 import { Product } from '../../../product/models/product-model';
 import { ProductService } from '../../../product/services/product.service';
 import { NotificationsService } from '../../../services/notifications.service';
+import { TransferUrlService } from '../../../services/transferUrl.service';
 import { UserService } from '../../../user/components/services/user.service.ts.service';
 import { Notification } from '../../components/model/notification-model';
 import { Notif } from '../../interfaces/notif.interface';
@@ -31,6 +32,7 @@ export class NotifComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private router: Router,
     private productService: ProductService,
+    private transferUrlService: TransferUrlService,
     private cdr: ChangeDetectorRef // Add ChangeDetectorRef
   ) {}
 
@@ -101,13 +103,10 @@ export class NotifComponent implements OnInit {
   }
 
 
-  markAsRead(notif : Notification) {
+  markAsRead(notif: Notification): void {
     const notificationRead: Notif = { isRead: 'oui' };
-    
+
     if (notif.isRead === 'oui') {
-      this.router.navigate(['/teik/products/current-product', notif.data.productId], {
-        queryParams: { notificationId: notif._id },
-      });
       return;
     }
 
@@ -115,10 +114,7 @@ export class NotifComponent implements OnInit {
       tap((updatedNotification) => {
         if (updatedNotification) {
           notif.isRead = updatedNotification.isRead;
-          this.cdr.detectChanges(); // Trigger change detection
-          this.router.navigate(['/teik/products/current-product', notif.data.productId], {
-            queryParams: { notificationId: notif._id },
-          });
+          this.cdr.detectChanges(); // OK
         }
       }),
       catchError(err => {
@@ -129,7 +125,29 @@ export class NotifComponent implements OnInit {
     ).subscribe();
   }
 
-  goToScanUser(userId: string): void {
-    this.router.navigate(['/teik/user/scan-user', userId]);
+  handleNotificationClick(notif: any): void {
+    this.markAsRead(notif);
+
+    if (notif.type === 'acquisition') {
+      const productId = notif.data?.productId;
+      if (productId) {
+        this.router.navigate(['/teik/products/current-product', productId], {
+          queryParams: { notificationId: notif._id },
+        });
+      }
+    } else if (notif.type === 'signal') {
+      const userId = notif.userId;
+      const url = `http://localhost:4200/teik/notifications/${userId}`
+      this.transferUrlService.catchUserUrlScanned(url);
+      if (userId) {
+        this.router.navigate(['/teik/user/scan-user', userId], {
+          queryParams: { notificationId: notif._id },
+        });
+      } else {
+        console.warn('⚠️ userId is undefined in notif', notif);
+      }
+    }
   }
+
+
 }

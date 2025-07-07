@@ -17,8 +17,15 @@
         </div>
     </mat-card>
     <mat-card class="form-card">
-        <mat-card-subtitle>Est-vous une entreprise productrice ?</mat-card-subtitle>
+        <mat-card-subtitle>Est-vous une entreprise?</mat-card-subtitle>
         <mat-radio-group [formControl]="userCompanieStatusCtrl">
+            <mat-radio-button value="non">Non</mat-radio-button>
+            <mat-radio-button value="oui">Oui</mat-radio-button>
+        </mat-radio-group>
+    </mat-card>
+    <mat-card class="form-card">
+        <mat-card-subtitle>Est-vous une entreprise de seconde main?</mat-card-subtitle>
+        <mat-radio-group [formControl]="userSecondHandStatusCtrl">
             <mat-radio-button value="non">Non</mat-radio-button>
             <mat-radio-button value="oui">Oui</mat-radio-button>
         </mat-radio-group>

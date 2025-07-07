@@ -4,6 +4,7 @@ export class User {
     lastName!: string;
     profilPhoto!: string;
     companie!: string;
+    secondHand!: string
     city!: string;
     country!: string;
     phoneNumber!: string;

@@ -18,19 +18,34 @@
                 
                     <div class="profile-info"> 
                         <h2 class="profile-name"> {{currentProductName}} </h2>
-                        <p class="profile-title">
-                            fabriqué à :  {{productCreatedCity}}
-                        </p> 
-                        <p class="profile-title">
-                            date de création: {{productCreatedDate | date: 'dd/MM/yyyy'}}
-                        </p> 
-                        <p class="profile-title">
-                            N° de série : {{currentProductId}}
-                        </p>
+                        <div *ngIf="currentOwnerSecondHandStatus === 'non'">
+                            <p class="profile-title">
+                                fabriqué à :  {{productCreatedCity}} 
+                            </p> 
+                            <p class="profile-title">
+                                date de création: {{productCreatedDate | date: 'dd/MM/yyyy'}}
+                            </p> 
+                            <p class="profile-title">
+                                N° de série : {{productSerialNumber ||  currentProductId}}
+                            </p>
+                            <p class="profile-location">Enregistré par : {{companieName}} </p>
+
+                        </div>
+                        <div *ngIf="currentOwnerSecondHandStatus === 'oui'">
+                            <p class="profile-title">
+                                Authentifié  à : {{productCreatedCity}} 
+                            </p>
+                            <p class="profile-title">
+                                date d'authentication: {{productCreatedDate | date: 'dd/MM/yyyy'}}
+                            </p> 
+                            <p class="profile-title">
+                                N° de série : {{productSerialNumber || currentProductId}}
+                            </p>
+                            <p class="profile-location">Authentifié par : {{companieName}} </p>
+                        </div>
                         <!-- <p *ngIf="isFashionProduct === 'non'" class="profile-title"> 
                             date d'expiration : {{expiryDate | date: 'dd/MM/yyyy'}}
                         </p>  -->
-                        <p class="profile-location">fabriqué par : {{companieName}} </p>
                     </div>
                 </div>
             
