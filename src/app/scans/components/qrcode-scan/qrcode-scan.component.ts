@@ -123,7 +123,6 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
 
           } else if (this.isValidUrl(url) && url.startsWith(allowedUserPrefix)) {
             const checkUserId = url.split('/').pop();
-            console.log("url ==> : ", url)
             if (!checkUserId) return;
             this.checkUrlId(url, checkUserId);
 

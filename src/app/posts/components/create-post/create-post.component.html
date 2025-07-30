@@ -37,7 +37,7 @@
         <mat-label>Nom de la Marque</mat-label>
         <mat-select formControlName="productName">
           <mat-option *ngFor="let company of companies" [value]="company.firstName">
-            {{ company.firstName }} {{ company.lastName }}
+             {{ company.lastName }} {{ company.firstName }}
           </mat-option>
         </mat-select>
         <mat-error>

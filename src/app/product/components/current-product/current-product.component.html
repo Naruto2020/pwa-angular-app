@@ -18,7 +18,7 @@
                 
                     <div class="profile-info"> 
                         <h2 class="profile-name"> {{currentProductName}} </h2>
-                        <div *ngIf="currentOwnerSecondHandStatus === 'non'">
+                        <div *ngIf="initOwnerSecondHandStatus === 'non'">
                             <p class="profile-title">
                                 fabriqué à :  {{productCreatedCity}} 
                             </p> 
@@ -31,7 +31,7 @@
                             <p class="profile-location">Enregistré par : {{companieName}} </p>
 
                         </div>
-                        <div *ngIf="currentOwnerSecondHandStatus === 'oui'">
+                        <div *ngIf="initOwnerSecondHandStatus === 'oui'">
                             <p class="profile-title">
                                 Authentifié  à : {{productCreatedCity}} 
                             </p>
@@ -61,8 +61,9 @@
                     >
                     <div class="profile-info">
                         <h2 class="profile-name"> Propriétaire </h2>
+
                         <p class="profile-title">
-                            nom : {{ownerfirstName}}
+                            nom : {{ownerLastName}} {{ownerFirstName}}
                         </p>
                         <p class="profile-title">
                             ville : {{ownerCity}}
@@ -108,7 +109,7 @@
                                 >
                                     <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
                                     <div class="timeline-content">
-                                        <strong>{{ history.firstName }}</strong> à {{ history.city }}
+                                        <strong> {{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
                                         <br>
                                         <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>
                                         <small>{{ purchaseDate | date: 'dd/MM/yyyy à HH:mm' }}</small>
@@ -136,7 +137,7 @@
                             <p *ngIf="isFashionProduct === 'non'" class="profile-title">
                                 <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
                                 produit déjas consommé : <span class="consumed"> {{currentProductState}} </span> 
-                                <span *ngIf="currentProductState === 'OUI'"> , Consommé par {{ownerfirstName}} à {{ownerCity}} le 23/2/2024 à 16h29</span>
+                                <span *ngIf="currentProductState === 'OUI'"> , Consommé par {{ownerFirstName}} à {{ownerCity}} le 23/2/2024 à 16h29</span>
                             </p>
                             <br>
                             <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId && isFashionProduct === 'non'">

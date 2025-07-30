@@ -8,7 +8,6 @@ export class PostsService {
     constructor(private http: HttpClient) {}
 
     createPostSignal(formValue: PostSignal): Observable<PostSignal | null> {
-        console.log('Form submitted:', formValue);
         return this.http.post<PostSignal>('http://127.0.0.1:8002/teko/gateway-posts/posts', formValue).pipe(
             delay(1000), 
             map(response => response), 

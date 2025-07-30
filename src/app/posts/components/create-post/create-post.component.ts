@@ -88,7 +88,6 @@ export class CreatePostComponent implements OnInit {
 
       this.postsService.createPostSignal(newPostSignal).pipe(
         tap(data => {
-          console.log('Form submitted:', data);
           this.loading = false;
           if (data) {
             const postId = data._id;

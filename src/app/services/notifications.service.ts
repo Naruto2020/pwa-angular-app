@@ -19,7 +19,6 @@ export class NotificationsService {
   }
 
   markNotificationAsRead(notificationId: string, notificationRead: Notif) {
-    console.log('Marking notification as read:', notificationId, notificationRead);
     return this.http.patch<Notification>(`http://127.0.0.1:8002/teko/gateway-notifications/read/${notificationId}`, notificationRead).pipe(
       map((notification: Notification) => notification),
       catchError(() => of(null))
