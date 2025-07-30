@@ -7,7 +7,8 @@
                     <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture">
                 
                     <div class="profile-info"> 
-                        <h2 class="profile-name">{{currentUserFirstName}} {{currentUserLastName}}</h2>
+                        <h2 class="profile-name" *ngIf="currentUserCompanie === 'non'" >{{currentUserFirstName}} {{currentUserLastName}}</h2>
+                        <h2 class="profile-name" *ngIf="currentUserCompanie === 'oui'" >{{currentUserLastName}} {{currentUserFirstName}} </h2>
                         <p class="profile-title">
                             <a routerLink="/teik/mysquad"> 10 partenaires </a>
                         </p> 

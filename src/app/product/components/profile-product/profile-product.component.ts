@@ -29,6 +29,7 @@ export class ProfileProductComponent implements OnInit {
   currentUserId!: string;
   uniqueDataByName!: Product[];
   currentUserFirstName!: string;
+  currentUserLastName!: string; 
   currentUserCompanie!: string;
   countOfProducts: ProductCount[] = [];
   userProducts!: Product[] | null;
@@ -53,12 +54,13 @@ export class ProfileProductComponent implements OnInit {
 
   private initUserInfo(): void {
     const userInfo = this.loginService.getUserInfo();
-    if (!userInfo?.userId || !userInfo?.firstName || !userInfo?.companie) return;
+    if (!userInfo?.userId || !userInfo?.firstName || !userInfo?.lastName || !userInfo?.companie) return;
+
   
     this.currentUserId = userInfo.userId;
     this.currentUserFirstName = userInfo.firstName;
+    this.currentUserLastName = userInfo.lastName;
     this.currentUserCompanie = userInfo.companie ;
-
     this.userService.getCurrentUser(this.currentUserId).pipe(
       tap(user => {
         if (user && user.profilPhoto) {

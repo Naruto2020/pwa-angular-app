@@ -28,11 +28,13 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
   currentProductPhoto!: SafeUrl;
   currentOwnerId!: string;
   currentUserCompanieStatus!: string;
-  currentOwnerSecondHandStatus!: string;
+  initOwnerSecondHandStatus!: string;
   productSerialNumber!: string;
   currentProductState!: string;
+  firstOwnerId!: string;
 
-  ownerfirstName!: string;
+  ownerFirstName!: string;
+  ownerLastName!: string;
   ownerCity!: string;
   ownerCountry!: string;
   ownerImgUrl!: string;
@@ -91,7 +93,7 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
     }
     this.currentUserId = userInfo.userId;
     this.currentUserCompanieStatus = userInfo.companie;
-    //this.currentOwnerSecondHandStatus = userInfo.secondHand;
+    //this.initOwnerSecondHandStatus = userInfo.secondHand;
   }
 
   private extractRouteParamsAndLoadProduct(): void {
@@ -105,6 +107,7 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
       }),
       switchMap(() => this.loadProductOwners()),
       switchMap(() => this.loadCurrentOwner()),
+      switchMap(() => this.loadFirstOwner()),
     ).subscribe();
   }
 
@@ -136,6 +139,7 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
           this.productCreatedDate = data.createdAt;
           this.productCreatedCity = data.city;
           this.currentOwnerId = data.owner[data.owner.length - 1];
+          this.firstOwnerId = data.owner[0];
           this.productLose = data.isLost;
           this.productSerialNumber = data.serialNumber  || ''
         }
@@ -172,9 +176,9 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
     return this.userService.getOwnerProduct(this.currentOwnerId).pipe(
       tap(data => {
         if (data) {
-          this.ownerfirstName = data.firstName;
+          this.ownerFirstName = data.firstName;
+          this.ownerLastName = data.lastName;
           this.ownerCity = data.city;
-          this.currentOwnerSecondHandStatus = data.secondHand;
           this.ownerCountry = data.country;
           this.ownerImgUrl = data.profilPhoto;
           this.ownerPhoto = this.sanitizer.bypassSecurityTrustUrl(this.ownerImgUrl);
@@ -185,6 +189,18 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
         return of(null);
       })
     );
+  }
+
+  loadFirstOwner() {
+    if(!this.firstOwnerId) return of(null);
+
+    return this.userService.getUserById(this.firstOwnerId).pipe(
+      tap(user => {
+        if(user) {
+          this.initOwnerSecondHandStatus = user.secondHand;
+        }
+      }),
+    )
   }
 
   getPurchaserUserId() {
@@ -257,11 +273,11 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
 
           this.purchaseDate = new Date().toISOString();
           this.successMessage = 'Transfert effectué avec succès';
-          // forkJoin([
-          //   this.loadProduct(),
-          //   this.loadProductOwners(),
-          //   this.loadCurrentOwner()
-          // ]).subscribe();
+          forkJoin([
+            this.loadProduct(),
+            this.loadProductOwners(),
+            this.loadCurrentOwner()
+          ]).subscribe();
         }
         localStorage.removeItem('scannedUserId');
       }),
@@ -291,7 +307,6 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
 
         const dateOfConsumption = new Date();
         this.consumeDate = dateOfConsumption.toISOString();
-        console.log('Request sent successfully:', notification);
       }),
       catchError(error => {
         this.successMessage = null;

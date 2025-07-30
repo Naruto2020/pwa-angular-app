@@ -36,7 +36,8 @@ export class CreateProductComponent implements OnInit {
   }
 
   private initFormControls() {
-    const currentCompanieName1 = this.loginService.getUserInfo().firstName;
+    const userInfos = this.loginService.getUserInfo();
+    const currentCompanieName1 = `${userInfos.lastName} ${userInfos.firstName}`
     const currentCompanieId = this.loginService.getUserInfo().userId;
   
     this.primaryProductInfoForm = this.formBuilder.group({
