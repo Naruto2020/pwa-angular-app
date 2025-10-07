@@ -108,7 +108,7 @@
                                     *ngFor="let history of ownershipHistory; let last = last"
                                 >
                                     <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
-                                    <div class="timeline-content">
+                                    <div *ngIf="history.secondHand === 'non'" class="timeline-content">
                                         <strong> {{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
                                         <br>
                                         <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>

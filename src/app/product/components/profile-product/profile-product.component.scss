@@ -69,3 +69,28 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
+
+.mobile-spacer {
+  display: none;
+}
+
+// responssive 
+
+@media screen and (max-width) {
+  .main-form {
+    margin: 20px;
+  }
+  .mobile-spacer {
+    margin-bottom: 40px;
+  }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .main-form {
+    margin: 20px;
+  }
+  .mobile-spacer {
+    margin-bottom: 40px;
+  }
+}
