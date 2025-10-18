@@ -1,26 +1,18 @@
-<div class="mobile-spacer">
-</div>
-
+<!-- <div class="mobile-spacer"></div> -->
+<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<br> <br> <br> <br>
 <mat-card class="main-form">
-  <div>
+  
+  <div class="profile-container">
     <img [src]="userProfilePhoto" alt="user profile picture" class="profile-picture">
-    <h2>Les produits de {{ currentUserLastName }} {{ currentUserFirstName }}</h2>
-
+    <h2> {{ currentUserFirstName }}</h2>
   </div>
 
-  <div class="product-container">
+  <app-carousel
+    [title]="'Mes Produits'"
+    [items]="uniqueProducts"
+    [baseRoute]="'/teik/products/current-product'"
+    context="default"
+  ></app-carousel>
 
-    <a 
-      *ngFor="let product of (currentUserCompanie === 'oui' ? countOfProducts : uniqueProducts)" 
-      routerLink="/teik/products/current-product/{{ product.id}}"
-      class="product-card-link"
-    >
-      <div class="product-card">
-        <img [src]="product.imageUrl" alt="photo produit"  class="product-image">
-        <h2>{{ product.name }}</h2>
-        <p>Quantité {{ product.count }}</p>
-      </div>
-
-    </a>
-  </div>
 </mat-card>

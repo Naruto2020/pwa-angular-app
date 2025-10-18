@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '@app/auth/components/services/login.service';
@@ -35,6 +35,7 @@ export class ProfileProductComponent implements OnInit {
   userProducts!: Product[] | null;
   uniqueProducts: ProductCount[] = [];
   userProfilePhoto!: SafeUrl 
+
 
   constructor(
     private productService: ProductService,

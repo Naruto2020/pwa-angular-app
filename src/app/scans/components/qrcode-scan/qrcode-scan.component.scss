@@ -136,6 +136,12 @@
     font-style: italic;
 }
 
+.profile-title {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .scanner-wrapper {
     position: relative;
     width: 100%;
@@ -283,6 +289,30 @@ li {
     cursor: pointer;
 }
 
+.scrolling-message {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  padding: 8px 0;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @media screen and (max-width: 1024px) {
     .container {
         flex-direction: column;
@@ -293,6 +323,9 @@ li {
     .secondary-card {
         width: 100%;
         max-width: 100%;
+    }
+    .secondary-card {
+        display: none;
     }
 
     .scanner-card,
@@ -355,6 +388,11 @@ li {
         width: 100%;
         max-width: 90%;
         height: auto;
+    }
+
+    .scrolling-message {
+        font-size: 0.85em;
+        padding: 6px 0;
     }
 }
 

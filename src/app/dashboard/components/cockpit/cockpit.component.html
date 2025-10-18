@@ -11,8 +11,8 @@
 
       <a routerLink="/teik/authentiques" class="card-link">
         <mat-card>
-          <mat-card-title>Produits authentifiés</mat-card-title>
-          <mat-card-content>{{ userValidScanCount }}</mat-card-content>
+          <mat-card-title>nombre d'authentifications</mat-card-title>
+          <mat-card-content>{{ userAuthCount }}</mat-card-content>
         </mat-card>
       </a>
 
@@ -23,21 +23,21 @@
         </mat-card>
       </a>
 
+      <a routerLink="/teik/alertes" class="card-link">
+        <mat-card>
+          <mat-card-title>Alertes Produit volé</mat-card-title>
+          <mat-card-content>{{ userReportedTheft }}</mat-card-content>
+        </mat-card>
+      </a>
+
       <a routerLink="/teik/score" class="card-link">
         <mat-card>
           <mat-card-title>Score d'authenticité</mat-card-title>
-          <mat-card-content>{{ authenticityScore }}%</mat-card-content>
+          <mat-card-content>{{ authenticityScore }}</mat-card-content>
         </mat-card>
       </a>
 
-      <a routerLink="/teik/cashback" class="card-link">
-        <mat-card>
-          <mat-card-title>Cashback</mat-card-title>
-          <mat-card-content><h3>{{ cashbackScore }} Fcfa</h3></mat-card-content>
-        </mat-card>
-      </a>
-
-      <a routerLink="/teik/badges" class="card-link">
+      <a *ngIf=" authenticityScore > 70" routerLink="/teik/badges" class="card-link">
         <mat-card>
           <mat-card-title>Badges</mat-card-title>
           <mat-card-content><h3>{{ userBadges[0] }}</h3></mat-card-content>

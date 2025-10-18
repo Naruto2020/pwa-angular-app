@@ -14,7 +14,7 @@ import { SquadComponent } from './network/components/squad/squad.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SquadComponent,
+    //SquadComponent,
     //DefaultComponent
   ],
   imports: [

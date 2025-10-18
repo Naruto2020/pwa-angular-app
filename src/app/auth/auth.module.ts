@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginService } from './components/services/login.service';
 import { RegisterService } from './components/services/register.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     AuthRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     LoginService,

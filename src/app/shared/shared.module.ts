@@ -14,10 +14,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from '../guards/auth.interceptor';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    ImageUploadComponent
+    ImageUploadComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     MatIconModule,
     HttpClientModule,
     MatSelectModule,
+    RouterModule,
     
   ],
   providers: [
@@ -51,6 +55,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     MatIconModule,
     ImageUploadComponent,
     MatSelectModule,
+    CarouselComponent,
   ]
 })
 export class SharedModule { }

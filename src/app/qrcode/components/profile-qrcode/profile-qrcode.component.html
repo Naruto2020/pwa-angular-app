@@ -1,17 +1,15 @@
+<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<br><br><br><br>
+
 <mat-card class="main-form">
     <mat-card-title>QRCodes de {{ currentUserLastName }} {{ currentUserFirstName }}</mat-card-title>
     
-    <div class="qrcode-container">
-        <a
-        *ngFor="let qrcode of (currentUserCompanie === 'oui' ? countOfQrcodes : uniqueQrcodes)"
-        routerLink="/teik/qrcodes/current-qrcode/{{ qrcode.id }}"
-        class="qrcode-card-link"
-        >
-        <div class="qrcode-card">
-            <img [src]="qrcode.imageUrl" alt="photo qrcode" class="profile-picture">
-            <h2>{{ qrcode.name }}</h2>
-            <p>Quantité {{ qrcode.count }}</p>
-        </div>
-        </a>
-    </div>
+    <app-carousel 
+        [items]="currentUserCompanie === 'oui' ? countOfQrcodes : uniqueQrcodes"
+        baseRoute="/teik/qrcodes/current-qrcode"
+        itemLabel="name"
+        itemSubLabel="count"
+        itemImage="imageUrl"
+        subLabelPrefix="Quantité"
+    ></app-carousel>
 </mat-card>

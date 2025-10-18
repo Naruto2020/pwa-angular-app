@@ -16,6 +16,13 @@ export class CockpitComponent implements OnInit {
   currentUserCity!: string;
   currentUserCountry!: string;
 
+  // Consumer data
+  userScanCount = 37;
+  userAuthCount = 29;
+  userReportedProducts = 3;
+  userReportedTheft = 1;
+  authenticityScore = 0; // Calculated
+
   ngOnInit(): void {
     const userId = this.loginService.getUserInfo().userId;
     if(!userId) return;
@@ -23,6 +30,8 @@ export class CockpitComponent implements OnInit {
     this.currentUserLastName = this.loginService.getUserInfo().lastName ?? '';
     this.currentUserFirstName = this.loginService.getUserInfo().firstName ?? '';
     this.currentUserCompanie = this.loginService.getUserInfo().companie ?? '';
+
+    this.calculateAuthenticityScore(); 
   }
 
   // Company data
@@ -34,12 +43,17 @@ export class CockpitComponent implements OnInit {
   activeUsersCount = 48;
   consumerOfTheMonthName = "Jean K.";
 
-  // Consumer data
-  userScanCount = 37;
-  userValidScanCount = 29;
-  userReportedProducts = 3;
-  authenticityScore = 82; // Calculated
-  cashbackScore = 500; // Calculated
+
+  calculateAuthenticityScore() {
+    const S = this.userScanCount;
+    const A = this.userAuthCount;
+    const C = this.userReportedProducts;
+    const T = this.userReportedTheft;
+
+    const base = S === 0 ? 0 : (A / S) * 100;
+    const penalty = (5 * C) + (10 * T);
+    this.authenticityScore = Math.max(0, Math.min(100, Math.round(base - penalty)));
+  }
   userBadges = ['Détective', 'Anti-fake', 'Premium'];
 
 }

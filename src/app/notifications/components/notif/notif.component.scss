@@ -17,10 +17,10 @@
 }
 
 
-.secondary-card {
-    display: flex;
-    flex-direction: column; 
-}
+// .secondary-card {
+//     display: flex;
+//     flex-direction: column; 
+// }
 
 
 .profile-card {
@@ -66,4 +66,20 @@
 
 .status-dot.read {
     background-color: orange;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-card {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    
 }

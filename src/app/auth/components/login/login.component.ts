@@ -19,6 +19,57 @@ export class LoginComponent implements OnInit {
   passwordCtrl!: FormControl;
   loginInfoForm!: FormGroup;
 
+  searchQuery: string = '';
+
+  lostProducts = [
+    {
+      id: 1,
+      serialNumber: 'A100235',
+      shortSerial: 'Numéro: ...235',
+      brand: 'JORDAN',
+      model: 'JordanAIR 11 RETRO ',
+      lossDate: '2025-10-10T00:00:00Z',
+      lossCity: 'Paris',
+      lossCountry: 'France',
+      imageUrl: 'assets/images/jordan-retro.png',
+    },
+    {
+      id: 2,
+      serialNumber: 'B784523',
+      shortSerial: 'Numéro: ...523',
+      brand: 'Hermes',
+      model: 'Sac Évelyne III 29',
+      lossDate: '2025-10-15T00:00:00Z',
+      lossCity: 'Lyon',
+      lossCountry: 'France',
+      imageUrl: 'assets/images/hermes-b.png',
+    },
+    {
+      id: 3,
+      serialNumber: 'C784987',
+      shortSerial: 'Numéro: ...987',
+      brand: 'Louis Vuitton',
+      model: 'Sac Neverfull GM',
+      lossDate: '2025-10-18T00:00:00Z',
+      lossCity: 'Tokyo',
+      lossCountry: 'Japan',
+      imageUrl: 'assets/images/louisV-n.png',
+    },
+
+    {
+      id: 4,
+      serialNumber: 'P784549',
+      shortSerial: 'Numéro: ...549',
+      brand: 'PATEK PHILIPPE',
+      model: 'MONTRE QUANTIÈME ANNUEL 5035R.',
+      lossDate: '2025-10-25T00:00:00Z',
+      lossCity: 'New York',
+      lossCountry: 'USA',
+      imageUrl: 'assets/images/patek-p.png',
+    },
+  ];
+
+
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) { }
 
@@ -81,6 +132,15 @@ export class LoginComponent implements OnInit {
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+  onSearchChange() {
+    console.log('Recherche :', this.searchQuery);
+    // 👉 tu pourras ici appeler un service pour filtrer les résultats
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
   }
   
 }

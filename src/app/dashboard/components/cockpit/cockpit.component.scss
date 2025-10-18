@@ -61,3 +61,41 @@ mat-card-content {
 h3 {
     color: darkorange;
 }
+
+/* --- RESPONSIVE --- */
+
+/* Tablettes et petits écrans ≤1024px */
+@media screen and (max-width: 1024px) {
+    .main-card,
+    .secondary-card {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* Smartphones ≤600px */
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .main-card,
+    .secondary-card {
+        margin: 0;
+    }
+
+    mat-card-title {
+        font-size: 1.2em;
+    }
+
+    mat-card-content {
+        font-size: 0.9em;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr; /* une seule colonne */
+        gap: 12px;
+        padding: 8px;
+    }
+}

@@ -53,3 +53,21 @@ button{
     padding-right: 15PX;
 }
 
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-field {
+  width: 80%;
+  max-width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+    .search-field {
+        width: 95%;
+    }
+}
+
+

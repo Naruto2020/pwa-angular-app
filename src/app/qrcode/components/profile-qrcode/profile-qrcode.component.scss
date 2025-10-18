@@ -1,13 +1,24 @@
+/* --- QR CODES CAROUSEL --- */
+
 .qrcode-container {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;             /* horizontal scroll */
+  gap: 16px;                 /* espace entre les cartes */
+  overflow-x: auto;          /* scroll horizontal */
   padding: 16px;
+  scroll-behavior: smooth;
+
+  /* masquer la barre de scroll pour un look plus propre */
+  -ms-overflow-style: none;  /* IE et Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.qrcode-container::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
 
 .qrcode-card-link {
   display: block;
-  width: 100%;
+  flex: 0 0 250px;           /* largeur fixe pour chaque carte */
   text-decoration: none;
 }
 
@@ -51,5 +62,156 @@
     font-size: 1em;
     color: #666;
     margin: 0 15px 15px;
+  }
+}
+
+/* --- GLOBAL STYLES EXISTANTS --- */
+
+.dashboard {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 16px;
+}
+
+mat-card {
+  padding: 16px;
+  background-color: #fff; 
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, border 0.3s ease;
+
+  &:hover {
+      transform: translateY(-5px);
+      border: #666 2px solid;
+  }
+}
+
+mat-card-title {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+mat-card-content {
+  text-align: center;
+  font-size: 1em;
+  color: #666;
+  font-weight: 500;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+
+  a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+  }
+}
+
+.main-card {
+  flex: 2;
+  margin-left: 120px;
+}
+
+.secondary-card {
+  flex: 1;
+  margin-right: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  color: darkorange;
+}
+
+.scrolling-message {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  padding: 8px 0;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 1024px) {
+  .qrcode-card-link {
+    flex: 0 0 200px; /* plus petit sur tablette */
+  }
+
+  #iconMediaQuerieMarge,
+  #iconMediaQuerieMarge1,
+  #iconMediaQuerieMarge2,
+  #iconMediaQuerieMarge3,
+  #iconMediaQuerieMarge4 {
+      margin-left: 8px;
+      margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .qrcode-card-link {
+    flex: 0 0 160px; /* plus petit sur mobile */
+  }
+
+  .qrcode-card h2 {
+    font-size: 1.2em;
+  }
+
+  .qrcode-card p {
+    font-size: 0.9em;
+  }
+
+  mat-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .search::placeholder {
+    color: transparent;
+  }
+
+  .search {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .icon-text {
+    font-size: xx-small;
+  }
+
+  app-profile-drop-down {
+    right: 30%;
+    top: 105%;
+  }
+
+  .scrolling-message {
+    font-size: 0.85em;
+    padding: 6px 0;
   }
 }

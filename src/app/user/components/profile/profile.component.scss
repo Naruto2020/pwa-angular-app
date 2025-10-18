@@ -187,6 +187,7 @@ h3 {
     .container {
         flex-direction: column;
         align-items: center;
+        margin-right: 15px;
     }
 
     .secondary-card {
@@ -196,6 +197,47 @@ h3 {
         flex: 1;
         width: 100%;
     }
+
+    /* Cible uniquement la carte d’upload */
+    .secondary-card mat-card:first-child {
+        width: 130px;
+        height: 40px;
+        
+        //background-color: #1976d2; /* couleur principale Angular Material */
+        position: relative;
+        margin: 10px auto;
+        padding: 0;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .secondary-card mat-card:first-child h3 {
+        display: none;
+    }
+
+    /* Rend ton composant upload invisible mais cliquable */
+    // .secondary-card mat-card:first-child app-image-upload {
+    //     position: absolute;
+    //     inset: 0;
+    //     opacity: 0;
+    //     cursor: pointer;
+    //     z-index: 2;
+    // }
+
+    /* Ajoute un petit point blanc au centre */
+    // .secondary-card mat-card:first-child::after {
+    //     content: '';
+    //     width: 12px;
+    //     height: 12px;
+    //     background: white;
+    //     border-radius: 50%;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     z-index: 1;
+    // }
 
     .main-card {
         order: 1;
@@ -208,6 +250,11 @@ h3 {
         margin-right: 10px;
         flex: 1;
         width: 100%;
+    }
+
+    .qrcode-image img {
+        width: 80px;
+        height: 80px;
     }
 
     .carousel-vertical {
@@ -240,7 +287,7 @@ h3 {
     .container {
         flex-direction: column;
         align-items: stretch;
-        padding: 15px;
+       
     }
 
     .main-card,
@@ -250,7 +297,7 @@ h3 {
     }
 
     .profile-card {
-        width: 100%;
+        width: 50%;
         margin: 15px 0;
         padding: 15px;
         box-sizing: border-box;

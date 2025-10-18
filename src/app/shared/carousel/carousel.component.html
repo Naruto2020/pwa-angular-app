@@ -1,0 +1,38 @@
+<div class="carousel-container">
+  <h2>{{ title }}</h2>
+  <div class="carousel">
+    <div class="carousel-item" *ngFor="let item of items" (click)="onItemClick(item)">
+      <img [src]="item.productImageUrl || item.imageUrl" alt="image" class="item-image" />
+
+      <div class="item-info">
+        <h3>{{ item.name }}</h3>
+
+        <!-- Collection standard -->
+        <p *ngIf="context === 'default'">Quantité : {{ item.count }}</p>
+
+        <!-- Produits volés publics -->
+        <p *ngIf="context === 'public stolen'">
+          N° série : ...{{ item.serialNumber?.slice(-3) }}<br>
+          Marque : {{ item.brand }}<br>
+          Modèle : {{ item.model }}<br>
+          Lieu : {{ item.lossCity }}, {{ item.lossCountry }}<br>
+          Disparu le : {{ item.lossDate | date:'dd/MM/yyyy' }}
+        </p>
+
+        <!-- Produits privés -->
+        <p *ngIf="context === 'private stolen'">
+          Marque : {{ item.brand }}<br>
+          Modèle : {{ item.model }}<br>
+          N° série : {{ item.serialNumber}}<br>
+          Authentifié par : {{ item.authenticator }}<br>
+          <span *ngIf="item.ownerName">Propriétaire : {{ item.ownerName }}<br></span>
+          Date de perte : {{ item.lossDate | date:'dd/MM/yyyy' }}<br>
+          <span *ngIf="item.lossCity || item.lossCountry">Lieu : {{ item.lossCity }}, {{ item.lossCountry }}</span>
+            Assuré : {{ item.insured ? 'Oui' : 'Non' }}<br>
+            Plainte déposée : {{ item.complaintFiled ? 'Oui' : 'Non' }}
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>

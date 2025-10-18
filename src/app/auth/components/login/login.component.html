@@ -32,3 +32,21 @@
         </div>
     </mat-card-actions>
 </mat-card>
+
+
+<!-- 🔍 search  field -->
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Rechercher</mat-label>
+    <input matInput placeholder="Ex: entreprise, produit, utilisateur..." [(ngModel)]="searchQuery" (input)="onSearchChange()">
+    <button *ngIf="searchQuery" mat-icon-button matSuffix (click)="clearSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<app-carousel
+  [title]="'Produits signalés volés'"
+  [items]="lostProducts"
+  context="public stolen"
+></app-carousel>

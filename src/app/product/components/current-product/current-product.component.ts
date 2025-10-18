@@ -54,6 +54,8 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
 
   productOwnershistory: string[] = [];
   ownershipHistory: User[] = [];
+  displayedHistory: User[] = []; // displayed 3 last history or all 
+  showAllHistory = false;   
   lose: boolean = false;
   productLose!: boolean;
 
@@ -122,6 +124,19 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
     });
   }
 
+  // 🔹 Update displayed list 
+  private updateDisplayedHistory(): void {
+    this.displayedHistory = this.showAllHistory
+      ? this.ownershipHistory
+      : this.ownershipHistory.slice(-3);
+  }
+
+  // 🔹 Toggle betwen "see more" & "see less"
+  toggleShowMore(): void {
+    this.showAllHistory = !this.showAllHistory;
+    this.updateDisplayedHistory();
+  }
+
   loadProduct() {
     return this.productService.getCurrentProduct(this.currentProductId).pipe(
       tap(data => {
@@ -166,6 +181,8 @@ export class CurrentProductComponent implements OnInit, OnDestroy {
     return forkJoin(userRequests).pipe(
       tap(data => {
         this.ownershipHistory = data.filter((user): user is User => user !== null);
+        this.updateDisplayedHistory(); // 🔹 Let initialise displayed with 3 last
+
       })
     );
   }

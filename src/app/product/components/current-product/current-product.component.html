@@ -8,6 +8,10 @@
         <button class="close-btn" (click)="clearMessages()">✖</button>
     </div>
 </div>
+
+<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<br>
+
 <div class="container">
     <div class="main-card">
         <div >
@@ -102,20 +106,26 @@
                             <mat-icon class="material-symbols-outlined">history</mat-icon>
                             Historique des propriétaires
                         </h2>
+
                         <div class="timeline">
-                                <div 
-                                    class="timeline-item" 
-                                    *ngFor="let history of ownershipHistory; let last = last"
-                                >
-                                    <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
-                                    <div *ngIf="history.secondHand === 'non'" class="timeline-content">
-                                        <strong> {{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
-                                        <br>
-                                        <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>
-                                        <small>{{ purchaseDate | date: 'dd/MM/yyyy à HH:mm' }}</small>
-                                    </div>
-                                </div>
+                            <div 
+                            class="timeline-item" 
+                            *ngFor="let history of displayedHistory; let last = last"
+                            >
+                            <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
+                            <div *ngIf="history.secondHand === 'non'" class="timeline-content">
+                                <strong>{{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
+                                <br>
+                                <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>
+                            </div>
+                            </div>
                         </div>
+
+                    <div class="show-more-container" *ngIf="ownershipHistory.length > 3">
+                        <button mat-stroked-button color="primary" (click)="toggleShowMore()">
+                        {{ showAllHistory ? 'Voir moins' : 'Voir plus' }}
+                        </button>
+                    </div>
                     </div>
                 </div>
             </mat-card>
