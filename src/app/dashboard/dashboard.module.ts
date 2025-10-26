@@ -5,6 +5,7 @@ import { CockpitComponent } from './components/cockpit/cockpit.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardRoutingModule,
     SharedModule,
     HttpClientModule,
+    TranslateModule,
   ]
 })
 export class DashboardModule { }

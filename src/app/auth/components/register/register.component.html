@@ -1,88 +1,113 @@
-<mat-card class="main-form"  [formGroup]="mainForm">
-    <mat-card-title>Inscription à TEIK</mat-card-title>
-    <mat-card class="form-card" formGroupName="personalInfo">
-        <mat-card-subtitle>Informations personnelles</mat-card-subtitle>
-        <br>
-        <div class="form-row">
-            <mat-form-field appearance="fill">
-                <mat-label>Prénom</mat-label>
-                <input type="text" matInput formControlName="firstName">
-                <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Nom</mat-label>
-                <input type="text" matInput formControlName="lastName">
-                <mat-error>Ce champs est requis OU Contien moin de 2 caractères</mat-error>
-            </mat-form-field>
-        </div>
-    </mat-card>
-    <mat-card class="form-card">
-        <mat-card-subtitle>Est-vous une entreprise?</mat-card-subtitle>
-        <mat-radio-group [formControl]="userCompanieStatusCtrl">
-            <mat-radio-button value="non">Non</mat-radio-button>
-            <mat-radio-button value="oui">Oui</mat-radio-button>
-        </mat-radio-group>
-    </mat-card>
-    <mat-card class="form-card">
-        <mat-card-subtitle>Est-vous une entreprise de seconde main?</mat-card-subtitle>
-        <mat-radio-group [formControl]="userSecondHandStatusCtrl">
-            <mat-radio-button value="non">Non</mat-radio-button>
-            <mat-radio-button value="oui">Oui</mat-radio-button>
-        </mat-radio-group>
-    </mat-card>
-    <mat-card class="form-card" formGroupName="userRegion">
-        <mat-card-subtitle>Région</mat-card-subtitle>
-        <div class="form-row">
-            <mat-form-field appearance="fill">
-                <mat-label>Ville</mat-label>
-                <input type="text" matInput formControlName="city">
-                <mat-error>Ce champs est requis</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Pays</mat-label>
-                <input type="text" matInput formControlName="country">
-                <mat-error>Ce champs est requis</mat-error>
-            </mat-form-field>
-        </div>
-    </mat-card>
-    <mat-card class="form-card">
-        <mat-card-subtitle>Téléphones</mat-card-subtitle>
-        <mat-form-field appearance="fill">
-            <mat-label>Numéro de téléphone</mat-label>
-            <input type="text" matInput [formControl]="phoneCtrl">
-            <mat-error>{{getFormControlErrorTex(phoneCtrl)}}</mat-error>
-        </mat-form-field>
-    </mat-card>
-    <mat-card class="form-card" [formGroup]="loginInfoForm">
-        <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
-        <div class="form-row">
-            <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="email">
-                <mat-error>{{getFormControlErrorTex(emailCtrl)}}</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Mot de passe </mat-label>
-                <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
-                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                </button>
-                <mat-error>{{getFormControlErrorTex(passwordCtrl)}}</mat-error>
-            </mat-form-field>
-        </div>
-    </mat-card>
-    <mat-card-actions>
-        <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">Enregistrer</button> &nbsp; &nbsp;
-        <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
-        <div>
-            <br>
-            <span>En vous inscrivant vous acceptez les <a href="https://twitter.com/fr/tos" target="_blank" rel="noopener noreferrer"> Conditions d'utilisation</a> </span> 
-        </div>
-        
-        <div>
-            <br>
-            <span>Vous avez déjà un compte ?</span> &nbsp;
-            <button mat-flat-button color="primary" routerLink="/teik/auth/login"> Connectez-vous</button>
-        </div>
-    </mat-card-actions>
+<div class="lang-switch">
+  <select [(ngModel)]="selectedLang" (ngModelChange)="changeLang($event)">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="jp">🇯🇵 日本語</option>
+    <option value="cn">🇨🇳 中文</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
+
+<mat-card class="main-form" [formGroup]="mainForm">
+  <mat-card-title>{{ 'REGISTER.SIGNUP' | translate }}</mat-card-title>
+
+  <mat-card class="form-card" formGroupName="personalInfo">
+    <mat-card-subtitle>{{ 'REGISTER.PERSONAL_INFO' | translate }}</mat-card-subtitle>
+    <br>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.FIRST_NAME' | translate }}</mat-label>
+        <input type="text" matInput formControlName="firstName">
+        <mat-error>{{ 'REGISTER.FIRST_NAME_ERROR' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.LAST_NAME' | translate }}</mat-label>
+        <input type="text" matInput formControlName="lastName">
+        <mat-error>{{ 'REGISTER.LAST_NAME_ERROR' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>{{ 'REGISTER.COMPANY_QUESTION' | translate }}</mat-card-subtitle>
+    <mat-radio-group [formControl]="userCompanieStatusCtrl">
+      <mat-radio-button value="non">{{ 'REGISTER.NO' | translate }}</mat-radio-button>
+      <mat-radio-button value="oui">{{ 'REGISTER.YES' | translate }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>{{ 'REGISTER.SECOND_HAND_QUESTION' | translate }}</mat-card-subtitle>
+    <mat-radio-group [formControl]="userSecondHandStatusCtrl">
+      <mat-radio-button value="non">{{ 'REGISTER.NO' | translate }}</mat-radio-button>
+      <mat-radio-button value="oui">{{ 'REGISTER.YES' | translate }}</mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+
+  <mat-card class="form-card" formGroupName="userRegion">
+    <mat-card-subtitle>{{ 'REGISTER.REGION' | translate }}</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.CITY' | translate }}</mat-label>
+        <input type="text" matInput formControlName="city">
+        <mat-error>{{ 'REGISTER.CITY_ERROR' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.COUNTRY' | translate }}</mat-label>
+        <input type="text" matInput formControlName="country">
+        <mat-error>{{ 'REGISTER.COUNTRY_ERROR' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-subtitle>{{ 'REGISTER.PHONE' | translate }}</mat-card-subtitle>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'REGISTER.PHONE' | translate }}</mat-label>
+      <input type="text" matInput [formControl]="phoneCtrl">
+      <mat-error>{{ getFormControlErrorTex(phoneCtrl) }}</mat-error>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card class="form-card" [formGroup]="loginInfoForm">
+    <mat-card-subtitle>{{ 'REGISTER.LOGIN_INFO' | translate }}</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.EMAIL' | translate }}</mat-label>
+        <input type="text" matInput formControlName="email">
+        <mat-error>{{ getFormControlErrorTex(emailCtrl) }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'REGISTER.PASSWORD' | translate }}</mat-label>
+        <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error>{{ getFormControlErrorTex(passwordCtrl) }}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card-actions>
+    <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="loading">
+      {{ 'REGISTER.SUBMIT' | translate }}
+    </button> &nbsp;&nbsp;
+    <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+
+    <div>
+      <br>
+      <span>{{ 'REGISTER.TERMS' | translate }} <a href="https://twitter.com/fr/tos" target="_blank" rel="noopener noreferrer">{{ 'REGISTER.TERMS_CONDITIONS' | translate }} </a></span>
+    </div>
+
+    <div>
+      <br>
+      <span>{{ 'REGISTER.ALREADY_ACCOUNT' | translate }}</span> &nbsp;
+      <button mat-flat-button color="primary" routerLink="/teik/auth/login">{{ 'REGISTER.LOGIN' | translate }}</button>
+    </div>
+  </mat-card-actions>
 </mat-card>

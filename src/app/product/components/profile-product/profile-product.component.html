@@ -1,6 +1,11 @@
 <!-- <div class="mobile-spacer"></div> -->
-<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<div class="scrolling-message-wrapper">
+    <div class="scrolling-message">
+      {{ 'HOME.REAUTHENTICATE_WARNING' | translate }}
+    </div>
+</div>
 <br> <br> <br> <br>
+
 <mat-card class="main-form">
   
   <div class="profile-container">
@@ -9,7 +14,7 @@
   </div>
 
   <app-carousel
-    [title]="'Mes Produits'"
+    [title]="'PROFILE.MY_PASSPORTS' | translate"
     [items]="uniqueProducts"
     [baseRoute]="'/teik/products/current-product'"
     context="default"

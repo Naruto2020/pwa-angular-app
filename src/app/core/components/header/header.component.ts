@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
 import { LoginService } from '../../../auth/components/services/login.service';
 import { UserService } from '../../../user/components/services/user.service.ts.service';
+import { I18nService } from '../../services/i18n.service';
 
 
 @Component({
@@ -17,9 +18,14 @@ export class HeaderComponent implements OnInit {
 
   userImageUrl!: string;
   currentUserPhoto!: SafeUrl;
+  selectedLang: string;
 
   constructor(private router: Router, private userService: UserService, 
-    private sanitizer: DomSanitizer, private loginService: LoginService, private cd: ChangeDetectorRef) { }
+    private sanitizer: DomSanitizer, private loginService: LoginService, private cd: ChangeDetectorRef,
+    public i18nService: I18nService
+  ) { 
+    this.selectedLang = this.i18nService.getCurrentLang();
+  }
 
   ngOnInit(): void {
     const userId = this.loginService.getUserInfo().userId;
@@ -66,5 +72,9 @@ export class HeaderComponent implements OnInit {
     return this.router.url === '/teik/auth/register';
   }
 
+  changeLang(lang: string) {
+    this.i18nService.changeLang(lang);
+    this.selectedLang = lang;
+  }
 
 }

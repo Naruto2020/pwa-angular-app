@@ -1,0 +1,193 @@
+{
+    "HEADER": {
+        "SEARCH_PLACEHOLDER": "Rechercher...",
+        "HOME": "Accueil",
+        "SHIELD": "Shield",
+        "NOTIFICATIONS": "Notifications",
+        "DASHBOARD": "Cockpit",
+        "USER": "Vous"
+    },
+
+    "LOGIN": {
+        "TITLE": "Connexion à TEIK",
+        "SUBTITLE": "Informations de connexion",
+        "EMAIL": "Email",
+        "PASSWORD": "Mot de passe",
+        "LOGIN_BUTTON": "Connexion",
+        "FORGOT_PASSWORD": "Mot de passe oublié ?",
+        "NO_ACCOUNT": "Vous n'avez pas de compte ?",
+        "SIGN_UP": "Inscrivez-vous",
+        "SEARCH": "Rechercher",
+        "SEARCH_PLACEHOLDER": "Ex: entreprise, produit, utilisateur...",
+        "SCAN_ALERT_TITLE": "🛡️ Connectez-vous à TEIK pour obtenir plus d’informations sur ce produit !",
+        "SCAN_ALERT_INTRO": "Produit volé : ",
+        "STOLEN_PRODUCTS_TITLE": "<span style='font-weight:700;'>🛑 Produits déclarés volés</span><br><span style='font-weight:400; font-size:0.9em;'>Liste publique des articles déclarés perdus ou volés par leurs propriétaires sur Teik. Vérifiez avant tout achat d’occasion.</span>"
+    },
+
+    "REGISTER": {
+                
+        "SIGNUP": "Inscription à TEIK",
+        "PERSONAL_INFO": "Informations personnelles",
+        "FIRST_NAME": "Prénom",
+        "LAST_NAME": "Nom",
+        "FIRST_NAME_ERROR": "Ce champ est requis ou contient moins de 2 caractères",
+        "LAST_NAME_ERROR": "Ce champ est requis ou contient moins de 2 caractères",
+        "COMPANY_QUESTION": "Êtes-vous une entreprise ?",
+        "YES": "Oui",
+        "NO": "Non",
+        "SECOND_HAND_QUESTION": "Êtes-vous une entreprise de seconde main ?",
+        "REGION": "Région",
+        "CITY": "Ville",
+        "COUNTRY": "Pays",
+        "CITY_ERROR": "Ce champ est requis",
+        "COUNTRY_ERROR": "Ce champ est requis",
+        "PHONE": "Numéro de téléphone",
+        "LOGIN_INFO": "Informations de connexion",
+        "EMAIL": "Email",
+        "PASSWORD": "Mot de passe",
+        "TERMS": "En vous inscrivant vous acceptez les Conditions d'utilisation",
+        "TERMS_CONDITIONS": "Conditions d'utilisation",
+        "ALREADY_ACCOUNT": "Vous avez déjà un compte ?",
+        "LOGIN": "Connectez-vous",
+        "SUBMIT": "Enregistrer"
+
+    },
+    
+    "SCAN_ALERT": {
+        "CLOSE": "Fermer"
+    },
+
+    "HOME": {
+        "QR_FAKE_TITLE": "⚠️ QR Code non reconnu par TEIK 💀",
+        "QR_FAKE_INTRO": "TEIK n’a pas pu authentifier ce QR code pour l’une des raisons suivantes :",
+        "QR_FAKE_REASON_1": "Le QR code est faux ou malveillant.",
+        "QR_FAKE_REASON_2": "Il a été généré par une autre application.",
+        "QR_FAKE_REASON_3": "L’entreprise n’est pas encore sur TEIK.",
+        "QR_FAKE_CTA": "Vous suspectez une contrefaçon ?",
+        "QR_FAKE_BUTTON": "🚨 Signaler le produit",
+        "TRANSFER_REFUSED": "🚨 Transaction refusé produit signalé volé",
+        "REAUTHENTICATE_WARNING": "⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️",
+        "SINGLE_SCAN": "Scanner un produit",
+        "MULTI_SCAN": "Scanner plusieurs produits",
+        "SCANNED_PRODUCTS": "Produits scannés",
+        "SCANNED_PRODUCTS_LIST": "Produits scannés :",
+        "TRANSFER_BUTTON": "Céder les articles",
+        "NEWS": "Actualités",
+        "PUBLISHED_ON": "a publié ceci le",
+        "COUNTERFEIT": "contrefaçon",
+        "SAFE_PLACES": "Lieux sûrs"
+    },
+
+    "CAROUSEL": {
+        "QUANTITY": "Quantité",
+        "SERIAL_NUMBER": "N° série",
+        "SHORT_SERIAL": "3 derniers chiffres du N° série",
+        "BRAND": "Marque",
+        "MODEL": "Modèle",
+        "LOSS_PLACE": "Lieu",
+        "LOSS_DATE": "Disparu le",
+        "OWNER": "Propriétaire",
+        "AUTHENTICATED_BY": "Authentifié par",
+        "INSURED": "Assuré",
+        "COMPLAINT_FILED": "Plainte déposée",
+        "YES": "Oui",
+        "NO": "Non"
+    },
+
+    "NOTIFICATIONS": {
+        "UNKNOWN_USER": "Utilisateur inconnu",
+        "ACQUISITION": "Souhaite faire une {{type}} du produit <strong>{{product}}</strong>",
+        "SIGNAL": "A scanné votre produit <strong>{{product}}</strong> le <strong>{{date}}</strong>"
+    },
+
+    "DASHBOARD": {
+        "USER_SCANNED_PRODUCTS": "Produits scannés",
+        "USER_AUTHENTIFICATIONS": "Nombre d'authentifications",
+        "COUNTERFEIT_ALERTS": "Alertes contrefaçon",
+        "STOLEN_PRODUCT_ALERTS": "Alertes Produit volé",
+        "AUTHENTICITY_SCORE": "Score d'authenticité",
+        "BADGES": "Badges",
+        "CREATED_PRODUCTS": "Produits créés",
+        "SCANNED_PRODUCTS": "Produits scannés",
+        "AUTHENTICATED_PRODUCTS_RATE": "% Produits authentifiés",
+        "ACTIVE_USERS": "Utilisateurs actifs",
+        "CONSUMER_OF_THE_MONTH": "Consommateur du mois",
+        "EXPIRED_PRODUCTS": "Produits périmés"
+    },
+
+    "PROFILE": {
+        "PHOTO_ALT": "Photo de profil",
+        "QRCODE_ALT": "Image QR code",
+        "CERTIFIED": "Certifié",
+        "PRODUCTS": "produits",
+        "TRANSACTIONS": "2 transactions",
+        "PRODUCTS_QRCODES": "Produits & Qrcodes",
+        "PRODUCT_CATEGORIES": "Catégories de produits",
+        "QRCODES": "Qrcodes",
+        "NEW_PRODUCT": "Nouveau Produit",
+        "STATISTICS": "Statistiques",
+        "SCANS": "scans",
+        "POSTS": "posts",
+        "ACQUISITIONS": "acquisitions",
+        "TRANSFERS": "cessions",
+        "SECURED": "sécurisation",
+        "VOUCHERS": "bons d'achats",
+        "ACTIVITIES": "Activités",
+        "PUBLISHED_THIS": "a publié ceci",
+        "WEEKS": "sem",
+        "MONTHS": "mois",
+        "EDIT": "Modifier",
+        "UPLOAD_PROFILE_PHOTO": "Télécharger la photo de profil",
+        "NEW_PRODUCTS": "Nouveautés",
+        "MY_PASSPORTS": "Mes Passeports",
+        "NEWS_ITEMS": "Nouveaux articles",
+        "UPLOAD_PHOTO": "Charger une Photo"
+        
+    },
+    "QRCODE": {
+        "TITLE": "QR Codes de {{ lastName }} {{ firstName }}"
+    },
+
+    "PRODUCT": {
+        "MADE_IN": "Fabriqué à",
+        "AUTHENTICATED_IN": "Authentifié à",
+        "CREATED_DATE": "Date de création",
+        "AUTH_DATE": "Date d’authentification",
+        "SERIAL_NUMBER": "N° de série",
+        "REGISTERED_BY": "Enregistré par",
+        "AUTH_BY": "Authentifié par",
+        "OWNER": "Propriétaire",
+        "NAME": "Nom",
+        "CITY": "Ville",
+        "COUNTRY": "Pays",
+        "TRANSFER_PRODUCT": "Céder le produit",
+        "ACQUIRE_PRODUCT": "Acquérir le produit",
+        "REPORT_LOSS": "🚨 Signaler la perte",
+        "FOUND_PRODUCT": "✅ Produit retrouvé",
+        "HISTORY": "Historique des propriétaires",
+        "SEE_MORE": "Voir plus",
+        "SEE_LESS": "Voir moins",
+        "STATE": "État du produit",
+        "QRCODES": "QR Codes",
+        "OK": "OK",
+        "NOT_OK": "Not OK",
+        "ALREADY_CONSUMED": "Produit déjà consommé",
+        "CONSUMED_BY": "Consommé par {{ name }} à {{ city }} le {{ date }} à {{ time }}",
+        "CONSUME_PRODUCT": "Consommer le produit",
+        "LOST_PRODUCT": "🚨 PRODUIT PERDU 🚨",
+        "CERTIFICATE": "Certificat ou Facture",
+        "PREVIEW": "Prévisualiser",
+        "DOWNLOAD": "Télécharger",
+        "UPLOAD_PRODUCT_IMAGE": "Télécharger l'image du produit",
+        "UPLOAD_CERTIFICATE": "Télécharger le certificat ou la facture"
+    },
+
+    "PROFILE_MENU": {
+        "PROFILE": "Profil",
+        "PREMIUM": "Premium",
+        "MANAGE": "Gérer",
+        "LOGOUT": "Déconnexion"
+    }
+
+
+}

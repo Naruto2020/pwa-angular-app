@@ -9,6 +9,8 @@ import { LoginService } from './components/services/login.service';
 import { RegisterService } from './components/services/register.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ScansModule } from '../scans/scans.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     AuthRoutingModule,
     SharedModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ScansModule,
+    TranslateModule,
   ],
   providers: [
     LoginService,

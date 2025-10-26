@@ -34,13 +34,15 @@ export class ProfileComponent implements OnInit {
   totalUserUniqueProducts!: number;
   qrcodeOwnerId!: string;
 
+
   newProducts = [
-    { name: 'Jacquard Dior', image: '../../../../assets/images/dior.png' },
-    { name: 'Sneaker LV Skate', image: '../../../../assets/images/vuiton.png' },
-    { name: 'Gucci Marina Chain', image: '../../../../assets/images/gucci.png' },
-    { name: 'Mui Mui sac beau', image: '../../../../assets/images/mui.png' },
-    { name: 'Hermes Pendentif Amulettes', image: '../../../../assets/images/hermes.png' },
-  ];
+  { name: 'Jacquard Dior', image: 'assets/images/dior.png' },
+  { name: 'Sneaker LV Skate', image: 'assets/images/vuiton.png' },
+  { name: 'Gucci Marina Chain', image: 'assets/images/gucci.png' },
+  { name: 'Mui Mui sac beau', image: 'assets/images/mui.png' },
+  { name: 'Hermes Pendentif Amulettes', image: 'assets/images/hermes.png' },
+];
+
 
   animationSpeed = 'scrollVertical 20s linear infinite';
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { User } from '../models/user-model';
 import { RegisterService } from '../services/register.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,8 @@ export class RegisterComponent implements OnInit {
   // showYesCtrl$!: Observable<boolean>;
   // showNoCtrl$!: Observable<boolean>;
 
+  selectedLang = this.translate.currentLang || 'en';
+
 
   phoneNumberValidator(control: FormControl): { [key: string]: any } | null {
     const phoneNumberPattern = /^\d+$/; // Change this if needed
@@ -37,7 +40,12 @@ export class RegisterComponent implements OnInit {
     return isValid ? null : { 'invalidPhoneNumber': { value: control.value } };
   }
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private registerService: RegisterService, 
+    private router: Router,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.initFormControls();
@@ -124,6 +132,11 @@ export class RegisterComponent implements OnInit {
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+  changeLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang); // garde la langue au prochain chargement
   }
 
 }

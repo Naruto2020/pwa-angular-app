@@ -1,37 +1,37 @@
 <div class="carousel-container">
-  <h2>{{ title }}</h2>
+  <h2 [innerHTML]="title"></h2>
+
   <div class="carousel">
     <div class="carousel-item" *ngFor="let item of items" (click)="onItemClick(item)">
       <img [src]="item.productImageUrl || item.imageUrl" alt="image" class="item-image" />
 
       <div class="item-info">
         <h3>{{ item.name }}</h3>
-
-        <!-- Collection standard -->
-        <p *ngIf="context === 'default'">Quantité : {{ item.count }}</p>
-
-        <!-- Produits volés publics -->
+        <p *ngIf="context === 'default'">
+          {{ 'CAROUSEL.QUANTITY' | translate }} : {{ item.count }}
+        </p>
         <p *ngIf="context === 'public stolen'">
-          N° série : ...{{ item.serialNumber?.slice(-3) }}<br>
-          Marque : {{ item.brand }}<br>
-          Modèle : {{ item.model }}<br>
-          Lieu : {{ item.lossCity }}, {{ item.lossCountry }}<br>
-          Disparu le : {{ item.lossDate | date:'dd/MM/yyyy' }}
+          {{ 'CAROUSEL.SERIAL_NUMBER' | translate }} : ...{{ item.serialNumber?.slice(-3) }}<br>
+          {{ 'CAROUSEL.BRAND' | translate }} : {{ item.brand }}<br>
+          {{ 'CAROUSEL.MODEL' | translate }} : {{ item.model }}<br>
+          {{ 'CAROUSEL.LOSS_PLACE' | translate }} : {{ item.lossCity }}, {{ item.lossCountry }}<br>
+          {{ 'CAROUSEL.LOSS_DATE' | translate }} : {{ item.lossDate | date:'dd/MM/yyyy' }}
         </p>
-
-        <!-- Produits privés -->
         <p *ngIf="context === 'private stolen'">
-          Marque : {{ item.brand }}<br>
-          Modèle : {{ item.model }}<br>
-          N° série : {{ item.serialNumber}}<br>
-          Authentifié par : {{ item.authenticator }}<br>
-          <span *ngIf="item.ownerName">Propriétaire : {{ item.ownerName }}<br></span>
-          Date de perte : {{ item.lossDate | date:'dd/MM/yyyy' }}<br>
-          <span *ngIf="item.lossCity || item.lossCountry">Lieu : {{ item.lossCity }}, {{ item.lossCountry }}</span>
-            Assuré : {{ item.insured ? 'Oui' : 'Non' }}<br>
-            Plainte déposée : {{ item.complaintFiled ? 'Oui' : 'Non' }}
+          {{ 'CAROUSEL.BRAND' | translate }} : {{ item.brand }}<br>
+          {{ 'CAROUSEL.MODEL' | translate }} : {{ item.model }}<br>
+          {{ 'CAROUSEL.SERIAL_NUMBER' | translate }} : {{ item.serialNumber}}<br>
+          {{ 'CAROUSEL.AUTHENTICATED_BY' | translate }} : {{ item.authenticator }}<br>
+          <span *ngIf="item.ownerName">
+            {{ 'CAROUSEL.OWNER' | translate }} : {{ item.ownerName }}<br>
+          </span>
+          {{ 'CAROUSEL.LOSS_DATE' | translate }} : {{ item.lossDate | date:'dd/MM/yyyy' }}<br>
+          <span *ngIf="item.lossCity || item.lossCountry">
+            {{ 'CAROUSEL.LOSS_PLACE' | translate }} : {{ item.lossCity }}, {{ item.lossCountry }}
+          </span><br>
+          {{ 'CAROUSEL.INSURED' | translate }} : {{ item.insured === 'oui' ? ('CAROUSEL.YES' | translate) : ('CAROUSEL.NO' | translate) }}<br>
+          {{ 'CAROUSEL.COMPLAINT_FILED' | translate }} : {{ item.complaintFiled === 'oui' ? ('CAROUSEL.YES' | translate) : ('CAROUSEL.NO' | translate) }}
         </p>
-
       </div>
     </div>
   </div>

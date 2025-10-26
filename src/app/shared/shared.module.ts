@@ -16,6 +16,8 @@ import { AuthInterceptor } from '../guards/auth.interceptor';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     MatSelectModule,
     RouterModule,
+    TranslateModule,
     
   ],
   providers: [

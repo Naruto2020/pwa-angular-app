@@ -4,6 +4,8 @@ import { NetworkRoutingModule } from './network-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SquadComponent } from './components/squad/squad.component';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { SquadService } from './services/squad.service';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     NetworkRoutingModule,
     SharedModule,
-    FormsModule
-  ]
+    FormsModule,
+    TranslateModule,
+  ],
+  providers: [SquadService], 
 })
 export class NetworkModule { }

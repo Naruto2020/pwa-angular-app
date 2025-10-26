@@ -1,88 +1,175 @@
+/* ============================== */
+/* 🔹 CONTAINER ET STRUCTURE DE BASE */
+/* ============================== */
+
 .container {
-    display: flex;
-    flex-direction: row; 
-    gap: 20px; 
-    padding: 20px; 
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .main-card {
-    flex: 2; 
-    margin-left: 120px;
-}
-
-.profile-location {
-    font-size: 16px;
-    color: #666;
-}
-
-.profile-title a:hover {
-    color: #0d47a1; 
-    text-decoration: underline;
-}
-
-.profile-title a {
-    font-size: 18px;
-    font-style: italic;
-    margin-bottom: 5px;
-    font-weight: bold;
-    text-decoration: none;
-    display: block;
-    align-items: center;
-}
-
-.profile-info {
-    flex: 1;
-}
-
-.profile-name {
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-.profile-picture {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
+  flex: 2;
+  margin-left: 120px;
+  max-width: 800px;
 }
 
 .profile-card {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 10px auto;
 }
 
-.product-name {
-    min-height: 60px; 
-    display: flex;
-    align-items: center; 
-    margin: 0;
-    font-size: 18px;
-    max-width: 100px; 
-    white-space: normal; 
-    overflow-wrap: break-word; 
+/* ============================== */
+/* 🔹 CONTENU DU PROFIL */
+/* ============================== */
+
+.profile-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* permet un retour à la ligne sur petit écran */
 }
 
-.profile-title, .profile-title a, .profile-location {
-    margin: 0;
-    color: #777;
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.profile-name {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.profile-location {
+  font-size: 16px;
+  color: #666;
+  margin: 2px 0;
 }
 
 .profile-title {
-    margin-bottom: 10px;
-    margin-right: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 200px;
+  text-align: center;
 }
 
-.profile-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center; 
-    gap: 20px; 
+.profile-title a {
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #777;
 }
+
+.profile-title a:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
 .profile-title-link-icon {
-    font-size: 40px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+/* ============================== */
+/* 🔹 RESPONSIVE DESIGN */
+/* ============================== */
+
+/* Tablette (≤ 1024px) */
+@media (max-width: 1024px) {
+  .main-card {
+    margin-left: 40px;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-title {
+    margin-right: 0;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-picture {
+    margin-bottom: 10px;
+  }
+}
+
+/* Mobile (≤ 600px) */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .main-card {
+    margin: 0;
+    width: 100%;
+  }
+
+  .profile-card {
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-picture {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 10px;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .profile-name {
+    font-size: 20px;
+  }
+
+  .profile-location {
+    font-size: 14px;
+  }
+
+  .profile-title {
+    margin: 10px 0 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .profile-title-link-icon {
+    font-size: 30px;
+  }
 }

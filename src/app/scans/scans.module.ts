@@ -10,6 +10,7 @@ import { QrcodeScanComponent } from './components/qrcode-scan/qrcode-scan.compon
 import { ScanAlertComponent } from './components/scan-alert/scan-alert.component';
 import { ScanShareComponent } from './components/scan-share/scan-share.component';
 import { ScansRoutingModule } from './scans-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -22,10 +23,12 @@ import { ScansRoutingModule } from './scans-routing.module';
     CommonModule,
     ScansRoutingModule,
     SharedModule,
+    TranslateModule,
   ],
   exports: [
     QrcodeScanComponent,
     ScanShareComponent,
+    ScanAlertComponent,
   ],
   providers: [
     PostsService,

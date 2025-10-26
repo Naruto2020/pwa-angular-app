@@ -1,97 +1,59 @@
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 9998;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 #scan-alert {
-    max-width: 600px;
-    width: 100%;
-    z-index: 9999;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    animation: fadeIn 0.3s ease-in-out;
-    border: 2px solid #d32f2f;
-    border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  padding: 16px;
+  border-radius: 12px;
 }
 
 .alert-header {
-    display: flex;
-    align-items: center;
-    background-color: #fff3e0;
-    color: #d32f2f;
-    border-bottom: 2px solid #ff9800;
-    padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .alert-icon {
-    margin-right: 12px;
-    font-size: 32px;
+  font-size: 32px;
 }
 
 .intro-text {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 12px;
+  margin: 12px 0;
 }
 
 .alert-reasons {
-    padding-left: 20px;
-    font-style: italic;
-    font-weight: 500;
-    color: #444;
-}
-
-.alert-reasons li {
-    margin-bottom: 8px;
-}
-
-.divider {
-    height: 1px;
-    background-color: #ccc;
-    margin: 20px 0;
+  margin: 12px 0;
+  padding-left: 20px;
 }
 
 .call-to-action {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.arrow-indicator {
-    text-align: center;
-    color: #d32f2f;
-    font-size: 28px;
-    margin-bottom: 12px;
+  margin-top: 16px;
+  font-weight: bold;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
 }
 
-.report-button {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 24px;
-    border-radius: 8px;
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
-.close-button{
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10000;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
+.error { border-left: 6px solid #f44336; }
+.success { border-left: 6px solid #4caf50; }
+.info { border-left: 6px solid #2196f3; }

@@ -9,6 +9,7 @@ import { ProductService } from '../../../product/services/product.service';
 import { TransferUrlService } from '../../../services/transferUrl.service';
 import { UserService } from '../../../user/components/services/user.service.ts.service';
 import { newSignal } from '../../interfaces/qrcode-scan.interfaces';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-qrcode-scan',
@@ -45,6 +46,7 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
     private transferUrlService: TransferUrlService,
     private sanitizer: DomSanitizer,
     private productService: ProductService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -157,7 +159,7 @@ export class QrcodeScanComponent implements OnInit, AfterViewInit {
           this.productService.catchAndSendLostScannedProduct(requestParams).pipe(
             tap(notification => {
               if(notification) {
-                this.successMessage = '✅ Transaction refusé produit signalé Perdu ou Volé ';
+                this.successMessage = 'HOME.TRANSFER_REFUSED';
                 this.errorMessage = null;
               }
             })

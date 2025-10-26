@@ -1,209 +1,217 @@
 <div *ngIf="successMessage || errorMessage" class="alert-box">
-    <div *ngIf="successMessage" class="alert success-alert">
-        {{ successMessage }}
-        <button class="close-btn" (click)="clearMessages()">✖</button>
-    </div>
-    <div *ngIf="errorMessage" class="alert error-alert">
-        {{ errorMessage }}
-        <button class="close-btn" (click)="clearMessages()">✖</button>
-    </div>
+  <div *ngIf="successMessage" class="alert success-alert">
+    {{ successMessage }}
+    <button class="close-btn" (click)="clearMessages()">✖</button>
+  </div>
+  <div *ngIf="errorMessage" class="alert error-alert">
+    {{ errorMessage }}
+    <button class="close-btn" (click)="clearMessages()">✖</button>
+  </div>
 </div>
 
-<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<div class="scrolling-message-wrapper">
+  <div class="scrolling-message">
+    {{ 'HOME.REAUTHENTICATE_WARNING' | translate }}
+  </div>
+</div>
+
 <br>
 
 <div class="container">
-    <div class="main-card">
-        <div >
-            
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                    <img [src]= "currentProductPhoto" alt="Profile product Picture" class="profile-picture">
-                
-                    <div class="profile-info"> 
-                        <h2 class="profile-name"> {{currentProductName}} </h2>
-                        <div *ngIf="initOwnerSecondHandStatus === 'non'">
-                            <p class="profile-title">
-                                fabriqué à :  {{productCreatedCity}} 
-                            </p> 
-                            <p class="profile-title">
-                                date de création: {{productCreatedDate | date: 'dd/MM/yyyy'}}
-                            </p> 
-                            <p class="profile-title">
-                                N° de série : {{productSerialNumber ||  currentProductId}}
-                            </p>
-                            <p class="profile-location">Enregistré par : {{companieName}} </p>
+  <div class="main-card">
 
-                        </div>
-                        <div *ngIf="initOwnerSecondHandStatus === 'oui'">
-                            <p class="profile-title">
-                                Authentifié  à : {{productCreatedCity}} 
-                            </p>
-                            <p class="profile-title">
-                                date d'authentication: {{productCreatedDate | date: 'dd/MM/yyyy'}}
-                            </p> 
-                            <p class="profile-title">
-                                N° de série : {{productSerialNumber || currentProductId}}
-                            </p>
-                            <p class="profile-location">Authentifié par : {{companieName}} </p>
-                        </div>
-                        <!-- <p *ngIf="isFashionProduct === 'non'" class="profile-title"> 
-                            date d'expiration : {{expiryDate | date: 'dd/MM/yyyy'}}
-                        </p>  -->
-                    </div>
-                </div>
-            
-            </mat-card>
+    <!-- Infos sur le produit -->
+    <mat-card class="profile-card">
+      <div class="profile-content">
+        <img [src]="currentProductPhoto" alt="Profile product Picture" class="profile-picture">
+
+        <div class="profile-info">
+          <h2 class="profile-name">{{ currentProductName }}</h2>
+
+          <div *ngIf="initOwnerSecondHandStatus === 'non'">
+            <p class="profile-title">
+              {{ 'PRODUCT.MADE_IN' | translate }} : {{ productCreatedCity }}
+            </p>
+            <p class="profile-title">
+              {{ 'PRODUCT.CREATED_DATE' | translate }} : {{ productCreatedDate | date: 'dd/MM/yyyy' }}
+            </p>
+            <p class="profile-title">
+              {{ 'PRODUCT.SERIAL_NUMBER' | translate }} : {{ productSerialNumber || currentProductId }}
+            </p>
+            <p class="profile-location">
+              {{ 'PRODUCT.REGISTERED_BY' | translate }} : {{ companieName }}
+            </p>
+          </div>
+
+          <div *ngIf="initOwnerSecondHandStatus === 'oui'">
+            <p class="profile-title">
+              {{ 'PRODUCT.AUTHENTICATED_IN' | translate }} : {{ productCreatedCity }}
+            </p>
+            <p class="profile-title">
+              {{ 'PRODUCT.AUTH_DATE' | translate }} : {{ productCreatedDate | date: 'dd/MM/yyyy' }}
+            </p>
+            <p class="profile-title">
+              {{ 'PRODUCT.SERIAL_NUMBER' | translate }} : {{ productSerialNumber || currentProductId }}
+            </p>
+            <p class="profile-location">
+              {{ 'PRODUCT.AUTH_BY' | translate }} : {{ companieName }}
+            </p>
+          </div>
         </div>
-        <div >
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                    <img 
-                        [src]= "ownerPhoto" 
-                        alt="owner " 
-                        class="profile-picture"
-                    >
-                    <div class="profile-info">
-                        <h2 class="profile-name"> Propriétaire </h2>
+      </div>
+    </mat-card>
 
-                        <p class="profile-title">
-                            nom : {{ownerLastName}} {{ownerFirstName}}
-                        </p>
-                        <p class="profile-title">
-                            ville : {{ownerCity}}
-                        </p>
-                        <p class="profile-title">
-                                pays : {{ownerCountry}}
-                        </p>
-                        <br>
-                        <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'" 
-                            mat-flat-button color="primary" 
-                            (click)="transfertProduct()"
-                        >
-                            Céder le produit
-                        </button>
-                        
-                        <button *ngIf="currentUserId !== currentOwnerId && currentProductState === 'NON'" 
-                            mat-flat-button color="primary" 
-                            (click)="purchaseProduct()">
-                            Acquérir le produit
-                        </button>
-                    </div>
-                    <div class="lose-signal" *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'" (click)="loseOrFound()" >
-                        <button *ngIf="!productLose" mat-flat-button > 🚨 Signaler la perte</button>
-                        <button *ngIf="productLose" mat-flat-button > ✅  produit retrouver</button>
+    <!-- Propriétaire -->
+    <mat-card class="profile-card">
+      <div class="profile-content">
+        <img [src]="ownerPhoto" alt="owner" class="profile-picture">
+        <div class="profile-info">
+          <h2 class="profile-name">{{ 'PRODUCT.OWNER' | translate }}</h2>
 
-                    </div>
-                </div>
-            </mat-card>
+          <p class="profile-title">
+            {{ 'PRODUCT.NAME' | translate }} : {{ ownerLastName }} {{ ownerFirstName }}
+          </p>
+          <p class="profile-title">
+            {{ 'PRODUCT.CITY' | translate }} : {{ ownerCity }}
+          </p>
+          <p class="profile-title">
+            {{ 'PRODUCT.COUNTRY' | translate }} : {{ ownerCountry }}
+          </p>
+          <br>
 
+          <button *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'"
+            mat-flat-button color="primary" (click)="transfertProduct()">
+            {{ 'PRODUCT.TRANSFER_PRODUCT' | translate }}
+          </button>
+
+          <button *ngIf="currentUserId !== currentOwnerId && currentProductState === 'NON'"
+            mat-flat-button color="primary" (click)="purchaseProduct()">
+            {{ 'PRODUCT.ACQUIRE_PRODUCT' | translate }}
+          </button>
         </div>
-        <div >
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                    <div class="profile-info">
-                        <h2 class="profile-name"> 
-                            <mat-icon class="material-symbols-outlined">history</mat-icon>
-                            Historique des propriétaires
-                        </h2>
 
-                        <div class="timeline">
-                            <div 
-                            class="timeline-item" 
-                            *ngFor="let history of displayedHistory; let last = last"
-                            >
-                            <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
-                            <div *ngIf="history.secondHand === 'non'" class="timeline-content">
-                                <strong>{{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
-                                <br>
-                                <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>
-                            </div>
-                            </div>
-                        </div>
-
-                    <div class="show-more-container" *ngIf="ownershipHistory.length > 3">
-                        <button mat-stroked-button color="primary" (click)="toggleShowMore()">
-                        {{ showAllHistory ? 'Voir moins' : 'Voir plus' }}
-                        </button>
-                    </div>
-                    </div>
-                </div>
-            </mat-card>
-
+        <div class="lose-signal" *ngIf="currentUserId === currentOwnerId && currentProductState === 'NON'"
+          (click)="loseOrFound()">
+          <button *ngIf="!productLose" mat-flat-button>
+            {{ 'PRODUCT.REPORT_LOSS' | translate }}
+          </button>
+          <button *ngIf="productLose" mat-flat-button>
+            {{ 'PRODUCT.FOUND_PRODUCT' | translate }}
+          </button>
         </div>
-        <div >
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                    <div class="profile-info">
-                        <h2 class="profile-name"> Etat du produit</h2>
-                        <div *ngIf="!lose">
-                            <p class="profile-title" >
-                                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                                qrcodes : <span *ngIf="currentProductState === 'NON' else notOk" class="qr_code_ok">OK</span>
-                            </p>
-                            <ng-template #notOk>
-                                <span class="qr_code_nok">Not OK</span>
-                            </ng-template>
-                            <p *ngIf="isFashionProduct === 'non'" class="profile-title">
-                                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
-                                produit déjas consommé : <span class="consumed"> {{currentProductState}} </span> 
-                                <span *ngIf="currentProductState === 'OUI'"> , Consommé par {{ownerFirstName}} à {{ownerCity}} le 23/2/2024 à 16h29</span>
-                            </p>
-                            <br>
-                            <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId && isFashionProduct === 'non'">
-                                <button mat-flat-button color="primary" (click)="consumeProduct()"> Consommé le produit </button>
-                            </div>
-                        </div>
-                        <div class="lose-container" *ngIf="productLose">
-                            <p class="profile-title lost-warning blink">
-                                <mat-icon class="profile-title-link-icon" color="warn">warning</mat-icon>
-                                🚨 PRODUIT PERDU 🚨
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-    </div>
+      </div>
+    </mat-card>
 
-    <div class="midle-card">
-        <mat-card>
-            <h2>Certificat Ou Facture</h2>
-            
-            <div class="scroll-container">
-                <img [src]= "certificatePhoto" alt="Certificate product Picture" class="certificate-picture">
+    <!-- Historique des propriétaires -->
+    <mat-card class="profile-card">
+      <div class="profile-content">
+        <div class="profile-info">
+          <h2 class="profile-name">
+            <mat-icon class="material-symbols-outlined">history</mat-icon>
+            {{ 'PRODUCT.HISTORY' | translate }}
+          </h2>
+
+          <div class="timeline">
+            <div class="timeline-item" *ngFor="let history of displayedHistory; let last = last">
+              <div class="timeline-dot" [ngClass]="{'last-dot': last}"></div>
+              <div *ngIf="history.secondHand === 'non'" class="timeline-content">
+                <strong>{{ history.lastName }} {{ history.firstName }}</strong> à {{ history.city }}
+                <br>
+                <small>{{ history.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</small>
+              </div>
             </div>
-            <div *ngIf="currentUserId === currentOwnerId">
-                <button mat-raised-button color="primary" (click)="previewImage()">
-                    Previsualiser
-                </button>
-                <button mat-raised-button color="primary" (click)="downloadImage()">
-                    Télécharger
-                </button>
+          </div>
 
+          <div class="show-more-container" *ngIf="ownershipHistory.length > 3">
+            <button mat-stroked-button color="primary" (click)="toggleShowMore()">
+              {{ showAllHistory ? ('PRODUCT.SEE_LESS' | translate) : ('PRODUCT.SEE_MORE' | translate) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- État du produit -->
+    <mat-card class="profile-card">
+      <div class="profile-content">
+        <div class="profile-info">
+          <h2 class="profile-name">{{ 'PRODUCT.STATE' | translate }}</h2>
+
+          <div *ngIf="!lose">
+            <p class="profile-title">
+              <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+              {{ 'PRODUCT.QRCODES' | translate }} :
+              <span *ngIf="currentProductState === 'NON'; else notOk" class="qr_code_ok">
+                {{ 'PRODUCT.OK' | translate }}
+              </span>
+            </p>
+            <ng-template #notOk>
+              <span class="qr_code_nok">{{ 'PRODUCT.NOT_OK' | translate }}</span>
+            </ng-template>
+
+            <p *ngIf="isFashionProduct === 'non'" class="profile-title">
+              <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
+              {{ 'PRODUCT.ALREADY_CONSUMED' | translate }} :
+              <span class="consumed">{{ currentProductState }}</span>
+            </p>
+
+            <div *ngIf="currentProductState === 'NON' && currentUserId === currentOwnerId && isFashionProduct === 'non'">
+              <button mat-flat-button color="primary" (click)="consumeProduct()">
+                {{ 'PRODUCT.CONSUME_PRODUCT' | translate }}
+              </button>
             </div>
-        </mat-card>
-    </div>
+          </div>
 
-    <div class="secondary-card">
-        <mat-card *ngIf="currentUserCompanieStatus === 'oui'" class="profile-card">
-            <h3> <strong>Telecharger l'image du produit</strong></h3>
-            <app-image-upload
-                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-products'"
-                [resourceId]= "currentProductId"
-                [fileType]= "'productPhoto'"
-                (imageUploaded)="onImageUploaded()"
-            ></app-image-upload>    
-        </mat-card>
-        <mat-card *ngIf="currentUserCompanieStatus === 'non' && currentOwnerId === currentUserId " class="profile-card">
-            <h3> <strong>Telecharger le certificat ou la facture</strong></h3>
-            <app-image-upload
-                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-products'"
-                [resourceId]= "currentProductId"
-                [fileType]= "'certificatePhoto'"
-                (imageUploaded)="onImageUploaded()"
-            ></app-image-upload>    
-        </mat-card>
+          <div class="lose-container" *ngIf="productLose">
+            <p class="profile-title lost-warning blink">
+              <mat-icon class="profile-title-link-icon" color="warn">warning</mat-icon>
+              {{ 'PRODUCT.LOST_PRODUCT' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 
-    </div>
+  <!-- Colonne du certificat et upload -->
+  <div class="midle-card">
+    <mat-card>
+      <h2>{{ 'PRODUCT.CERTIFICATE' | translate }}</h2>
+
+      <div class="scroll-container">
+        <img [src]="certificatePhoto" alt="Certificate product Picture" class="certificate-picture">
+      </div>
+
+      <div *ngIf="currentUserId === currentOwnerId">
+        <button mat-raised-button color="primary" (click)="previewImage()">
+          {{ 'PRODUCT.PREVIEW' | translate }}
+        </button>
+        <button mat-raised-button color="primary" (click)="downloadImage()">
+          {{ 'PRODUCT.DOWNLOAD' | translate }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="secondary-card">
+    <mat-card *ngIf="currentUserCompanieStatus === 'oui'" class="profile-card">
+      <h3><strong>{{ 'PRODUCT.UPLOAD_PRODUCT_IMAGE' | translate }}</strong></h3>
+      <app-image-upload
+        [apiUrl]="'http://127.0.0.1:8002/teko/gateway-products'"
+        [resourceId]="currentProductId"
+        [fileType]="'productPhoto'"
+        (imageUploaded)="onImageUploaded()"
+      ></app-image-upload>
+    </mat-card>
+
+    <mat-card *ngIf="currentUserCompanieStatus === 'non' && currentOwnerId === currentUserId" class="profile-card">
+      <h3><strong>{{ 'PRODUCT.UPLOAD_CERTIFICATE' | translate }}</strong></h3>
+      <app-image-upload
+        [apiUrl]="'http://127.0.0.1:8002/teko/gateway-products'"
+        [resourceId]="currentProductId"
+        [fileType]="'certificatePhoto'"
+        (imageUploaded)="onImageUploaded()"
+      ></app-image-upload>
+    </mat-card>
+  </div>
 </div>

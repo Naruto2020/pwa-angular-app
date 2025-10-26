@@ -1,104 +1,104 @@
 <div class="container">
   <div class="main-card">
- 
+
+    <!-- Dashboard utilisateur -->
     <div *ngIf="currentUserCompanie === 'non'" class="dashboard">
       <a routerLink="/teik/scans" class="card-link">
         <mat-card>
-          <mat-card-title>Produits scannés</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.USER_SCANNED_PRODUCTS' | translate }}</mat-card-title>
           <mat-card-content>{{ userScanCount }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/authentiques" class="card-link">
         <mat-card>
-          <mat-card-title>nombre d'authentifications</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.USER_AUTHENTIFICATIONS' | translate }}</mat-card-title>
           <mat-card-content>{{ userAuthCount }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/alertes" class="card-link">
         <mat-card>
-          <mat-card-title>Alertes contrefaçon</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.COUNTERFEIT_ALERTS' | translate }}</mat-card-title>
           <mat-card-content>{{ userReportedProducts }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/alertes" class="card-link">
         <mat-card>
-          <mat-card-title>Alertes Produit volé</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.STOLEN_PRODUCT_ALERTS' | translate }}</mat-card-title>
           <mat-card-content>{{ userReportedTheft }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/score" class="card-link">
         <mat-card>
-          <mat-card-title>Score d'authenticité</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.AUTHENTICITY_SCORE' | translate }}</mat-card-title>
           <mat-card-content>{{ authenticityScore }}</mat-card-content>
         </mat-card>
       </a>
 
       <a *ngIf=" authenticityScore > 70" routerLink="/teik/badges" class="card-link">
         <mat-card>
-          <mat-card-title>Badges</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.BADGES' | translate }}</mat-card-title>
           <mat-card-content><h3>{{ userBadges[0] }}</h3></mat-card-content>
         </mat-card>
       </a>
     </div>
 
-    
+    <!-- Dashboard entreprise -->
     <div *ngIf="currentUserCompanie === 'oui'" class="dashboard">
       <a routerLink="/teik/produits" class="card-link">
         <mat-card>
-          <mat-card-title>Produits créés</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.CREATED_PRODUCTS' | translate }}</mat-card-title>
           <mat-card-content>{{ createdProductsCount }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/scans" class="card-link">
         <mat-card>
-          <mat-card-title>Produits scannés</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.SCANNED_PRODUCTS' | translate }}</mat-card-title>
           <mat-card-content>{{ totalScans }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/authenticite" class="card-link">
         <mat-card>
-          <mat-card-title>% Produits authentifiés</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.AUTHENTICATED_PRODUCTS_RATE' | translate }}</mat-card-title>
           <mat-card-content>{{ authenticityRate }}%</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/alertes" class="card-link">
         <mat-card>
-          <mat-card-title>Alertes contrefaçon</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.COUNTERFEIT_ALERTS' | translate }}</mat-card-title>
           <mat-card-content>{{ flaggedProductsCount }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/utilisateurs" class="card-link">
         <mat-card>
-          <mat-card-title>Utilisateurs actifs</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.ACTIVE_USERS' | translate }}</mat-card-title>
           <mat-card-content>{{ activeUsersCount }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/consommateur-du-mois" class="card-link">
         <mat-card>
-          <mat-card-title>Consommateur du mois</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.CONSUMER_OF_THE_MONTH' | translate }}</mat-card-title>
           <mat-card-content>{{ consumerOfTheMonthName }}</mat-card-content>
         </mat-card>
       </a>
 
       <a routerLink="/teik/produits-perimes" class="card-link">
         <mat-card>
-          <mat-card-title>Produits périmés</mat-card-title>
+          <mat-card-title>{{ 'DASHBOARD.EXPIRED_PRODUCTS' | translate }}</mat-card-title>
           <mat-card-content>{{ expiredProducts }}</mat-card-content>
         </mat-card>
       </a>
     </div>
+
   </div>
 
-  <div class="secondary-card">
-    
-  </div>
+  <div class="secondary-card"></div>
 </div>

@@ -10,6 +10,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ScanUserComponent } from './components/scan-user/scan-user.component';
 import { UserService } from './components/services/user.service.ts.service';
 import { UserRoutingModule } from './user-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { UserRoutingModule } from './user-routing.module';
     SharedModule,
     HttpClientModule,
     ScansModule,
+    TranslateModule,
   ],
   exports: [
     ScanUserComponent,

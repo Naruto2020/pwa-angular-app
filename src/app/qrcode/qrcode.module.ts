@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProfileQrcodeComponent } from './components/profile-qrcode/profile-qrcode.component';
 import { QrcodeRoutingModule } from './qrcode-routing.module';
 import { ProfileQrcodeService } from './services/profile-qrcode.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ProfileQrcodeService } from './services/profile-qrcode.service';
     QrcodeRoutingModule,
     SharedModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [
     ProfileQrcodeService,

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LostProduct } from '@app/network/models/lostProduct.model';
+import { SquadService } from '@app/network/services/squad.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-squad',
@@ -7,15 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SquadComponent implements OnInit {
 
-  searchQuery: string = '';
+  // Search field
+  selectedBrand: string = '';
+  serialNumber: string = '';
 
+  // Select brand list avaiable 
+  brands: string[] = ['JORDAN', 'Hermes', 'Louis Vuitton', 'PATEK PHILIPPE'];
+
+  // Produits perdus
   lostProducts = [
     {
       id: 1,
       serialNumber: 'A100235',
       shortSerial: 'Numéro: ...235',
       brand: 'JORDAN',
-      model: 'JordanAIR 11 RETRO ',
+      model: 'JordanAIR 11 RETRO',
       authenticator: 'LegitGrails',
       ownerName: 'Steve Kounga',
       lossDate: '2025-10-10T00:00:00Z',
@@ -55,7 +64,6 @@ export class SquadComponent implements OnInit {
       complaintFiled: true,
       imageUrl: 'assets/images/louisV-n.png',
     },
-
     {
       id: 4,
       serialNumber: 'P784549',
@@ -73,20 +81,50 @@ export class SquadComponent implements OnInit {
     },
   ];
 
+  // Produits filtrés pour le carousel
+  filteredProducts = [...this.lostProducts];
+  //filteredProducts: LostProduct[] = [];
+  lostProductsP: LostProduct[] =  [];
+
   baseRoute = '/teik/products/current-product';
 
-  constructor() { }
+  constructor(private squadService: SquadService) { }
 
   ngOnInit(): void {
+    this.getPrivateLostProduct();
   }
 
+  private getPrivateLostProduct(): void {
+    this.squadService.getAllPrivateLostProduct().pipe(
+      tap(
+        privateProducts => {
+          if(privateProducts) {
+            this.lostProductsP = privateProducts;
+            //this.filteredProducts = [...this.lostProductsP];
+            console.log('test ==> : ', this.lostProductsP)
+          }
+        }
+      )
+    ).subscribe();
+  }
+  
+
+  // Filtering by brand and serial number
   onSearchChange() {
-    console.log('Recherche :', this.searchQuery);
-    // 👉 tu pourras ici appeler un service pour filtrer les résultats
+    this.filteredProducts = this.lostProducts.filter(p =>
+      (!this.selectedBrand || p.brand === this.selectedBrand) &&
+      (!this.serialNumber || p.serialNumber?.includes(this.serialNumber))
+    );
   }
 
-  clearSearch() {
-    this.searchQuery = '';
+  clearBrand() {
+    this.selectedBrand = '';
+    this.onSearchChange();
+  }
+
+  clearSerialNumber() {
+    this.serialNumber = '';
+    this.onSearchChange();
   }
 
 }

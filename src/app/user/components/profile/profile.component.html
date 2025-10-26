@@ -1,177 +1,175 @@
 <div class="container">
-    <div class="main-card">
-        <div >
+  <div class="main-card">
 
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                    <img [src]= "currentUserPhoto" alt="Profile Picture" class="profile-picture">
-                
-                    <div class="profile-info"> 
-                        <h2 class="profile-name" *ngIf="currentUserCompanie === 'non'" >{{currentUserFirstName}} {{currentUserLastName}}</h2>
-                        <h2 class="profile-name" *ngIf="currentUserCompanie === 'oui'" >{{currentUserLastName}} {{currentUserFirstName}} </h2>
-                        <p class="profile-title">
-                            <a routerLink="/teik/mysquad"> 10 partenaires </a>
-                        </p> 
-                        <p class="profile-location" *ngIf="currentUserCompanie === 'non'"> 
-                            {{totalUserProducts}} produits 
-                        </p> 
-                        <p class="profile-location" *ngIf="currentUserCompanie === 'oui'"> 
-                            {{totalProduct}} produits 
-                        </p> 
-                        <p class="profile-title">
-                            <a routerLink="/teik/dashboard"> 2 transactions </a>
-                        </p> 
-                        <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
-                    </div>
-                    <div class="qrcode-image">
-                        <img [src]= "currentUserQrcode" alt="qrcode picture">
-                    </div>
-                </div>
-            
-                <button mat-icon-button class="edit-button" aria-label="Modifier">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </mat-card>
-        </div>
-        <div *ngIf="currentUserCompanie === 'non'">
+    <!-- Profil principal -->
+    <mat-card class="profile-card">
+      <div class="profile-content">
+        <img [src]="currentUserPhoto" alt="Profile Picture" class="profile-picture">
+        <div class="profile-info"> 
+          <h2 class="profile-name" *ngIf="currentUserCompanie === 'non'">
+            {{currentUserFirstName}} {{currentUserLastName}}
+          </h2>
+          <h2 class="profile-name" *ngIf="currentUserCompanie === 'oui'">
+            {{currentUserLastName}} {{currentUserFirstName}}
+          </h2>
 
-            <mat-card class="profile-card">
-                <div class="profile-content">          
-                    <div class="profile-info">
-                        <h2 class="profile-name"> produits  & Qrcodes </h2>
-                        <p class="profile-title">
-                            <a routerLink="/teik/products/profile-product">
-                                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
-                                {{totalUserUniqueProducts}} Catégories de produits
-                            </a>
-                        </p>
-                        <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
-                            <a routerLink="/teik/qrcodes/profile-qrcode">
-                                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                                {{totalUserProducts}} qrcodes
-                            </a>
-                        </p>
-                        <br>
-                    </div>
-                </div>
+          <p class="profile-title">
+            <a routerLink="/teik/mysquad"> 🏅{{ 'PROFILE.CERTIFIED' | translate }} </a>
+          </p> 
 
-            </mat-card>
-        </div>
-        <div *ngIf="currentUserCompanie === 'oui'">
+          <p class="profile-location" *ngIf="currentUserCompanie === 'non'">
+            {{totalUserProducts}} {{ 'PROFILE.PRODUCTS' | translate }}
+          </p> 
+          <p class="profile-location" *ngIf="currentUserCompanie === 'oui'">
+            {{totalProduct}} {{ 'PROFILE.PRODUCTS' | translate }}
+          </p> 
 
-            <mat-card class="profile-card">
-                <div class="profile-content">
-                
-                    <div class="profile-info">
-                        <h2 class="profile-name"> produits & Qrcodes</h2>
-                        <p class="profile-title">
-                            <a routerLink="/teik/products/profile-product">
-                                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
-                                {{numberOfProducts}} Catégories de produits
-                            </a>
-                        </p>
-                        <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
-                            <a routerLink="/teik/qrcodes/profile-qrcode">
-                                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                                {{totalProduct}} qrcodes
-                            </a>
-                        </p>
-                        <br>
-                        <button *ngIf="currentUserId === qrcodeOwnerId" mat-flat-button color="primary" routerLink="/teik/products/create"> Nouveau Produit </button>
-                        
-                    </div>
-                </div>
-            
-            </mat-card>
-        </div>
-        <div >
+          <p class="profile-title">
+            <a routerLink="/teik/dashboard"> {{ 'PROFILE.TRANSACTIONS' | translate }} </a>
+          </p> 
 
-            <mat-card class="profile-card">
-                
-                <div class="profile-info">
-                    <h2 class="profile-name">Statistiques</h2>
-                    <div class="profile-statistique">
-                        <div class="stat-one">
-                            <p class="profile-title">20 scans</p> <br>
-                            <p class="profile-title">10 posts</p>
-                        </div>
-                        <div class="stat-two">
-                            <p class="profile-title">5 acquisitions</p> <br>
-                            <p class="profile-title">15 cessions</p>
-                        </div>
-                        <div class="stat-three">
-                            <p class="profile-location">16% sécurisation</p> <br>
-                            <p class="profile-location">2 bons d'achats</p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </mat-card>
-        </div>
-        <div >
-
-            <mat-card class="profile-card">
-                
-                <div class="profile-info">
-                    <h2 class="profile-name">Activités</h2> <br>
-
-                    <h6>Cornel West a publié ceci . 2 sem</h6>
-                    <p class="profile-title">Eau minérale Supermont de contrefaçon </p>
-                    <p class="profile-location">Douala viva shop akwa</p>
-                    
-                    <div class="separator"></div>
-
-                    <h6>Cornel West a publié ceci . 2 mois</h6>
-                    <p class="profile-title">Gaz de contrebande non plein</p>
-                    <p class="profile-location">Douala magasin trouvetout qaurtier new bell</p>
-
-                    
-                    <div class="separator"></div>
-
-                    <h6>Cornel West a publié ceci . 5 mois</h6>
-                    <p class="profile-title">ruinar de contrefaçon</p>
-                    <p class="profile-location"> Douala sckack B&W quartier Bonamoussadi</p>
-                </div>
-                
-            
-                <button mat-icon-button class="edit-button" aria-label="Modifier">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </mat-card>
+          <p class="profile-location">{{currentUserCity}}, {{currentUserCountry}}</p>
         </div>
 
+        <div class="qrcode-image">
+          <img [src]="currentUserQrcode" alt="QR Code Picture">
+        </div>
+      </div>
+
+      <button mat-icon-button class="edit-button" [attr.aria-label]="'PROFILE.EDIT' | translate">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card>
+
+    <!-- Produits & QR codes utilisateur -->
+    <div *ngIf="currentUserCompanie === 'non'">
+      <mat-card class="profile-card">
+        <div class="profile-content">          
+          <div class="profile-info">
+            <h2 class="profile-name">{{ 'PROFILE.PRODUCTS_QRCODES' | translate }}</h2>
+            <p class="profile-title">
+              <a routerLink="/teik/products/profile-product">
+                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
+                {{totalUserUniqueProducts}} {{ 'PROFILE.PRODUCT_CATEGORIES' | translate }}
+              </a>
+            </p>
+            <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
+              <a routerLink="/teik/qrcodes/profile-qrcode">
+                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+                {{totalUserProducts}} {{ 'PROFILE.QRCODES' | translate }}
+              </a>
+            </p>
+            <br>
+          </div>
+        </div>
+      </mat-card>
     </div>
 
-    <div class="secondary-card">
-        <mat-card class="profile-card">
-            <h3> <strong>Telecharger la photo de profile</strong></h3>
-            <app-image-upload
-                [apiUrl]= "'http://127.0.0.1:8002/teko/gateway-user-image'"
-                [resourceId]= "currentUserId"
-                [fileType]= "'profilePhoto'"
-                (imageUploaded)="onImageUploaded()"
-            ></app-image-upload>    
-        </mat-card>
-        <mat-card class="profile-card">
-            <mat-card-header>
-                <mat-card-title>Nouveautés sur les articles</mat-card-title>
-            </mat-card-header>
-
-            <div class="carousel-vertical">
-                <div class="carousel-track" [style.animation]="animationSpeed">
-                <div
-                    class="carousel-item"
-                    *ngFor="let product of newProducts"
-                    (click)="onProductClick(product)"
-                >
-                <a href="https://www.24s.com/fr-fr/sac-seau-signature-small-toile-jacquard-dior-oblique-et-cuir-de-veau-lisse-dior_DIO57QMWBLU?color=bleu" target="_blank">
-                    <img [src]="product.image" [alt]="product.name" class="product-picture" />
-                </a>
-                <h2 class="product-name">{{ product.name }}</h2>
-                </div>
-                </div>
-            </div>
-        </mat-card>
+    <div *ngIf="currentUserCompanie === 'oui'">
+      <mat-card class="profile-card">
+        <div class="profile-content">
+          <div class="profile-info">
+            <h2 class="profile-name">{{ 'PROFILE.PRODUCTS_QRCODES' | translate }}</h2>
+            <p class="profile-title">
+              <a routerLink="/teik/products/profile-product">
+                <mat-icon class="profile-title-link-icon">shopping_cart</mat-icon>
+                {{numberOfProducts}} {{ 'PROFILE.PRODUCT_CATEGORIES' | translate }}
+              </a>
+            </p>
+            <p *ngIf="currentUserId === qrcodeOwnerId" class="profile-title">
+              <a routerLink="/teik/qrcodes/profile-qrcode">
+                <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+                {{totalProduct}} {{ 'PROFILE.QRCODES' | translate }}
+              </a>
+            </p>
+            <br>
+            <button *ngIf="currentUserId === qrcodeOwnerId" mat-flat-button color="primary" routerLink="/teik/products/create">
+              {{ 'PROFILE.NEW_PRODUCT' | translate }}
+            </button>
+          </div>
+        </div>
+      </mat-card>
     </div>
+
+    <!-- Statistiques -->
+    <mat-card class="profile-card">
+      <div class="profile-info">
+        <h2 class="profile-name">{{ 'PROFILE.STATISTICS' | translate }}</h2>
+        <div class="profile-statistique">
+          <div class="stat-one">
+            <p class="profile-title">20 {{ 'PROFILE.SCANS' | translate }}</p>
+            <p class="profile-title">10 {{ 'PROFILE.POSTS' | translate }}</p>
+          </div>
+          <div class="stat-two">
+            <p class="profile-title">5 {{ 'PROFILE.ACQUISITIONS' | translate }}</p>
+            <p class="profile-title">15 {{ 'PROFILE.TRANSFERS' | translate }}</p>
+          </div>
+          <div class="stat-three">
+            <p class="profile-location">16% {{ 'PROFILE.SECURED' | translate }}</p>
+            <p class="profile-location">2 {{ 'PROFILE.VOUCHERS' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Activités -->
+    <mat-card class="profile-card">
+      <div class="profile-info">
+        <h2 class="profile-name">{{ 'PROFILE.ACTIVITIES' | translate }}</h2>
+        <br>
+        <h6>Cornel West {{ 'PROFILE.POSTED_THIS' | translate }} 2 {{ 'PROFILE.WEEKS' | translate }}</h6>
+        <p class="profile-title">Eau minérale Supermont {{ 'PROFILE.COUNTERFEIT' | translate }}</p>
+        <p class="profile-location">Douala viva shop akwa</p>
+
+        <div class="separator"></div>
+
+        <h6>Cornel West {{ 'PROFILE.POSTED_THIS' | translate }} 2 {{ 'PROFILE.MONTHS' | translate }}</h6>
+        <p class="profile-title">Gaz de contrebande non plein</p>
+        <p class="profile-location">Douala magasin trouvetout quartier new bell</p>
+
+        <div class="separator"></div>
+
+        <h6>Cornel West {{ 'PROFILE.POSTED_THIS' | translate }} 5 {{ 'PROFILE.MONTHS' | translate }}</h6>
+        <p class="profile-title">Ruinar de contrefaçon</p>
+        <p class="profile-location">Douala sckack B&W quartier Bonamoussadi</p>
+      </div>
+
+      <button mat-icon-button class="edit-button" [attr.aria-label]="'PROFILE.EDIT' | translate">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card>
+
+  </div>
+
+  <!-- Cartes secondaires -->
+  <div class="secondary-card">
+    <mat-card class="profile-card upload-card">
+      <h3><strong>{{ 'PROFILE.UPLOAD_PHOTO' | translate }}</strong></h3>
+      <app-image-upload
+        [apiUrl]="'http://127.0.0.1:8002/teko/gateway-user-image'"
+        [resourceId]="currentUserId"
+        [fileType]="'profilePhoto'"
+        (imageUploaded)="onImageUploaded()"
+      ></app-image-upload>    
+    </mat-card>
+
+    <mat-card class="profile-card carousel-card">
+      <br><br><br><br>
+      <mat-card-header>
+        <mat-card-title>{{ 'PROFILE.NEWS_ITEMS' | translate }}</mat-card-title>
+      </mat-card-header>
+
+      <div class="carousel-vertical">
+        <div class="carousel-track-vertical">
+          <div class="carousel-item" *ngFor="let product of newProducts">
+            <a href="https://www.24s.com/fr-fr/sac-seau-signature-small-toile-jacquard-dior-oblique-et-cuir-de-veau-lisse-dior_DIO57QMWBLU?color=bleu" target="_blank">
+              <img [src]="product.image" alt="{{ product.name }}">
+              <h2 class="product-name">{{ product.name }}</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
 </div>

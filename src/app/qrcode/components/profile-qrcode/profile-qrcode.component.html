@@ -1,8 +1,14 @@
-<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
+<div class="scrolling-message-wrapper">
+    <div class="scrolling-message">
+      {{ 'HOME.REAUTHENTICATE_WARNING' | translate }}
+    </div>
+</div>
 <br><br><br><br>
 
 <mat-card class="main-form">
-    <mat-card-title>QRCodes de {{ currentUserLastName }} {{ currentUserFirstName }}</mat-card-title>
+  <mat-card-title>
+    {{ 'QRCODE.TITLE' | translate:{ lastName: currentUserLastName, firstName: currentUserFirstName } }}
+  </mat-card-title>
     
     <app-carousel 
         [items]="currentUserCompanie === 'oui' ? countOfQrcodes : uniqueQrcodes"

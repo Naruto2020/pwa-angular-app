@@ -1,50 +1,30 @@
 <div class="modal-overlay" *ngIf="showScanAlert">
-    <button mat-flat-button color="primary" class="close-button" (click)="hideModal()">Retour</button>
+  <button mat-flat-button color="primary" class="close-button" (click)="hideModal()">
+    {{ 'SCAN_ALERT.CLOSE' | translate }}
+  </button>
 
-    <mat-card id="scan-alert">
-        <mat-card-header class="alert-header">
-        <mat-icon class="alert-icon">error_outline</mat-icon>
-        <mat-card-title>⚠️ Alert QR Code non reconnu par TEIK 💀</mat-card-title>
-        </mat-card-header>
+  <mat-card id="scan-alert" [ngClass]="type">
+    <mat-card-header class="alert-header">
+      <mat-icon class="alert-icon">
+        {{ type === 'error' ? 'error_outline' : type === 'success' ? 'check_circle' : 'info' }}
+      </mat-icon>
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
 
-        <mat-card-content>
-            <br>
-        <p class="intro-text">
-            TEIK n’a pas pu authentifier ce QR code pour l’une des raisons suivantes :
-        </p>
+    <mat-card-content>
+      <p *ngIf="introText" class="intro-text">{{ introText }}</p>
 
-        <ul class="alert-reasons">
-            <li>Le QR code est faux et redirige vers un site malveillant.</li>
-            <li>Il a été généré par une autre application.</li>
-            <li>L'entreprise n’est pas encore enregistrée sur TEIK.</li>
-            <li>Un autre QR code TEIK est présent sur le produit : veillez le scanner.</li>
-        </ul>
+      <ul *ngIf="reasons?.length" class="alert-reasons">
+        <li *ngFor="let reason of reasons">{{ reason }}</li>
+      </ul>
 
-        <div class="divider"></div>
+      <p *ngIf="ctaText" class="call-to-action">{{ ctaText }}</p>
 
-        <p class="call-to-action">
-            <strong>Vous suspectez une contrefaçon ?</strong><br />
-            Cliquez sur le bouton ci-dessous pour la signaler.
-        </p>
-
-        <div class="arrow-indicator">
-            <mat-icon>arrow_downward</mat-icon>
-            <mat-icon>arrow_downward</mat-icon>
-            <mat-icon>arrow_downward</mat-icon>
-        </div>
-
-        <div class="button-container">
-            <button 
-            mat-raised-button 
-            color="warn" 
-            class="report-button"
-            [routerLink]="['/teik/activity/create']"
-            [state]="{ fakeUrl: scannedUrl }"
-            >
-            🚨 Signaler un produit
-            </button>
-        </div>
-        </mat-card-content>
-    </mat-card>
+      <div *ngIf="actionButtonLabel && actionLink" class="button-container">
+        <button mat-raised-button color="warn" [routerLink]="actionLink">
+          {{ actionButtonLabel }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
-

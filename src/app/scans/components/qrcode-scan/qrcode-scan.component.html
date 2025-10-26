@@ -1,131 +1,150 @@
-<!-- Modal alert section  -->
-<app-scan-alert *ngIf="isFakeUrl" [scannedUrl]="fakeUrl" ></app-scan-alert>
+<!-- QR code fake -->
+<app-scan-alert
+  *ngIf="isFakeUrl"
+  type="error"
+  [title]="'HOME.QR_FAKE_TITLE' | translate"
+  [introText]="'HOME.QR_FAKE_INTRO' | translate"
+  [reasons]="[
+    'HOME.QR_FAKE_REASON_1' | translate,
+    'HOME.QR_FAKE_REASON_2' | translate,
+    'HOME.QR_FAKE_REASON_3' | translate
+  ]"
+  [ctaText]="'HOME.QR_FAKE_CTA' | translate"
+  [actionButtonLabel]="'HOME.QR_FAKE_BUTTON' | translate"
+  [actionLink]="'/teik/activity/create'"
+></app-scan-alert>
 
-<div *ngIf="successMessage || errorMessage" class="alert-box">
-    <div *ngIf="successMessage" class="alert success-alert">
-        {{ successMessage }}
-        <button class="close-btn" (click)="clearMessages()">✖</button>
-    </div>
-    <div *ngIf="errorMessage" class="alert error-alert">
-        {{ errorMessage }}
-        <button class="close-btn" (click)="clearMessages()">✖</button>
-    </div>
+<!-- Transaction refusée -->
+<app-scan-alert
+  *ngIf="successMessage === 'HOME.TRANSFER_REFUSED'"
+  type="error"
+  [title]="'HOME.TRANSFER_REFUSED' | translate"
+></app-scan-alert>
+
+<!-- Message déroulant -->
+<div class="scrolling-message-wrapper">
+  <div class="scrolling-message">
+    {{ 'HOME.REAUTHENTICATE_WARNING' | translate }}
+  </div>
 </div>
 
-<div class="scrolling-message">⚠️ Ré-authentifier le produit physique avant chaque transfert ! ⚠️</div>
 <br>
 
 <div class="container">
-    <!-- Main section : Scanner + Products -->
-    <div class="main-card">
-        <button mat-flat-button color="primary" (click)="multiScanMode = !multiScanMode">
-            {{ multiScanMode ? 'Scanner un produit' : 'Scanner plusieurs produits' }}
-        </button>
-        <!-- Scanner QR Code -->
-        <mat-card class="scanner-card">
-            <div class="scanner-wrapper">
-                <video #videoElement class="video-preview"></video>
-                <div class="scanner-overlay">
-                    <div class="scanner-frame"></div>
-                </div>
-            </div>
-        </mat-card>
+  <!-- Main section : Scanner + Products -->
+  <div class="main-card">
+    <button mat-flat-button color="primary" (click)="multiScanMode = !multiScanMode">
+      {{ multiScanMode ? ('HOME.SINGLE_SCAN' | translate) : ('HOME.MULTI_SCAN' | translate) }}
+    </button>
 
-        <div *ngIf="multiScanMode && scanUrls.length " class="separator-activity"><h2 class="profile-name">Produits scannés</h2> </div> 
-        <mat-card *ngIf="multiScanMode && scanUrls.length " class="profile-card">
-            <div *ngIf="multiScanMode && scanUrls.length > 0" class="results-list">
-                <h3>Produits scannés :</h3>
-                <ul>
-                    <li *ngFor="let url of scanUrls"> 
-                        <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
-                        {{ url }}
-                    </li>
-                </ul>
-            </div>
-            <button mat-flat-button  (click)="transfertProduct()" color="primary">Céder Les articles</button>
-        </mat-card>
+    <!-- Scanner QR Code -->
+    <mat-card class="scanner-card">
+      <div class="scanner-wrapper">
+        <video #videoElement class="video-preview"></video>
+        <div class="scanner-overlay">
+          <div class="scanner-frame"></div>
+        </div>
+      </div>
+    </mat-card>
 
-        <div class="separator-activity"><h2 class="profile-name">Actualités</h2> </div> 
-
-        <mat-card *ngFor="let post of signalPost" class="profile-card">
-            <div class="profile-content">
-                <!-- Horizontal row : image + texte -->
-                <div class="profile-header">
-                <img [src]="post.userImageUrl" alt="Profile Picture" class="profile-picture">
-                <div class="profile-info">
-                    <h6>{{ post.userName }} a publié ceci le {{ post.date }}</h6>
-                    <p class="profile-title">contrefaçon {{ post.productName }} : {{post.fakeUrl}} </p>
-                </div>
-                </div>
-                <div class="profile-description">
-                    <img [src]="post.imageUrl" alt="" class="alert-picture">
-                    <p class="profile-location description-text"> 
-                        <strong>
-                            {{ post.city }} :  {{ post.storeName }}
-                        </strong> <br> {{ post.description }} 
-                    </p>
-
-                </div>
-
-                <div class="separator"></div>
-            </div>
-        </mat-card>
-
-
+    <div *ngIf="multiScanMode && scanUrls.length" class="separator-activity">
+      <h2 class="profile-name">{{ 'HOME.SCANNED_PRODUCTS' | translate }}</h2>
     </div>
 
-    <!-- Secondary card : Products information -->
-    <div class="secondary-card">
-        <mat-card class="profile-card">
-            <mat-card-header>
-                <mat-card-title>Safe places</mat-card-title>
-            </mat-card-header>
+    <mat-card *ngIf="multiScanMode && scanUrls.length" class="profile-card">
+      <div *ngIf="multiScanMode && scanUrls.length > 0" class="results-list">
+        <h3>{{ 'HOME.SCANNED_PRODUCTS_LIST' | translate }}</h3>
+        <ul>
+          <li *ngFor="let url of scanUrls">
+            <mat-icon class="profile-title-link-icon">qr_code</mat-icon>
+            {{ url }}
+          </li>
+        </ul>
+      </div>
+      <button mat-flat-button (click)="transfertProduct()" color="primary">
+        {{ 'HOME.TRANSFER_BUTTON' | translate }}
+      </button>
+    </mat-card>
 
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/fancy-vin.png" alt="Jack Daniel" class="product-picture">
-                    <div class="product-name-wrapper">
-                        <h2 class="product-name">Fancy Vinted Paris</h2>
-
-                    </div>
-                </div>
-            </mat-card-content>
-
-            <div class="separator"></div>
-
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/passion-lux.png" alt="Chivas" class="product-picture">
-                    <div class="product-name-wrapper">
-                        <h2 class="product-name">Passion Luxe Paris</h2>
-
-                    </div>
-                </div>
-            </mat-card-content>
-
-            <div class="separator"></div>
-
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/The -statement .png" alt="Heineken" class="product-picture">
-                    <div class="product-name-wrapper">
-                        <h2 class="product-name">The Statement</h2>
-
-                    </div>
-                </div>
-            </mat-card-content>
-
-            <div class="separator"></div>
-
-            <mat-card-content>
-                <div class="product-section">
-                    <img src="../../../../assets/images/the-room.png" alt="riz Basmati" class="product-picture">
-                    <div class="product-name-wrapper">
-                        <h2 class="product-name"> The Room</h2>
-
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
+    <div class="separator-activity">
+      <h2 class="profile-name">{{ 'HOME.NEWS' | translate }}</h2>
     </div>
+
+    <mat-card *ngFor="let post of signalPost" class="profile-card">
+      <div class="profile-content">
+        <div class="profile-header">
+          <img [src]="post.userImageUrl" alt="Profile Picture" class="profile-picture">
+          <div class="profile-info">
+            <h6>
+              {{ post.userName }} {{ 'HOME.PUBLISHED_ON' | translate }} {{ post.date }}
+            </h6>
+            <p class="profile-title">
+              {{ 'HOME.COUNTERFEIT' | translate }} {{ post.productName }} : {{ post.fakeUrl }}
+            </p>
+          </div>
+        </div>
+
+        <div class="profile-description">
+          <img [src]="post.imageUrl" alt="" class="alert-picture">
+          <p class="profile-location description-text">
+            <strong>{{ post.city }} : {{ post.storeName }}</strong><br>
+            {{ post.description }}
+          </p>
+        </div>
+
+        <div class="separator"></div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Secondary card : Products information -->
+  <div class="secondary-card">
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>{{ 'HOME.SAFE_PLACES' | translate }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="product-section">
+          <img src="../../../../assets/images/fancy-vin.png" alt="Jack Daniel" class="product-picture">
+          <div class="product-name-wrapper">
+            <h2 class="product-name">Fancy Vinted Paris</h2>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="separator"></div>
+
+      <mat-card-content>
+        <div class="product-section">
+          <img src="../../../../assets/images/passion-lux.png" alt="Chivas" class="product-picture">
+          <div class="product-name-wrapper">
+            <h2 class="product-name">Passion Luxe Paris</h2>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="separator"></div>
+
+      <mat-card-content>
+        <div class="product-section">
+          <img src="../../../../assets/images/The -statement .png" alt="Heineken" class="product-picture">
+          <div class="product-name-wrapper">
+            <h2 class="product-name">The Statement</h2>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <div class="separator"></div>
+
+      <mat-card-content>
+        <div class="product-section">
+          <img src="../../../../assets/images/the-room.png" alt="riz Basmati" class="product-picture">
+          <div class="product-name-wrapper">
+            <h2 class="product-name">The Room</h2>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

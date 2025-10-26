@@ -1,52 +1,98 @@
-<mat-card class="main-form" [formGroup] = "mainForm">
-    <mat-card-title>Connexion à TEIK</mat-card-title>
-    
-    <mat-card class="form-card" [formGroup]="loginInfoForm">
-        <mat-card-subtitle>Informations de connexion</mat-card-subtitle>
-        <div class="form-row">
-            <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input type="text" matInput formControlName="email">
-                <mat-error>{{getFormControlErrorTex(emailCtrl)}}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="pwd-container" appearance="fill">
-                <mat-label>Mot de passe</mat-label>
-                <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
-                <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
-                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                </button>
-                <mat-error>{{getFormControlErrorTex(passwordCtrl)}}</mat-error>
-            </mat-form-field>
-        </div>
-    </mat-card>
+<div class="lang-switch">
+  <select [(ngModel)]="selectedLang" (ngModelChange)="changeLang($event)">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="jp">🇯🇵 日本語</option>
+    <option value="cn">🇨🇳 中文</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="ar">🇸🇦 العربية</option>
+  </select>
+</div>
 
-    <mat-card-actions >
-        <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()">Connexion</button> &nbsp; &nbsp;
-        <button mat-flat-button color="primary" (click)="onSubmitForm()">Mot de passe oublié ?</button>
-        <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
-        
-        <div>
-            <br>
-            <span>Vous n'avez pas de compte ?</span> &nbsp;
-            <button mat-flat-button color="primary" routerLink="/teik/auth/register"> Inscrivez-vous</button>
-        </div>
-    </mat-card-actions>
+<mat-card class="main-form" [formGroup]="mainForm">
+  <mat-card-title>{{ 'LOGIN.TITLE' | translate }}</mat-card-title>
+    
+  <mat-card class="form-card" [formGroup]="loginInfoForm">
+      <mat-card-subtitle>{{ 'LOGIN.SUBTITLE' | translate }}</mat-card-subtitle>
+      <div class="form-row">
+          <mat-form-field appearance="fill">
+              <mat-label>{{ 'LOGIN.EMAIL' | translate }}</mat-label>
+              <input type="text" matInput formControlName="email">
+              <mat-error>{{getFormControlErrorTex(emailCtrl)}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="pwd-container" appearance="fill">
+              <mat-label>{{ 'LOGIN.PASSWORD' | translate }}</mat-label>
+              <input type="{{ hidePassword ? 'password' : 'text' }}" matInput formControlName="password">
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                  <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error>{{getFormControlErrorTex(passwordCtrl)}}</mat-error>
+          </mat-form-field>
+      </div>
+  </mat-card>
+
+  <mat-card-actions>
+      <button *ngIf="mainForm.valid" mat-flat-button color="primary" (click)="onSubmitForm()">
+        {{ 'LOGIN.LOGIN_BUTTON' | translate }}
+      </button>
+      &nbsp; &nbsp;
+      <button mat-flat-button color="primary" (click)="onSubmitForm()">
+        {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
+      </button>
+      <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-spinner>
+      
+      <div>
+          <br>
+          <span>{{ 'LOGIN.NO_ACCOUNT' | translate }}</span> &nbsp;
+          <button mat-flat-button color="primary" routerLink="/teik/auth/register">
+            {{ 'LOGIN.SIGN_UP' | translate }}
+          </button>
+      </div>
+  </mat-card-actions>
 </mat-card>
 
+<!-- 🔍 search field -->
+<div class="search-container" style="display: flex; gap: 1rem;">
+  <!-- Select marque -->
+  <mat-form-field appearance="outline" class="search-field" style="flex: 1;">
+    <mat-label>{{ 'CAROUSEL.BRAND' | translate }}</mat-label>
+    <mat-select [(ngModel)]="selectedBrand" (selectionChange)="onSearchChange()">
+      <mat-option *ngFor="let brand of brands" [value]="brand">{{ brand }}</mat-option>
+    </mat-select>
+    <button *ngIf="selectedBrand" mat-icon-button matSuffix (click)="clearBrand()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
 
-<!-- 🔍 search  field -->
-<div class="search-container">
-  <mat-form-field appearance="outline" class="search-field">
-    <mat-label>Rechercher</mat-label>
-    <input matInput placeholder="Ex: entreprise, produit, utilisateur..." [(ngModel)]="searchQuery" (input)="onSearchChange()">
-    <button *ngIf="searchQuery" mat-icon-button matSuffix (click)="clearSearch()">
+  <!-- Input numéro de série -->
+  <mat-form-field appearance="outline" class="search-field" style="flex: 1;">
+    <mat-label>{{ 'CAROUSEL.SHORT_SERIAL' | translate }}</mat-label>
+    <input matInput placeholder="Ex: ...245" [(ngModel)]="serialNumberShort" (input)="onSearchChange()">
+    <button *ngIf="serialNumberShort" mat-icon-button matSuffix (click)="clearSerialNumber()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 </div>
 
+<!-- <div *ngFor="let lostP of lostProductsP">
+  <h3>{{ lostP.brand }} - {{ lostP.productModel }}</h3>
+  <p>Serial: ...{{ lostP.serialNumberShort }}</p>
+  <p>{{ lostP.lossCity }}, {{ lostP.lossCountry }}</p>
+  <img [src]="lostP.productImageUrl" width="100" />
+</div> -->
+
 <app-carousel
-  [title]="'Produits signalés volés'"
-  [items]="lostProducts"
+  [title]="'LOGIN.STOLEN_PRODUCTS_TITLE' | translate"
+  [items]="filteredProducts" 
   context="public stolen"
+  (itemClicked)="onStolenProductClick($event)"
 ></app-carousel>
+
+<app-scan-alert
+  *ngIf="showStolenModal"
+  type="info"
+  [title]="'LOGIN.SCAN_ALERT_TITLE' | translate"
+  [introText]="scanAlertIntro"
+  (close)="closeStolenModal()"
+></app-scan-alert>

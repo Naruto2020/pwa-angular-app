@@ -1,73 +1,140 @@
+/* === STYLE GLOBAL === */
 mat-form-field {
-    width: 45%;
-    &.full-width {
-      width: 80%;
-      margin-left: 10%;
-    }
+  width: 45%; /* largeur par défaut des champs */
+  &.full-width {
+    width: 80%;
+    margin-left: 10%;
+  }
 }
-  
+
 .form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .form-card {
-    margin: 20px 0;
-}
-
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
-}
-
-mat-card-actions {
-    text-align: center;
-}
-
-.main-form {
-    margin: 10%;
-    padding-bottom: 30px;
-    position: relative;
-}
-
-.loading {
-    position: absolute;
-    top: -10px;
-    bottom: -10px;
-    left: -10px;
-    right: -10px;
-    height: inherit;
-    z-index: 10;
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.error-text {
-    color: red;
-}
-
-button{
-    padding-left: 15PX;
-    padding-right: 15PX;
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
   margin: 20px 0;
 }
 
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+mat-card-actions {
+  text-align: center;
+}
+
+.main-form {
+  margin: 10px;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.loading {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -10px;
+  right: -10px;
+  height: inherit;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-text {
+  color: red;
+}
+
+button {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.title-bold {
+  font-weight: 700;
+}
+
+.title-light {
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+.lang-switch {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  margin-right: 3rem;
+
+  select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+}
+
+/* === BARRE DE RECHERCHE === */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* espace entre les champs */
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
 .search-field {
-  width: 80%;
-  max-width: 500px;
+  flex: 1 1 45%;
+  min-width: 180px;
+  max-width: 450px;
 }
 
+/* === RESPONSIVE POUR MOBILE === */
 @media screen and (max-width: 600px) {
-    .search-field {
-        width: 95%;
-    }
+  body {
+    font-size: 0.8rem; /* texte global plus petit */
+  }
+
+  .main-form {
+    margin-top: 5px;
+    margin-left: 10%;
+    width: 70%;
+    padding-bottom: 15px;
+  }
+
+  /* Champs côte à côte mais largeur réduite */
+  .search-container {
+    gap: 5px; /* espace minimal entre les deux champs */
+    margin-right: 4%;
+  }
+
+  .search-field {
+    flex: 1 1 40%; /* largeur réduite */
+    min-width: 120px;
+    font-size: 0.75rem;
+    padding: 5px 6px;
+  }
+
+  mat-form-field {
+    margin: 0 !important;
+  }
+
+  button,
+  .mat-radio-button label {
+    font-size: 0.75rem;
+  }
+
+  h2, h3, p, label {
+    font-size: 0.8rem;
+  }
+
+  .carousel-container {
+    margin: 0 2%;
+  }
 }
-
-

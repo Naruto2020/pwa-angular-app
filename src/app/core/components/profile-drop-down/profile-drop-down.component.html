@@ -1,7 +1,14 @@
 <mat-card id="profileMenu" class="dropdown-menu">
-    <a [routerLink]="['/teik/user/current-user', userF]" class="dropdown-item">Profil</a>
-    <a routerLink="/teik/news" class="dropdown-item">Premium</a>
-    <a routerLink="/teik/news" class="dropdown-item">Gérer</a>
-    <a routerLink="/teik/auth/login" (click)="logout()" class="dropdown-item">Déconnexion</a>
+  <a [routerLink]="['/teik/user/current-user', userF]" class="dropdown-item">
+    {{ 'PROFILE_MENU.PROFILE' | translate }}
+  </a>
+  <a routerLink="/teik/news" class="dropdown-item">
+    {{ 'PROFILE_MENU.PREMIUM' | translate }}
+  </a>
+  <a routerLink="/teik/news" class="dropdown-item">
+    {{ 'PROFILE_MENU.MANAGE' | translate }}
+  </a>
+  <a routerLink="/teik/auth/login" (click)="logout()" class="dropdown-item">
+    {{ 'PROFILE_MENU.LOGOUT' | translate }}
+  </a>
 </mat-card>
-

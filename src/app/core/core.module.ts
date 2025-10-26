@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileDropDownComponent } from './components/profile-drop-down/profile-drop-down.component';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -22,6 +24,8 @@ import { ProfileDropDownComponent } from './components/profile-drop-down/profile
     MatIconModule,
     MatCardModule,
     SharedModule,
+    FormsModule,
+    TranslateModule,
   ],
   exports: [
     HeaderComponent,

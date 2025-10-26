@@ -8,6 +8,7 @@ import { CurrentProductComponent } from './components/current-product/current-pr
 import { ProfileProductComponent } from './components/profile-product/profile-product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductService } from './services/product.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ProductService } from './services/product.service';
     ProductRoutingModule,
     SharedModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [
     ProductService

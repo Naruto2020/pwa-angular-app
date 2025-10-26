@@ -25,9 +25,25 @@ mat-card-actions {
 }
 
 .main-form {
-    margin: 10%;
+    margin: 50px;
     padding-bottom: 30px;
     position: relative;
+}
+
+.lang-switch {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  margin-right: 3rem;
+
+  select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
 }
 
 .loading {

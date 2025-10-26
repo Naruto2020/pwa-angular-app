@@ -131,19 +131,23 @@ h3 {
   color: darkorange;
 }
 
+.scrolling-message-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;       /* empêche le débordement */
+    border-radius: 8px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+}
+
+/* Texte qui défile */
 .scrolling-message {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  border-radius: 8px;
-  padding: 8px 0;
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
-  animation: scroll 15s linear infinite;
+    display: inline-block;
+    white-space: nowrap;
+    padding: 8px 0;
+    font-weight: bold;
+    color: #856404;
+    animation: scroll 15s linear infinite;
 }
 
 @keyframes scroll {
@@ -172,6 +176,11 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
+
+  .main-form{
+    margin-right: 8%;
+  }
+
   .qrcode-card-link {
     flex: 0 0 160px; /* plus petit sur mobile */
   }

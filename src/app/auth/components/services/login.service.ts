@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, map, of, tap } from "rxjs";
+import { LostProduct } from "@app/network/models/lostProduct.model";
+import { Observable, catchError, delay, map, of, tap, throwError } from "rxjs";
 
 @Injectable()
 export class LoginService {
@@ -49,6 +50,19 @@ export class LoginService {
             companie: companie,
             secondHand: secondHand,
         }
+    }
+
+    getAllPublicLostProduct(): Observable<LostProduct[]> {
+        return this.http.get<LostProduct[]>(`http://127.0.0.1:8002/teko/gateway-lost-products/public-lost-product`).pipe(
+            // catchError(() => of().pipe(
+            //     delay(1000)
+            // ))
+
+            catchError((error) => {
+                console.error('Erreur getAllPublicLostProduct', error);
+                return throwError(() => error);
+            })
+        );
     }
 
     logout(): void {

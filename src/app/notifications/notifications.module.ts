@@ -5,6 +5,7 @@ import { ProductModule } from '../product/product.module';
 import { SharedModule } from '../shared/shared.module';
 import { NotifComponent } from './components/notif/notif.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NotificationsRoutingModule } from './notifications-routing.module';
     CommonModule,
     SharedModule,
     NotificationsRoutingModule,
-    ProductModule
+    ProductModule,
+    TranslateModule,
   ]
 })
 export class NotificationsModule { }

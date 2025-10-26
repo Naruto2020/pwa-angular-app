@@ -1,75 +1,31 @@
-/* Container général */
+/* ========================= */
+/* 🔹 CONTAINER GÉNÉRAL */
+/* ========================= */
 .container {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     gap: 20px;
-    padding: 20px; 
-}
-
-/* Cartes principales */
-.main-card {
-    flex: 2;
-    margin-left: 20px;
-}
-
-.midle-card {
-    flex: 2;
-    margin-left: 20px;
-    margin-top: 60px;
-}
-
-.midle-card h2 {
-    color: darkorange;
-    text-align: center;
-}
-
-/* Conteneur scrollable pour certificat/facture */
-.scroll-container {
-    width: 400px;
-    max-height: 400px;
-    overflow-x: auto;
-    overflow-y: auto;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #fafafa;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-/* Image certificat/facture */
-.certificate-picture {
-    display: block;
-    max-width: none;
-    max-height: none;
-}
-
-/* Boutons prévisualiser / télécharger */
-.midle-card button {
-    display: block;
-    margin: 10px auto;
-}
-
-/* Cartes secondaires */
-.secondary-card {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-left: 20px;
-    gap: 20px;
-}
-
-.secondary-card .profile-card {
-    margin: 0;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden; /* empêche débordement */
 }
 
-/* Carte produit / profil */
+/* ========================= */
+/* 🔹 CARTES PRINCIPALES */
+/* ========================= */
+.main-card,
+.midle-card,
+.secondary-card {
+    flex: 2;
+    margin-left: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ========================= */
+/* 🔹 PROFILE CARD & CONTENU */
+/* ========================= */
 .profile-card {
     display: flex;
     flex-direction: column;
@@ -77,25 +33,25 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
-    margin: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
 }
 
 .profile-content {
     display: flex;
-    align-items: center; 
-    gap: 20px; 
+    align-items: center;
+    gap: 20px;
 }
 
-/* Photo de profil */
-.profile-picture, .product-picture {
+.profile-picture,
+.product-picture {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    object-fit: cover; 
+    object-fit: cover;
     margin-right: 20px;
 }
 
-/* Infos de profil */
 .profile-info {
     flex: 1;
 }
@@ -116,11 +72,11 @@
 }
 
 .profile-title .material-icons {
-    margin-right: 4px; 
+    margin-right: 4px;
 }
 
 .profile-title-link-icon {
-    font-size: 18px; 
+    font-size: 18px;
 }
 
 .profile-location {
@@ -128,7 +84,9 @@
     color: #666;
 }
 
-/* Boutons cession/achat/perte */
+/* ========================= */
+/* 🔹 BOUTONS & SIGNALS */
+/* ========================= */
 .lose-signal {
     display: flex;
     justify-content: center;
@@ -141,37 +99,34 @@
     font-style: italic;
     font-weight: bold;
     color: #777;
-    white-space: normal;
-    word-wrap: break-word;
     text-align: center;
-    line-height: 1.3em;
     max-width: 180px;
+    white-space: normal;
 }
 
-/* Statistiques produit */
+/* ========================= */
+/* 🔹 STATISTIQUES */
+/* ========================= */
 .profile-statistique {
     display: flex;
-    flex-direction: row; 
-    gap: 150px; 
-    padding: 20px; 
+    flex-direction: row;
+    gap: 150px;
+    padding: 20px;
 }
 
-/* QR code état */
-.qr_code_ok {
-    color: forestgreen;
-}
-.qr_code_nok {
-    color: darkred;
-}
-.consumed {
-    color: forestgreen;
-}
+/* ========================= */
+/* 🔹 QR CODE & CONSOMMATION */
+/* ========================= */
+.qr_code_ok { color: forestgreen; }
+.qr_code_nok { color: darkred; }
+.consumed { color: forestgreen; }
 
-h3 {
-    color: darkorange;
-}
+/* ========================= */
+/* 🔹 TITRES & H3 */
+h3 { color: darkorange; }
 
-/* Timeline historique */
+/* ========================= */
+/* 🔹 TIMELINE HISTORIQUE */
 .timeline {
     position: relative;
     margin-left: 20px;
@@ -201,37 +156,10 @@ h3 {
     box-shadow: 0 0 0 2px #4caf50;
 }
 
-.timeline-content {
-    padding-left: 20px;
-}
+.timeline-content { padding-left: 20px; }
 
-/* Animation perte */
-@keyframes blinkPulse {
-    0% { background-color: #ffe5e5; }
-    50% { background-color: #ffcccc; }
-    100% { background-color: #ffe5e5; }
-}
-
-.lost-warning {
-    background-color: #ffe5e5;
-    color: #b00020;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: 2px solid #b00020;
-    border-radius: 6px;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 16px;
-}
-
-.blink {
-    animation: blinkPulse 1.5s infinite ease-in-out;
-}
-
-/* Alertes succès / erreur */
+/* ========================= */
+/* 🔹 ALERTES */
 .alert-box {
     margin: auto;
     width: 100%;
@@ -244,7 +172,6 @@ h3 {
 .alert {
     padding: 15px;
     border-radius: 8px;
-    position: relative;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -271,135 +198,154 @@ h3 {
     cursor: pointer;
 }
 
-/* Product carousel */
-.product-carousel {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding: 16px;
-    scroll-snap-type: x mandatory;
-}
-
-.product-card-link {
-    flex: 0 0 250px;
-    max-width: 250px;
-    scroll-snap-align: start;
-    display: block;
+.scrolling-message-wrapper {
     width: 100%;
-    height: 100%;
-    text-decoration: none;
-}
-
-.product-card {
-    background-color: #fff;
+    max-width: 100%;
+    overflow: hidden;       /* empêche le débordement */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    min-height: 350px;
-    max-height: 350px;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    border: #666 2px solid;
-}
-
-.product-card .product-image {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    padding: 16px 0;
-}
-
-.product-card h2 {
-    font-size: 1.2em;
-    margin: 10px 10px 5px 10px;
-    line-height: 1.2em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-word;
-}
-
-.product-card p {
-    font-size: 1em;
-    color: #666;
-    margin: 0 15px 15px;
-}
-
+/* Texte qui défile */
 .scrolling-message {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  border-radius: 8px;
-  padding: 8px 0;
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
-  animation: scroll 15s linear infinite;
+    display: inline-block;
+    white-space: nowrap;
+    padding: 8px 0;
+    font-weight: bold;
+    color: #856404;
+    animation: scroll 15s linear infinite;
 }
 
 @keyframes scroll {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
-/* ✅ Responsive */
+/* ========================= */
+/* 🔹 SCROLL CERTIFICAT/FACTURE */
+.scroll-container {
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.certificate-picture {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* ========================= */
+/* 🔹 CAROUSEL PRODUITS */
+.carousel-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    max-height: 400px;
+    width: 100%;
+}
+
+.carousel-horizontal {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 16px;
+    max-width: 100%;
+}
+
+/* ========================= */
+/* 🔹 RESPONSIVE MOBILE */
 @media screen and (max-width: 768px) {
     .container {
-        margin: 0;
         flex-direction: column;
         padding: 10px;
+        margin: 0 auto;
+        width: 100%;
     }
 
     .main-card,
     .midle-card,
     .secondary-card {
-        margin-left: 0;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
     }
 
-    .scroll-container {
+    .profile-card {
+        margin: 10px auto;
+        padding: 15px;
         width: 100%;
+        box-shadow: none; /* supprime le cadre pour mobile */
     }
 
-    .lose-signal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 15px;
-        width: 100%;
+    .profile-picture,
+    .product-picture,
+    app-image-upload img {
+        width: 80px;
+        height: 80px;
     }
+
+    .certificate-picture { max-height: 200px; }
+
+    .profile-name { font-size: 18px !important; }
+    .profile-title { font-size: 14px !important; }
+    .profile-location { font-size: 13px !important; }
 
     .lose-signal button {
-        font-size: 14px;
-        padding: 10px 12px;
-        max-width: 140px;
-        text-align: center;
+
+        font-size: 13px;       /* déjà présent */
+        padding: 8px 10px;     /* déjà présent */
+        max-width: 100%;       /* enlever la limite stricte de 180px */
+        white-space: normal;   /* autoriser le retour à la ligne */
+        word-break: break-word; /* couper les mots si nécessaire */
+        text-align: center;    /* centrer le texte */
     }
 
-    .scrolling-message {
-        font-size: 0.85em;
-        padding: 6px 0;
+    h2, h3 { font-size: 16px !important; }
+
+    .scrolling-message { font-size: 0.85em; padding: 6px 0; }
+    .lost-warning { font-size: 14px; padding: 6px 12px; }
+
+    /* Carousel horizontal sur mobile */
+    .carousel-vertical {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-height: none;
+        gap: 12px;
+    }
+
+    .carousel-horizontal {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 
+/* ========================= */
+/* 🔹 RESPONSIVE TABLETTE */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        margin: 20px;
-    }
+    .container { flex-direction: column; margin: 20px auto; }
+    .main-card,
+    .secondary-card,
+    .midle-card { width: 90%; margin: 0 auto; }
+    .profile-card { width: 80%; margin: 15px auto; }
+    .profile-picture, .product-picture { width: 80px; height: 80px; }
+    .certificate-picture { max-height: 250px; }
+    .profile-name { font-size: 20px; }
+    .profile-title { font-size: 16px; }
+    .profile-location { font-size: 14px; }
 }
